@@ -19,6 +19,8 @@ package usuarios;
 		this.telefono = telefono;
 
 	}
+	
+	public Usuario() {}
 
 
 

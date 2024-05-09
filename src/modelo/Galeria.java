@@ -84,6 +84,13 @@ public class Galeria {
 		return piezasExhibidas;
 	}
 	
+	public void añadirPieza(Pieza nuevaPieza){
+		this.piezasActuales.add(nuevaPieza);
+		this.historialPiezas.add(nuevaPieza);
+		
+		
+	}
+	
 	public boolean verificarUsuario(Usuario usuarioAVerificar) throws UsuarioInexistenteException {
 
 		if ((this.usuarios.contains(usuarioAVerificar)) == false ) {
@@ -109,17 +116,38 @@ public class Galeria {
 		return logins;	
 	}
 	
-	public boolean verificacionSesion (String login, String contraseña) {
+	public Usuario obtenerUsuarioPorLogin(String login) {
+		Usuario usuario1 = null;
+		for (Usuario usuario:this.usuarios) {
+			if (usuario.getLogin().compareTo(login) == 0) {
+				usuario1 = usuario;
+			}
+		}
+		return usuario1;
+	}
+	
+	//Si retorna 0, pertenece a los usuarios y es el tipo adecuado, si retorna 1 no pertenece a los usuarios, si retorna 2 no es el tipo adecuado.
+	public int verificacionSesion (String login, String contraseña, String tipo) {
 		HashMap<String, String>  logins = obtenerLoginContraseña();
 		
 		
+		
 		if (logins.containsKey(login)) {
-			if ((logins.get(login).compareTo(contraseña) ) == 0) {
-				return true;
-			}
-		}
 			
-		return false;
+			if ((logins.get(login).compareTo(contraseña) ) == 0) {
+				if(obtenerUsuarioPorLogin(login).getTipo() == tipo) {
+					return 1;
+				}
+				else 
+					return 2;
+			}
+			else
+				return 3;
+		}
+		
+		else 
+			return 0;
+		
 	}
 
 	public void agregarUsuario(Usuario usuario) {
@@ -175,7 +203,15 @@ public class Galeria {
 		return operador;
 	}
 
-
+	public Pieza obtenerPiezaporTitulo(String titulo) {
+		for (Pieza pieza:this.piezasActuales) {
+			if (pieza.getTitulo().compareTo(titulo) == 0) {
+				return pieza;
+			}
+		}
+		return null;
+	}
+	
 	public void realizarConsignacion(Usuario propietario, Pieza piezaAConsignar, String fechaLimite, Galeria galeria, String exhibaVendaoSubasta) throws PropietarioErroneoException {
 
 		((Administrador )this.getAdministrador()).registrarPiezaPorConsignacion(propietario, piezaAConsignar, fechaLimite, this, exhibaVendaoSubasta);

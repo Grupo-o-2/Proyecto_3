@@ -17,7 +17,7 @@ public class Escultura extends Pieza {
 	private static final String TIPO = "Escultura";
 	
 	public Escultura(String titulo, int valor, String fecha, String lugar, Usuario propietario,
-			ArrayList<Artista> autores, ArrayList<Usuario> dueños, HashMap<Integer, String> ventas,
+			ArrayList<Artista> autores, ArrayList<Usuario> dueños, HashMap<String, Integer> ventas,
 			String exhibaVendaoSubasta, boolean consignacion, boolean exhibida, boolean dispsubasta,
 			boolean dispventa, double alto, double ancho, double profundidad, String materiales, double peso, boolean electricidad, boolean otroDetalle) {
 		super(titulo, valor, fecha, lugar, propietario, autores, dueños, ventas, exhibaVendaoSubasta, consignacion, exhibida,

@@ -100,6 +100,15 @@ public class Comprador extends Usuario{
 		this.historialPiezas.put(pieza, fecha);
 	}
 	
+	public Pieza obtenerPiezaporTitulo(String titulo) {
+		for (Pieza pieza:this.piezasActuales) {
+			if (pieza.getTitulo().compareTo(titulo) == 0) {
+				return pieza;
+			}
+		}
+		return null;
+	}
+	
 	public void consignarPieza(Pieza piezaAConsignar, String fechaLimite, Galeria galeria, String exhibaVendaoSubasta ) throws PropietarioErroneoException {
 			galeria.realizarConsignacion(this, piezaAConsignar, fechaLimite, galeria, exhibaVendaoSubasta);	
 	}

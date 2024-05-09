@@ -18,7 +18,7 @@ abstract public class Pieza {
 	
 	private ArrayList<Artista> autores; //cambiado
 	private ArrayList<Usuario> historialDueños;  //nuevo
-	private HashMap<Integer, String> historialVentas; // nuevo - Por cuánto ha sido vendida y cuándo
+	private HashMap<String, Integer> historialVentas; // nuevo - Por cuánto ha sido vendida y cuándo
 	
 	private String exhibaVendaoSubasta;	
 	private boolean consignacion;
@@ -29,7 +29,7 @@ abstract public class Pieza {
 
 	
 	public Pieza(String titulo,  int valor, String fechaCreacion, String lugarCreacion, Usuario propietario,  
-			ArrayList<Artista> autores, ArrayList<Usuario> historialDueños, HashMap<Integer, String> historialVentas, 
+			ArrayList<Artista> autores, ArrayList<Usuario> historialDueños, HashMap<String, Integer> historialVentas, 
 			String exhibaVendaoSubasta, boolean consignacion,
 			boolean exhibida, boolean dispsubasta, boolean dispventa) {
 		
@@ -124,12 +124,12 @@ abstract public class Pieza {
 	}
 
 
-	public HashMap<Integer, String> getHistorialVentas() {
+	public HashMap<String, Integer> getHistorialVentas() {
 		return historialVentas;
 	}
 
 
-	public void setHistorialVentas(HashMap<Integer, String> historialVentas) {
+	public void setHistorialVentas(HashMap<String, Integer> historialVentas) {
 		this.historialVentas = historialVentas;
 	}
 

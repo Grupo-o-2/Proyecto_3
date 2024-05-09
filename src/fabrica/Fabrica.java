@@ -43,7 +43,7 @@ public class Fabrica {
 	private int cantidadComprasCreadas;
 	private ArrayList<VentaPiezas> comprasCreadas;
 	private int cantidadArtistasCreados;
-	private ArrayList<Artista> artistasCreados;
+	private ArrayList<Artista> artistasCreados = new ArrayList<Artista>();
 	private PersistenciaCentral persistencia = new PersistenciaCentral();
 	private ArrayList<String> logins = new ArrayList<String>();
 	
@@ -171,7 +171,7 @@ public class Fabrica {
 	}
 	
 	public Escultura crearEscultura(String titulo, int valor, String fecha, String lugar, Comprador creador,
-			ArrayList<Artista> autores, ArrayList<Usuario> dueños, HashMap<Integer, String> ventas,
+			ArrayList<Artista> autores, ArrayList<Usuario> dueños, HashMap<String, Integer> ventas,
 			String exhibaVendaoSubasta, boolean consignacion, boolean exhibida, boolean dispsubasta,
 			boolean dispventa, double alto, double ancho, double profundidad, String materiales, double peso, boolean electricidad, boolean otroDetalle) {
 		Escultura nEscultura  = new Escultura(titulo, valor, fecha, lugar, creador, autores, dueños, ventas,
@@ -186,7 +186,7 @@ public class Fabrica {
 	}
 	
 	public Fotografia crearFotografia(String titulo, int valor, String fecha, String lugar, Comprador creador,
-			ArrayList<Artista> autores, ArrayList<Usuario> dueños, HashMap<Integer, String> ventas,
+			ArrayList<Artista> autores, ArrayList<Usuario> dueños, HashMap<String, Integer> ventas,
 			String exhibaVendaoSubasta, boolean consignacion, boolean exhibida, boolean dispsubasta,
 			boolean dispventa, double alto,double ancho, String formato, boolean enmarcado ) {
 		Fotografia nFotografia  = new Fotografia(titulo, valor,  fecha, lugar, creador,
@@ -201,7 +201,7 @@ public class Fabrica {
 	}
 	
 	public Impresion crearImpresion(String titulo, int valor, String fecha, String lugar, Comprador creador,
-			ArrayList<Artista> autores, ArrayList<Usuario> dueños, HashMap<Integer, String> ventas,
+			ArrayList<Artista> autores, ArrayList<Usuario> dueños, HashMap<String, Integer> ventas,
 			String exhibaVendaoSubasta, boolean consignacion, boolean exhibida, boolean dispsubasta,
 			boolean dispventa, double alto, double ancho) {
 		Impresion nImpresion  = new Impresion(titulo, valor, fecha, lugar, creador,
@@ -216,7 +216,7 @@ public class Fabrica {
 	}
 	
 	public Pintura crearPintura(String titulo, int valor, String fecha, String lugar, Comprador creador,
-			ArrayList<Artista> autores, ArrayList<Usuario> dueños, HashMap<Integer, String> ventas,
+			ArrayList<Artista> autores, ArrayList<Usuario> dueños, HashMap<String, Integer> ventas,
 			String exhibaVendaoSubasta, boolean consignacion, boolean exhibida, boolean dispsubasta,
 			boolean dispventa, double alto, double ancho ) {
 		Pintura nPintura  = new Pintura(titulo, valor, fecha, lugar, creador, autores, dueños,  ventas,
@@ -231,7 +231,7 @@ public class Fabrica {
 	}
 	
 	public Video crearVideo(String titulo, int valor, String fecha, String lugar, Comprador creador,
-			ArrayList<Artista> autores, ArrayList<Usuario> dueños, HashMap<Integer, String> ventas,
+			ArrayList<Artista> autores, ArrayList<Usuario> dueños, HashMap<String, Integer> ventas,
 			String exhibaVendaoSubasta, boolean consignacion, boolean exhibida, boolean dispsubasta,
 			boolean dispventa, double alto, double ancho, int duracion, String formato) {
 		Video nVideo  = new Video(titulo, valor, fecha, lugar,  creador,

@@ -22,5 +22,4 @@ public class Artista extends Usuario{
 	public String getTipo() {
 		return TIPO;
 	}
-
 }
