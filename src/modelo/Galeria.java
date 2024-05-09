@@ -27,6 +27,7 @@ public class Galeria {
 		this.historialPiezas = historialPiezas;
 		this.piezasActuales = piezasActuales;
 		this.piezasAntiguas = piezasAntiguas;
+		this.usuarios = usuarios;
 	}
 
 

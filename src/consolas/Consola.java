@@ -31,7 +31,7 @@ public abstract class Consola {
 		}
 	}
 	
-	double pedirNumeroAlUsuario( String mensaje )
+	public static double pedirNumeroAlUsuario( String mensaje )
 	{
 		double valorResultado = Integer.MIN_VALUE;
 		while( valorResultado == Integer.MIN_VALUE )
