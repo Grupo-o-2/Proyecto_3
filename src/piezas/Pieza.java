@@ -18,7 +18,7 @@ abstract public class Pieza {
 	
 	private ArrayList<Artista> autores; //cambiado
 	private ArrayList<Usuario> historialDueños;  //nuevo
-	private HashMap<String, Integer> historialVentas; // nuevo - Por cuándo se vendió con el precio
+	private HashMap<String, Integer> historialVentas; // nuevo - Por cuánto ha sido vendida y cuándo
 	
 	private String exhibaVendaoSubasta;	
 	private boolean consignacion;
