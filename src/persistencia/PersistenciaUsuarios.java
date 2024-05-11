@@ -21,6 +21,7 @@ public class PersistenciaUsuarios {
 	private static final String tipoComprador = "Comprador";
 	private static final String tipoEmpleado = "Empleado";
 	private static final String tipoOperador = "Operador";
+	private static final String tipoArtista = "Artista";
 	private static final String login = "Login";
 	private static final String password = "Password";
 	private static final String nombre = "Nombre";
@@ -60,6 +61,10 @@ public class PersistenciaUsuarios {
 			{
 				salvarEmpleado((Empleado) usuario, jUsuarios);
 			}
+			else if (tipoArtista.equals(usuario.getTipo()))
+			{
+				salvarArtista((Artista) usuario, jUsuarios, identificadorPieza);
+			}
 		}
 		jobject.put("Usuarios", jUsuarios);
 	}
@@ -73,6 +78,7 @@ public class PersistenciaUsuarios {
 		jComprador.put( "Dinero", comprador.getDinero( ) );
 		jComprador.put( telefono, comprador.getTelefono() );
 		jComprador.put( "Valor Maximo Compras", comprador.getValorMaximoCompras( ) );
+		jComprador.put("Valor Coleccion", comprador.getValorColeccion());
 		String piezasActuales = "";
 		if (! comprador.getPiezasActuales().isEmpty())
 		{
@@ -88,11 +94,12 @@ public class PersistenciaUsuarios {
 			jComprador.put( "Piezas Actuales", "Vacío");
 		}
 		String historialPiezas = "";
-		if (! comprador.getHistorialPiezas().isEmpty())
+		HashMap<Pieza, String> historialPiezasComprador = comprador.getHistorialPiezas();
+		if (! historialPiezasComprador.keySet().isEmpty())
 		{
 			for (Pieza pieza: comprador.getHistorialPiezas().keySet())
 			{
-				historialPiezas = historialPiezas + "," + identificadorPieza.get(pieza);
+				historialPiezas = historialPiezas + "," + identificadorPieza.get(pieza) + ";" + historialPiezasComprador.get(pieza);
 			}
 			jComprador.put( "Historial Piezas", historialPiezas);
 		}
@@ -103,6 +110,27 @@ public class PersistenciaUsuarios {
 		jComprador.put( tipo, comprador.getTipo( ) );
 
 		jCompradores.put( jComprador );
+	}
+	
+	public void salvarArtista(Artista artista, JSONArray jArtistas, HashMap<Pieza, String> identificadorPieza)
+	{
+		JSONObject jArtista = new JSONObject( );
+		jArtista.put( login, artista.getLogin() );
+		jArtista.put( password, artista.getPassword() );
+		jArtista.put( nombre, artista.getNombre( ) );
+		jArtista.put( telefono, artista.getTelefono() );
+		jArtista.put( tipo, artista.getTipo( ) );
+		String piezasActuales = "";
+		if (! artista.getPiezasCreadas().isEmpty())
+		{
+			for (Pieza pieza: artista.getPiezasCreadas())
+			{
+				piezasActuales = piezasActuales + "," + identificadorPieza.get(pieza);
+			}
+			jArtista.put( "Historial Piezas", piezasActuales );
+		}
+		
+		jArtistas.put( jArtista );
 	}
 	
 	public void salvarAdministradorOperadorCajero(Usuario usuario, JSONArray jCompradores)
@@ -130,7 +158,8 @@ public class PersistenciaUsuarios {
 	}
 
 	public void cargarUsuarios(JSONArray jUsuarios, Galeria galeria, HashMap<String, Comprador> loginCompradores,
-			HashMap<Comprador , String> historialCompradores) throws LoginException
+			HashMap<Comprador , String> historialCompradores, HashMap<String, Artista> loginAutores,
+			HashMap<Artista , String> historialAutores) throws LoginException
 	{
 		Fabrica fabrica = galeria.getFabrica(); 
 		int numeroCompradores = jUsuarios.length();
@@ -159,6 +188,11 @@ public class PersistenciaUsuarios {
 				{
 					cargarEmpleado(usuario, galeria, fabrica);
 				}
+				else if (tipoArtista.equals(tipoArtista))
+				{
+					cargarArtista(usuario, galeria, loginAutores, 
+							historialAutores, fabrica);
+				}
 		}
 
 	}
@@ -171,10 +205,11 @@ public class PersistenciaUsuarios {
 			String nNombre = jComprador.getString(nombre);
 			int nDinero = jComprador.getInt("Dinero");
 			int nValorMaximoCompras = jComprador.getInt("Valor Maximo Compras");
-			int nTelefono = jComprador.getInt(telefono);
-			ArrayList<Pieza> nHistorialPiezas = new ArrayList<Pieza>();
+			String nTelefono = jComprador.getString(telefono);
+			int nValorColeccion = jComprador.getInt("Valor Coleccion");
+			HashMap<Pieza, String> nHistorialPiezas = new HashMap<Pieza, String>();
 			ArrayList<Pieza> nPiezasActuales = new ArrayList<Pieza>();
-			Comprador nComprador = fabrica.crearComprador(nLogin, nPassword, nNombre, nValorMaximoCompras, nHistorialPiezas, nPiezasActuales, nDinero, nTelefono, galeria);
+			Comprador nComprador = fabrica.crearComprador(nLogin, nPassword, nNombre, nValorMaximoCompras, nValorColeccion, nHistorialPiezas, nPiezasActuales, nDinero, nTelefono, galeria);
 			loginCompradores.put(nLogin, nComprador);
 			String nHistorialPiezasString = jComprador.getString("Historial Piezas");
 			if (! nHistorialPiezasString.equals("Vacío"))
@@ -183,17 +218,31 @@ public class PersistenciaUsuarios {
 			}
 		}
 	
+	public void cargarArtista(JSONObject jArtista, Galeria galeria, HashMap<String, Artista> loginAutores,
+			HashMap<Artista , String> historialAutores, Fabrica fabrica) throws LoginException
+	{
+			String nLogin = jArtista.getString(login);
+			String nPassword = jArtista.getString(password);
+			String nNombre = jArtista.getString(nombre);
+			String nTelefono = jArtista.getString(telefono);
+			ArrayList<Pieza> nPiezasCreadas = new ArrayList<Pieza>();
+			Artista nArtista = fabrica.crearArtista(nLogin, nPassword, nNombre, nTelefono, nPiezasCreadas, galeria);
+			loginAutores.put(nLogin, nArtista);
+			String nHistorialPiezasString = jArtista.getString("Historial Piezas");
+			if (! nHistorialPiezasString.equals("Vacío"))
+			{
+				historialAutores.put(nArtista,nHistorialPiezasString );
+			}
+			
+		}
+	
 	public void cargarAdministrador(JSONObject jAdministrador, Galeria galeria,
 			Fabrica fabrica) throws LoginException
 	{
 			String nLogin = jAdministrador.getString(login);
-			if (galeria.getUsuarios().contains(nLogin))
-			{
-				throw new LoginException(nLogin); 
-			}
 			String nPassword = jAdministrador.getString(password);
 			String nNombre = jAdministrador.getString(nombre);
-			int nTelefono = jAdministrador.getInt(telefono);
+			String nTelefono = jAdministrador.getString(telefono);
 			Administrador nAdministrador = fabrica.crearAdministrador(nLogin, nPassword,nTelefono, nNombre, galeria);
 		}
 	
@@ -203,7 +252,7 @@ public class PersistenciaUsuarios {
 		String nLogin = jCajero.getString(login);
 		String nPassword = jCajero.getString(password);
 		String nNombre = jCajero.getString(nombre);
-		int nTelefono = jCajero.getInt(telefono);
+		String nTelefono = jCajero.getString(telefono);
 		Cajero nCajero = fabrica.crearCajero(nLogin, nPassword,nTelefono, nNombre, galeria);
 		}
 	
@@ -213,7 +262,7 @@ public class PersistenciaUsuarios {
 			String nLogin = jOperador.getString(login);
 			String nPassword = jOperador.getString(password);
 			String nNombre = jOperador.getString(nombre);
-			int nTelefono = jOperador.getInt(telefono);
+			String nTelefono = jOperador.getString(telefono);
 			Operador nOperador = fabrica.crearOperador(nLogin, nPassword, nTelefono, nNombre, galeria);
 		}
 
@@ -223,7 +272,7 @@ public class PersistenciaUsuarios {
 			String nLogin = jEmpleado.getString(login);
 			String nPassword = jEmpleado.getString(password);
 			String nNombre = jEmpleado.getString(nombre);
-			int nTelefono = jEmpleado.getInt(telefono);
+			String nTelefono = jEmpleado.getString(telefono);
 			Empleado nEmpleado = fabrica.crearEmpleado(nLogin, nPassword, nTelefono, nNombre, galeria);
 		}	
 }

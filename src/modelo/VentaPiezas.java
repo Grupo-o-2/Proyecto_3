@@ -44,10 +44,12 @@ public class VentaPiezas {
 				piezaAVender.setExhibida(false);
 				piezaAVender.setPropietario(comprador);
 				
-				int dineroActualizado = ((Comprador)comprador).getDinero() - piezaAVender.getValor();
+				int valorPiezaAVender = piezaAVender.getValor();
+				int dineroActualizado = ((Comprador)comprador).getDinero() - valorPiezaAVender;
 				((Comprador)comprador).setValorColeccion(piezaAVender.getValor());
 				((Comprador)comprador).setDinero(dineroActualizado);
-			}
+				
+				}
 			
 			
 			}

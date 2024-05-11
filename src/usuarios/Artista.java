@@ -13,9 +13,9 @@ public class Artista extends Usuario{
 
 	private ArrayList<Pieza> piezasCreadas;
 	
-	public Artista(String login, String password, String nombre, String telefono) {
+	public Artista(String login, String password, String nombre, String telefono, ArrayList<Pieza> piezasCreadas) {
 		super(login, password, nombre, telefono);
-		// TODO Auto-generated constructor stub
+		this.piezasCreadas = piezasCreadas;
 	}
 
 	@Override
@@ -23,4 +23,13 @@ public class Artista extends Usuario{
 		return TIPO;
 	}
 
+	public ArrayList<Pieza> getPiezasCreadas()
+	{
+		return this.piezasCreadas;
+	}
+	
+	public void añadirPieza(Pieza pieza)
+	{
+		this.piezasCreadas.add(pieza);
+	}
 }

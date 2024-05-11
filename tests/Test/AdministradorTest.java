@@ -74,6 +74,7 @@ public class AdministradorTest {
     
     
     void crearGaleria1( ) {
+    	
     	ArrayList<Subasta> subastas = new ArrayList<Subasta>();
     	ArrayList<Pieza> piezas = new ArrayList<Pieza>();
     	piezas.add(new Pintura(NOMBRE_PIEZA, VALOR, FECHA_CREACION, LUGAR_CREACION,

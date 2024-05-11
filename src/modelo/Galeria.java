@@ -127,11 +127,86 @@ public class Galeria {
 	}
 
 	public void crearComprador(String login, String password,  String nombre, int valorMaximoCompras, int valorColeccion, 
-			HashMap<Pieza, String> historialPiezas, ArrayList<Pieza> piezasActuales, int dinero, String telefono, Galeria galeria ) throws LoginException
+			HashMap<Pieza, String> historialPiezas, ArrayList<Pieza> piezasActuales, int dinero, String telefono) throws LoginException
 	{
 		getFabrica().crearComprador( login, password, nombre, valorMaximoCompras, valorColeccion, 
-			 historialPiezas,  piezasActuales, dinero, telefono, galeria);
+			 historialPiezas,  piezasActuales, dinero, telefono, this);
 	}
+	
+	public void crearArtista(String login, String password, String nombre, String telefono, ArrayList<Pieza> piezasCreadas) throws LoginException
+	{
+		getFabrica().crearArtista( login, password, nombre, telefono, piezasCreadas, this);
+	}
+	
+	public void crearAdministrador(String login, String password, String nombre, String telefono) throws LoginException
+	{
+		getFabrica().crearAdministrador( login, password, nombre, telefono, this);
+	}
+	
+	public void crearOperador(String login, String password, String nombre, String telefono) throws LoginException
+	{
+		getFabrica().crearOperador( login, password, nombre, telefono, this);
+	}
+	
+	public void crearCajero(String login, String password, String nombre, String telefono) throws LoginException
+	{
+		getFabrica().crearCajero( login, password, nombre, telefono, this);
+	}
+	
+	public void crearEmpleado(String login, String password, String nombre, String telefono) throws LoginException
+	{
+		getFabrica().crearEmpleado( login, password, nombre, telefono, this);
+	}
+	
+	public void crearEscultura(String titulo, int valor, String fecha, String lugar, Comprador creador,
+			ArrayList<Artista> autores, ArrayList<Usuario> dueños, HashMap<String, Integer> ventas,
+			String exhibaVendaoSubasta, boolean consignacion, boolean exhibida, boolean dispsubasta,
+			boolean dispventa, double alto, double ancho, double profundidad, String materiales, double peso, boolean electricidad, boolean otroDetalle)
+	{
+		getFabrica().crearEscultura(titulo, valor, fecha, lugar, creador, autores, dueños, ventas, exhibaVendaoSubasta, consignacion, exhibida, dispsubasta, dispventa, alto, ancho, profundidad, materiales, peso, electricidad, otroDetalle);
+	}
+	
+	public void crearFotografia(String titulo, int valor, String fecha, String lugar, Comprador creador,
+			ArrayList<Artista> autores, ArrayList<Usuario> dueños, HashMap<String, Integer> ventas,
+			String exhibaVendaoSubasta, boolean consignacion, boolean exhibida, boolean dispsubasta,
+			boolean dispventa, double alto, double ancho, String formato, boolean enmarcado)
+	{
+		getFabrica().crearFotografia(titulo, valor, fecha, lugar, creador, autores, dueños, ventas, exhibaVendaoSubasta, consignacion, exhibida, dispsubasta, dispventa, alto, ancho, formato, enmarcado);
+	}
+	
+	public void crearImpresion(String titulo, int valor, String fecha, String lugar, Comprador creador,
+			ArrayList<Artista> autores, ArrayList<Usuario> dueños, HashMap<String, Integer> ventas,
+			String exhibaVendaoSubasta, boolean consignacion, boolean exhibida, boolean dispsubasta,
+			boolean dispventa, double alto, double ancho)
+	{
+		getFabrica().crearImpresion(titulo, valor, fecha, lugar, creador, autores, dueños, ventas, exhibaVendaoSubasta, consignacion, exhibida, dispsubasta, dispventa, alto, ancho);
+	}
+	
+	public void crearPintura(String titulo, int valor, String fecha, String lugar, Comprador creador,
+			ArrayList<Artista> autores, ArrayList<Usuario> dueños, HashMap<String, Integer> ventas,
+			String exhibaVendaoSubasta, boolean consignacion, boolean exhibida, boolean dispsubasta,
+			boolean dispventa, double alto, double ancho)
+	{
+		getFabrica().crearPintura(titulo, valor, fecha, lugar, creador, autores, dueños, ventas, exhibaVendaoSubasta, consignacion, exhibida, dispsubasta, dispventa, alto, ancho);
+	}
+	
+	public void crearVideo(String titulo, int valor, String fecha, String lugar, Comprador creador,
+			ArrayList<Artista> autores, ArrayList<Usuario> dueños, HashMap<String, Integer> ventas,
+			String exhibaVendaoSubasta, boolean consignacion, boolean exhibida, boolean dispsubasta,
+			boolean dispventa, double alto, double ancho, int duracion, String formato)
+	{
+		getFabrica().crearVideo(titulo, valor, fecha, lugar, creador, autores, dueños, ventas, exhibaVendaoSubasta, consignacion, exhibida, dispsubasta, dispventa, alto, ancho, duracion, formato);
+	}
+	
+	public HashMap<String, Usuario> obtenerLoginUsuario()
+	{
+		HashMap<String, Usuario> loginUsuario = new HashMap<String, Usuario>();
+		for (Usuario usuario : this.usuarios) {
+			loginUsuario.put(usuario.getLogin(),usuario);
+		}
+		return loginUsuario;	
+	}
+	
 	public void cargarGaleria(String archivo)
 	{
 		try
@@ -140,8 +215,23 @@ public class Galeria {
 		}
 		catch (Exception e)
 		{
+			e.printStackTrace();
 		}
 	}
+	
+	public void salvarGaleria(String archivo)
+	{
+		try
+		{
+			getFabrica().salvarGaleria(archivo, this);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	
 
 	// ¡Crear usuario! y pieza. 
 
