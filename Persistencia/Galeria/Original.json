@@ -1,6 +1,6 @@
 {
   "Galeria": {
-    "Piezas Actuales": "5,6,7,8,9,",
+    "Piezas Actuales": "5,6,7,8,9,2,",
     "Piezas Antiguas": "0,1,2,4,3,"
   },
   "Usuarios": [
@@ -10,7 +10,7 @@
       "Historial Piezas": "8,20180704;",
       "Telefono": "1234567890",
       "Login": "loginalice",
-      "Dinero": 100000,
+      "Dinero": 1000000000,
       "Tipo ": "Comprador",
       "Valor Maximo Compras": 2000000,
       "Valor Coleccion": 2003,
@@ -177,9 +177,9 @@
       "Proprietario": "loginalice",
       "Autores": "loginvangogh,",
       "LugarCreacion": "Colombia",
-      "Dispventa": false,
+      "Dispventa": true,
       "Fecha Limite": "0",
-      "Consignacion": false,
+      "Consignacion": true,
       "Titulo": "Esperanza",
       "Valor": "73",
       "Exhiba venda o subasta": "123",
@@ -189,7 +189,7 @@
       "fechaCreacion": "19980822",
       "Alto": "72.0",
       "Ancho": "25.0",
-      "Dispsubasta": false,
+      "Dispsubasta": true,
       "Identificador": "2",
       "Fecha Precio": "2024-01-05,73;"
     },
