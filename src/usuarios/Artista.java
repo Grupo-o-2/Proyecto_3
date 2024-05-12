@@ -22,4 +22,20 @@ public class Artista extends Usuario{
 	public String getTipo() {
 		return TIPO;
 	}
-}
+	
+	public ArrayList<Pieza> obtenerPiezasCreadas(Galeria galeria){
+		ArrayList<Pieza> piezasCreadas = new ArrayList<Pieza>();
+		Usuario artista = galeria.obtenerUsuarioPorNombre(this.getNombre());
+				
+		for (Pieza pieza: galeria.getHistorialPiezas())		{
+			if (pieza.getAutores().contains(this)) {
+				piezasCreadas.add(pieza);
+			}
+		}
+		
+		return piezasCreadas;
+		}
+		
+		
+	}
+

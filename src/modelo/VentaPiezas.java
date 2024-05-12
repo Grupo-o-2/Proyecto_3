@@ -30,12 +30,36 @@ public class VentaPiezas {
 	}
 	
 	
-	public void venderPieza( Usuario  comprador, Pieza piezaAVender, Galeria galeria, String fecha) throws DineroInsuficienteException {
+	public void venderPieza( Usuario  comprador, Pieza piezaAVender, Galeria galeria, String fecha) throws DineroInsuficienteException, MismoComprador, ValorMaximoExcedido {
 		
 	
 			if (((Comprador)comprador).getDinero() < piezaAVender.getValor()) {
 				throw new DineroInsuficienteException(comprador.getNombre());
 				}
+			else if (  ((Comprador)comprador).getPiezasActuales().contains(piezaAVender)) {
+				throw new MismoComprador();
+			}
+			else if (((Comprador)comprador).getValorMaximoCompras() < piezaAVender.getValor()) {
+				throw new ValorMaximoExcedido(comprador.getNombre());
+			}
+			else if(piezaAVender.isConsignacion() == true) {
+				
+				
+				((Comprador)comprador).añadirPieza(piezaAVender, fecha);
+				galeria.getPiezasActuales().remove(piezaAVender);
+				((Comprador)piezaAVender.getPropietario()).getPiezasActuales().remove(piezaAVender); //Elimina de la lista de piezas actuales del propietario anterior
+				piezaAVender.setConsignacion(false);
+				piezaAVender.setDispsubasta(false);	
+				piezaAVender.setExhibida(false);
+				piezaAVender.setPropietario(comprador);
+				
+				int dineroActualizado = ((Comprador)comprador).getDinero() - piezaAVender.getValor();
+				((Comprador)comprador).setValorColeccion(piezaAVender.getValor());
+				((Comprador)comprador).setDinero(dineroActualizado);
+				
+				
+				
+			}
 			else  {
 				((Comprador)comprador).añadirPieza(piezaAVender, fecha);;
 				galeria.getPiezasActuales().remove(piezaAVender);

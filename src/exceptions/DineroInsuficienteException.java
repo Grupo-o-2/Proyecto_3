@@ -5,7 +5,7 @@ public class DineroInsuficienteException extends Exception{
 	
 	public  DineroInsuficienteException (String usuario)  {
 			
-		super("El usuario" + usuario + "no cuenta con el dinero suficiente para comprar esta pieza.\n");
+		super("El usuario " + usuario + " no cuenta con el dinero suficiente para comprar esta pieza.\n");
 	}
 	
 	public  DineroInsuficienteException ()  {

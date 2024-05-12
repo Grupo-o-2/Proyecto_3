@@ -3,8 +3,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import exceptions.DineroInsuficienteException;
+import exceptions.FechaInvalida;
+import exceptions.MismoComprador;
 import exceptions.PropietarioErroneoException;
 import exceptions.UsuarioInexistenteException;
+import exceptions.ValorMaximoExcedido;
 import exceptions.VentaImposibleException;
 import modelo.*;
 import piezas.*;
@@ -58,7 +61,7 @@ public class Administrador extends Empleado{
 	
 
  	
- 	public void verificacionDeCompra(Pieza pieza, Usuario comprador, Galeria galeria, String fecha) throws UsuarioInexistenteException, DineroInsuficienteException, VentaImposibleException {
+ 	public void verificacionDeCompra(Pieza pieza, Usuario comprador, Galeria galeria, String fecha) throws UsuarioInexistenteException, DineroInsuficienteException, VentaImposibleException, MismoComprador, ValorMaximoExcedido {
  	
  		VentaPiezas nuevaVenta = new VentaPiezas(comprador, pieza);
  		if ((nuevaVenta.verificarEstadoDeVenta(pieza, galeria)) == true ){
@@ -69,10 +72,10 @@ public class Administrador extends Empleado{
 	
  
  	
- 	public void registrarPiezaPorConsignacion(Usuario propietario, Pieza piezaAConsignar, String fechaLimite, Galeria galeria, String exhibaVendaoSubasta) throws PropietarioErroneoException {
+ 	public void registrarPiezaPorConsignacion(Usuario propietario, Pieza piezaAConsignar, String fechaLimite, Galeria galeria, String exhibaVendaoSubasta, String fechaActual) throws PropietarioErroneoException, FechaInvalida {
  		
  		Consignacion nuevaConsignacion = new Consignacion(propietario, piezaAConsignar);
- 		nuevaConsignacion.generarConsignacion(propietario, piezaAConsignar, fechaLimite, galeria, exhibaVendaoSubasta);
+ 		nuevaConsignacion.generarConsignacion(propietario, piezaAConsignar, fechaLimite, galeria, exhibaVendaoSubasta, fechaActual);
  	}
  	
  	public void aumentarValorMaximo(Usuario usuario, int nuevoValor) {

@@ -109,11 +109,11 @@ public class Comprador extends Usuario{
 		return null;
 	}
 	
-	public void consignarPieza(Pieza piezaAConsignar, String fechaLimite, Galeria galeria, String exhibaVendaoSubasta ) throws PropietarioErroneoException {
-			galeria.realizarConsignacion(this, piezaAConsignar, fechaLimite, galeria, exhibaVendaoSubasta);	
+	public void consignarPieza(Pieza piezaAConsignar, String fechaLimite, Galeria galeria, String exhibaVendaoSubasta, String fechaActual ) throws PropietarioErroneoException, FechaInvalida {
+			galeria.realizarConsignacion(this, piezaAConsignar, fechaLimite, galeria, exhibaVendaoSubasta, fechaActual);	
 	}
 	
-	public void comprarPieza(Pieza piezaAcomprar, Galeria galeria, String fecha) throws UsuarioInexistenteException, DineroInsuficienteException, VentaImposibleException {
+	public void comprarPieza(Pieza piezaAcomprar, Galeria galeria, String fecha) throws UsuarioInexistenteException, DineroInsuficienteException, VentaImposibleException, MismoComprador, ValorMaximoExcedido {
 		((Cajero)galeria.getUnCajero()).venderPieza(this, piezaAcomprar, galeria, fecha);
 	}
 	
