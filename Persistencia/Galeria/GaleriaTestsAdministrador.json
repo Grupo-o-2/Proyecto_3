@@ -1,6 +1,6 @@
 {
   "Galeria": {
-    "Piezas Actuales": "5,6,7,8,9,2,",
+    "Piezas Actuales": "5,6,7,8,9,2,4,",
     "Piezas Antiguas": "0,1,2,4,3,"
   },
   "Usuarios": [
@@ -123,13 +123,7 @@
       "Password": "surrealism"
     }
   ],
-  "Subastas": [{
-    "Operador": "loginneo",
-    "Nombre": "Subasta VIP",
-    "Registro Subasta": "5'loginlucy,2000;loginalice,1700;loginjohn,1800;/6'Vacio/9'loginlucy,7500;loginalice,7800;loginjohn,7600;/",
-    "Piezas Subastadas": "5;1600,1500,'6;8900,8700,'9;7500,7000,'",
-    "Participantes": "loginalice,loginlucy,loginjohn,"
-  }],
+  "Subastas": [{"Vacio":"Sí"}],
   "Piezas": [
     {
       "Proprietario": "loginalice",
@@ -178,7 +172,7 @@
       "Autores": "loginvangogh,",
       "LugarCreacion": "Colombia",
       "Dispventa": true,
-      "Fecha Limite": "0",
+      "Fecha Limite": "20240524",
       "Consignacion": true,
       "Titulo": "Esperanza",
       "Valor": "73",
@@ -221,14 +215,14 @@
       "Autores": "loginkahlo,loginmonet,loginvangogh,logindali,",
       "LugarCreacion": "Italia",
       "Dispventa": false,
-      "Fecha Limite": "0",
+      "Fecha Limite": "20250101",
       "Otro detalle": false,
-      "Consignacion": false,
+      "Consignacion": true,
       "Titulo": "Venus de Milo",
       "Valor": "400",
-      "Exhiba venda o subasta": "123",
+      "Exhiba venda o subasta": "1",
       "Historial Dueños": "loginjohn,",
-      "Exhibida": false,
+      "Exhibida": true,
       "Tipo": "Escultura",
       "Peso": "456.0",
       "Materiales": "Marmol",

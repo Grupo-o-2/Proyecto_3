@@ -8,6 +8,7 @@ import java.util.HashMap;
 import usuarios.*;
 import piezas.*;
 import modelo.*;
+import fabrica.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,98 +17,140 @@ import org.junit.jupiter.api.Test;
 
 public class AdministradorTest {
 	
-	private static final String LOGIN_ADMIN = "loginAlejandra";
-	private static final String PASSWORD_ADMIN = "Contraseña123";
-	private static final String NOMBRE_ADMIN = "Alejandra";
-	private static final String NUMERO_ADMIN = "3012849079";
+	Galeria galeria;
+	Administrador administrador;
+	Fabrica fabricaGaleria;
 	
-	private static final String LOGIN_OPERADOR = "loginFranco";
-	private static final String PASSWORD_OPERADOR = "Contraseña1";
-	private static final String NOMBRE_OPERADOR = "Franco";
-	private static final String NUMERO_OPERADOR = "3135453738";
-	
-	private static final String LOGIN_CAJERO = "loginVal";
-	private static final String PASSWORD_CAJERO = "Nojiji";
-	private static final String NOMBRE_CAJERO = "Val";
-	private static final String NUMERO_CAJERO = "3283228947";
-	
-	private static final String LOGIN_COMPRADOR = "loginElias";
-	private static final String PASSWORD_COMPRADOR = "12345";
-	private static final String NOMBRE_COMPRADOR= "Elias";
-	private static final String NUMERO_COMPRADOR = "3012485522";
-	
-
-	
-	
-	private static final String LOGIN_ARTISTA = "loginJose";
-	private static final String PASSWORD_ARTISTA = "Integrales";
-	private static final String NOMBRE_ARTISTA= "Jose";
-	private static final String NUMERO_ARTISTA = "3012849098";
-	
-	private static final String NOMBRE_PIEZA = "El grito";
-	private static final String FECHA_CREACION = "20240514";
-	private static final String LUGAR_CREACION = "Noruega";
-	private static final double ALTO = 91;
-	private static final double ANCHO = 73.5;
-	private static final int VALOR = 1000;
-	
-	private static final String NOMBRE_PIEZA2 = "Venus de Milo";
-	private static final String FECHA_CREACION2 = "10001205";
-	private static final String LUGAR_CREACION2 = "Grecia";
-	private static final int VALOR2 = 15000;
-	private static final double ANCHO2 = 90;
-	private static final double ALTO2 = 211;
-	private static final double PROFUNDIDAD = 60;
-	private static final String MATERIALES = "Marmol";
-	private static final double PESO = 900;
-	
-	private static final String NOMBRE_GALERIA = "Las maravillas";
-	
-	
-	
-	
-	
-	private Galeria g1;
-	private Comprador comprador1;
-	private Pintura pintura1;
-	private Artista artista1;
-	
-
     @BeforeEach
     void setUp( ) throws Exception
     {  
-        		
+        Fabrica fabrica = new Fabrica();
+        this.galeria = fabrica.crearGaleria("GaleriaTestsAdministrador.json", new ArrayList<Subasta>(), new ArrayList<Pieza>(), new ArrayList<Pieza>(), new ArrayList<Pieza>(), new ArrayList<Usuario>());
+        this.galeria.cargarGaleria("GaleriaTestsAdministrador.json");
+        this.administrador = (Administrador) galeria.getAdministrador();
+        this.fabricaGaleria = galeria.getFabrica();
+    } 
+     
+    @Test
+    void registrarDevolverPiezasTest()
+    {
+    	try
+    	{
+	    	Comprador john = (Comprador) galeria.obtenerUsuarioPorNombre("John");
+	    	Artista dali = (Artista) galeria.obtenerUsuarioPorLogin("logindali");
+	    	ArrayList<Artista> autor = new ArrayList<Artista>();
+	    	autor.add(dali);
+	    	Pintura persistencia = fabricaGaleria.crearPintura("La persistencia de la galería", 1111110, "20240513", "Java", john, autor, new ArrayList<Usuario>() , new HashMap<String, Integer>(), "123", false, false, true, true, "0", 89.5, 59.8);
+	    	assertFalse(galeria.getPiezasActuales().contains(persistencia), "La galería tiene la pieza en sus piezas acutales cuando esta no ha sido consignada aún.");
+	    	assertFalse(galeria.getPiezasAntiguas().contains(persistencia), "La galería tiene la pieza en sus piezas antiguas cuando esta no ha sido consignada y devuelta aún.");
+	    	assertFalse(galeria.getHistorialPiezas().contains(persistencia), "La galería tiene la pieza en su historial de piezas antiguas cuando esta no ha sido consignada aún.");
+	    	administrador.registrarPiezas(persistencia, galeria);
+	    	assertTrue(galeria.getPiezasActuales().contains(persistencia), "La galería no tiene la pieza en sus puezas acutales cuando esta ya ha sido consignada y no se ha devuelto.");
+	    	assertFalse(galeria.getPiezasAntiguas().contains(persistencia), "La galería tiene la pieza en sus piezas antiguas cuando esta ha sido consignada y no se ha devuelto.");
+	    	assertTrue(galeria.getHistorialPiezas().contains(persistencia), "La galería no tiene la pieza en su historial de piezas antiguas cuando esta ya ha sido consignada .");
+	    	administrador.devoluciondePiezas(persistencia, galeria, john);
+	    	assertFalse(galeria.getPiezasActuales().contains(persistencia), "La galería tiene la pieza en sus puezas acutales cuando esta ya ha sido consignada y devuelta.");
+	    	assertTrue(galeria.getPiezasAntiguas().contains(persistencia), "La galería no tiene la pieza en sus piezas antiguas cuando esta ha sido consignada y devuelta.");
+	    	assertTrue(galeria.getHistorialPiezas().contains(persistencia), "Al devolver la pieza, el historial de piezas de la galeria se modifica de manera incorrecta.");
+    	}
+    	catch(Exception e)
+    	{
+    		e.printStackTrace();
+    	}
+    }
+    
+    void verificacionCompraTest()
+    {
+    	try
+    	{
+	    	Comprador lucy = (Comprador) galeria.obtenerUsuarioPorNombre("Lucy");
+	    	Impresion impresion = (Impresion) galeria.obtenerPiezaporTitulo("Esperanza");
+	    	administrador.registrarPiezas(persistencia, galeria);
+	    	assertTrue(galeria.getPiezasActuales().contains(persistencia), "La galería no tiene la pieza en sus puezas acutales cuando esta ya ha sido consignada y no se ha devuelto.");
+	    	assertFalse(galeria.getPiezasAntiguas().contains(persistencia), "La galería tiene la pieza en sus piezas antiguas cuando esta ha sido consignada y no se ha devuelto.");
+	    	assertTrue(galeria.getHistorialPiezas().contains(persistencia), "La galería no tiene la pieza en su historial de piezas antiguas cuando esta ya ha sido consignada .");
+	    	administrador.devoluciondePiezas(persistencia, galeria, john);
+	    	assertFalse(galeria.getPiezasActuales().contains(persistencia), "La galería tiene la pieza en sus puezas acutales cuando esta ya ha sido consignada y devuelta.");
+	    	assertTrue(galeria.getPiezasAntiguas().contains(persistencia), "La galería no tiene la pieza en sus piezas antiguas cuando esta ha sido consignada y devuelta.");
+	    	assertTrue(galeria.getHistorialPiezas().contains(persistencia), "Al devolver la pieza, el historial de piezas de la galeria se modifica de manera incorrecta.");
+    	}
+    	catch(Exception e)
+    	{
+    		e.printStackTrace();
+    	}
     }
     
     
-
-    void crearGaleria1( ) {
-    	
-
-    /*void crearGaleria1( ) {
->>>>>>> refs/remotes/origin/main
-    	ArrayList<Subasta> subastas = new ArrayList<Subasta>();
-    	ArrayList<Pieza> piezas = new ArrayList<Pieza>();
-    	HashMap<Pieza, String> historialPiezas = new HashMap<Pieza, String>();
-    	ArrayList<Pieza> piezasActuales = new ArrayList<Pieza>();
-    	
-    	comprador1 = new Comprador(LOGIN_COMPRADOR, PASSWORD_COMPRADOR, NOMBRE_COMPRADOR, 20000 ,1000,
-    			historialPiezas, piezasActuales,50000, NUMERO_COMPRADOR );
-    	
-    	artista1 = new
-    	
-    	Pintura pintura1 = new Pintura(NOMBRE_PIEZA, VALOR, FECHA_CREACION, LUGAR_CREACION, comprador1,
-    			
-			);
-    	
-    	historialPiezas.put(pintura1, "20240101");
-    	piezasActuales.add(pintura1);
-    	piezas.add(pintura1);
-    	
-    	g1 = new Galeria (NOMBRE_GALERIA, subastas,  )
-    	
-    }*/
     
+   @Test
+    void revisarConsignacionPiezaTest()
+    {
+    	try
+    	{
+	    	Comprador john = (Comprador) galeria.obtenerUsuarioPorLogin("loginjohn");
+	    	Escultura escultura = (Escultura) galeria.obtenerPiezaporTitulo("Venus de Milo");
+	    	// La fecha límite de escultura es 20250101 (1 de enero de 2025) y se comprueba con la fecha 20240525 (25 de mayo de 2024)
+	    	assertFalse(administrador.devolverPiezasConsignadas(john, escultura, "20240525", galeria), "La escultura Venus de Milo aún no debe ser devuelta.");
+	    	Comprador alice = (Comprador) galeria.obtenerUsuarioPorLogin("loginalice");
+	    	Impresion impresion = (Impresion) galeria.obtenerPiezaporTitulo("Esperanza");
+	    	// La fecha límite de impresion es 20240524 (24 de mayo de 2025) y se comprueba con la fecha 20240525 (25 de mayo de 2024)
+	    	assertTrue(administrador.devolverPiezasConsignadas(alice, impresion, "20240525", galeria), "La impresion Esperanza debe ser devuelta.");
+	    	assertFalse(impresion.isConsignacion(),"No se cambió el atributo 'consignacion' de la pieza");
+	    	assertFalse(impresion.isConsignacion(),"No se cambió el atributo 'consignacion' de la pieza");
+	    	assertFalse(impresion.isConsignacion(),"No se cambió el atributo 'consignacion' de la pieza");
+	    	assertFalse(impresion.isConsignacion(),"No se cambió el atributo 'consignacion' de la pieza");
+    	}
+    	catch(Exception e)
+    	{
+    		e.printStackTrace();
+    	}
     }
+    /*
+    @Test
+    void crearSubastaTest()
+    {
+    	try
+    	{
+	    	Comprador john = (Comprador) galeria.obtenerUsuarioPorLogin("loginjohn");
+	    	Comprador alice = (Comprador) galeria.obtenerUsuarioPorLogin("loginalice");
+	    	Escultura escultura = (Escultura) galeria.obtenerPiezaporTitulo("Venus de Milo");
+	    	Pintura pintura = (Pintura) galeria.obtenerPiezaGlobalesporTitulo("Amancer en París");
+	    	Impresion impresion = (Impresion) galeria.obtenerPiezaporTitulo("Esperanza");
+	    	Video video = (Video) galeria.obtenerPiezaporTitulo("Video abstruso");
+	    	ArrayList
+	    	assertEquals(0,galeria.getSubastas().size(), "Hay subastas antes de que estas sean creadas");
+	    	
+    	}
+    	catch(Exception e)
+    	{
+    		e.printStackTrace();
+    	}
+    }
+    */
+   @Test
+   void registrarIngresoPiezaConsignacionTest()
+   {
+   	try
+   	{
+   		
+	    	Comprador john = (Comprador) galeria.obtenerUsuarioPorLogin("loginjohn");
+	    	Artista dali = (Artista) galeria.obtenerUsuarioPorLogin("logindali");
+	    	ArrayList<Artista> autor = new ArrayList<Artista>();
+	    	autor.add(dali);
+	    	Pintura persistencia = fabricaGaleria.crearPintura("La persistencia de la galería", 1111110, "20240513", "Java", john, autor, new ArrayList<Usuario>() , new HashMap<String, Integer>(), "123", false, false, true, true, "0", 89.5, 59.8);
+	    	assertFalse(galeria.getPiezasActuales().contains(persistencia), "La galería tiene la pieza en sus puezas acutales cuando esta no ha sido consignada aún.");
+	    	assertFalse(galeria.getHistorialPiezas().contains(persistencia), "La galería tiene la pieza en su historial de piezas antiguas cuando esta no ha sido consignada aún.");
+	    	administrador.registrarPiezaPorConsignacion(john, persistencia, "20240525", galeria, "123", "20240513");
+	    	assertTrue(galeria.getPiezasActuales().contains(persistencia), "La galería no tiene la pieza en sus puezas acutales cuando esta ya ha sido consignada.");
+	    	assertTrue(galeria.getHistorialPiezas().contains(persistencia), "La galería no tiene la pieza en su historial de piezas antiguas cuando esta ya ha sido consignada.");
+	    	assertTrue(persistencia.isConsignacion(), "No se cambió el atributo 'consignacion' de la pieza");
+	    	assertEquals("123", persistencia.getExhibaVendaoSubasta(), "No se cambió el atributo 'exhibaVendaoSubasta' de la pieza");
+	    	assertEquals("123", persistencia.getExhibaVendaoSubasta(), "No se cambió el atributo 'exhibaVendaoSubasta' de la pieza");
+   	}
+   	catch(Exception e)
+   	{
+   		e.printStackTrace();
+   	}
+   }
+    
 }
-//(String login, String password, String nombre, int telefono)

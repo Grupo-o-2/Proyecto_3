@@ -1,10 +1,10 @@
 package consolas;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import fabrica.Fabrica;
-import modelo.Galeria;
+	import java.io.BufferedReader;
+	import java.io.IOException;
+	import java.io.InputStreamReader;
+	import fabrica.Fabrica;
+	import modelo.Galeria;
 
 public abstract class Consola {
 

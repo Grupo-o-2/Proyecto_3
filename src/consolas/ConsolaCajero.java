@@ -1,5 +1,6 @@
 package consolas;
 
+
 import java.util.ArrayList;
 
 import exceptions.ConsignacionExistenteException;
@@ -265,3 +266,8 @@ public static void main(String[] args ) throws PropietarioErroneoException, Usua
 }
 
 }
+=======
+public class ConsolaCajero {
+
+}
+>>>>>>> refs/remotes/origin/main
