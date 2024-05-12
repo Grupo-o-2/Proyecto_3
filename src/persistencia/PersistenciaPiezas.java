@@ -153,13 +153,13 @@ public class PersistenciaPiezas {
 		}
 		jVideo.put( "Fecha Precio", historialVentas);
 		jVideo.put( exhibida, video.isExhibida() );
-		jVideo.put( valor, video.getValor( ) );
+		jVideo.put( valor, String.valueOf(video.getValor( )));
 		jVideo.put( "Proprietario", video.getPropietario( ).getLogin() );
 		jVideo.put( exhibaVendaoSubasta , video.getExhibaVendaoSubasta() );
 		jVideo.put( tipo, video.getTipo( ) );
-		jVideo.put( "Alto", video.getAlto( ) );
-		jVideo.put( "Ancho", video.getAncho( ) );
-		jVideo.put( "Duracion", video.getDuracion( ) );
+		jVideo.put( "Alto", String.valueOf(video.getAlto( )) );
+		jVideo.put( "Ancho", String.valueOf(video.getAncho( )) );
+		jVideo.put( "Duracion", String.valueOf(video.getDuracion( )) );
 		jVideo.put( "Formato", video.getFormato( ) );
 		jVideo.put( consignacion, video.isConsignacion( ) );
 		jVideo.put( dispsubasta, video.isDispsubasta( ) );
@@ -218,12 +218,12 @@ public class PersistenciaPiezas {
 		}
 		jPintura.put( "Fecha Precio", historialVentas);
 		jPintura.put( exhibida, pintura.isExhibida() );
-		jPintura.put( valor, pintura.getValor( ) );
+		jPintura.put( valor, String.valueOf(pintura.getValor( )) );
 		jPintura.put( "Proprietario", pintura.getPropietario( ).getLogin() );
 		jPintura.put( exhibaVendaoSubasta, pintura.getExhibaVendaoSubasta() );
 		jPintura.put( tipo, pintura.getTipo( ) );
-		jPintura.put( "Alto", pintura.getAlto( ) );
-		jPintura.put( "Ancho", pintura.getAncho( ) );
+		jPintura.put( "Alto", String.valueOf(pintura.getAlto( ) ));
+		jPintura.put( "Ancho", String.valueOf(pintura.getAncho( )) );
 		jPintura.put( consignacion, pintura.isConsignacion( ) );
 		jPintura.put( dispsubasta, pintura.isDispsubasta( ) );
 		jPintura.put( dispventa, pintura.isDispventa( ) );
@@ -281,12 +281,12 @@ public class PersistenciaPiezas {
 		}
 		jImpresion.put( "Fecha Precio", historialVentas);
 		jImpresion.put( exhibida, impresion.isExhibida() );
-		jImpresion.put( "Valor", impresion.getValor( ) );
+		jImpresion.put( "Valor", String.valueOf(impresion.getValor( )) );
 		jImpresion.put( "Proprietario", impresion.getPropietario( ).getLogin() );
 		jImpresion.put( exhibaVendaoSubasta, impresion.getExhibaVendaoSubasta() );
 		jImpresion.put( tipo, impresion.getTipo( ) );
-		jImpresion.put( "Alto", impresion.getAlto( ) );
-		jImpresion.put( "Ancho", impresion.getAncho( ) );
+		jImpresion.put( "Alto", String.valueOf(impresion.getAlto( )) );
+		jImpresion.put( "Ancho", String.valueOf(impresion.getAncho( ) ));
 		jImpresion.put( consignacion, impresion.isConsignacion( ) );
 		jImpresion.put( dispsubasta, impresion.isDispsubasta( ) );
 		jImpresion.put( dispventa, impresion.isDispventa( ) );
@@ -344,12 +344,12 @@ public class PersistenciaPiezas {
 		}
 		jFotografia.put( "Fecha Precio", historialVentas);
 		jFotografia.put( exhibida, fotografia.isExhibida() );
-		jFotografia.put( valor, fotografia.getValor( ) );
+		jFotografia.put( valor, String.valueOf(fotografia.getValor( )) );
 		jFotografia.put( "Proprietario", fotografia.getPropietario( ).getLogin() );
 		jFotografia.put( exhibaVendaoSubasta, fotografia.getExhibaVendaoSubasta() );
 		jFotografia.put( tipo, fotografia.getTipo( ) );
-		jFotografia.put( "Alto", fotografia.getAlto( ) );
-		jFotografia.put( "Ancho", fotografia.getAncho( ) );
+		jFotografia.put( "Alto", String.valueOf(fotografia.getAlto( )) );
+		jFotografia.put( "Ancho", String.valueOf(fotografia.getAncho( )) );
 		jFotografia.put( "Formato", fotografia.getFormato( ) );
 		jFotografia.put( "Enmarcado", fotografia.isEnmarcado( ) );
 		jFotografia.put( consignacion, fotografia.isConsignacion( ) );
@@ -409,15 +409,15 @@ public class PersistenciaPiezas {
 		}
 		jEscultura.put( "Fecha Precio", historialVentas);
 		jEscultura.put( exhibida, escultura.isExhibida() );
-		jEscultura.put( valor, escultura.getValor( ) );
+		jEscultura.put( valor, String.valueOf(escultura.getValor( )) );
 		jEscultura.put( "Proprietario", escultura.getPropietario( ).getLogin() );
 		jEscultura.put( exhibaVendaoSubasta, escultura.getExhibaVendaoSubasta() );
 		jEscultura.put( tipo, escultura.getTipo( ) );
-		jEscultura.put( "Alto", escultura.getAlto( ) );
-		jEscultura.put( "Ancho", escultura.getAncho( ) );
-		jEscultura.put( "Profundidad", escultura.getProfundidad( ) );
+		jEscultura.put( "Alto", String.valueOf(escultura.getAlto( ) ));
+		jEscultura.put( "Ancho", String.valueOf(escultura.getAncho( ) ));
+		jEscultura.put( "Profundidad", String.valueOf(escultura.getProfundidad( ) ));
 		jEscultura.put( "Materiales", escultura.getMateriales( ) );
-		jEscultura.put( "Peso", escultura.getPeso( ) );
+		jEscultura.put( "Peso", String.valueOf(escultura.getPeso( )) );
 		jEscultura.put( "Electricidad", escultura.isElectricidad( ) );
 		jEscultura.put( "Otro detalle", escultura.isOtroDetalle( ) );
 		jEscultura.put( consignacion, escultura.isConsignacion( ) );
@@ -428,8 +428,7 @@ public class PersistenciaPiezas {
 		jEsculturas.put( jEscultura );
 	}
 
-	public void cargarPiezas(JSONArray jPiezas, Galeria galeria, HashMap<String, Comprador> loginCompradores, HashMap<String, Pieza> identificacionPieza,
-			HashMap<String, Artista> loginAutores) throws LoginInexistenteException
+	public void cargarPiezas(JSONArray jPiezas, Galeria galeria, HashMap<String, Usuario> loginUsuarios, HashMap<String, Pieza> identificacionPieza) throws LoginInexistenteException
 	{ 
 		int numeroPiezas = jPiezas.length();
 		for (int i = 0 ; i < numeroPiezas ; i++)
@@ -438,29 +437,28 @@ public class PersistenciaPiezas {
 			String tipoPieza = pieza.getString(tipo);
 			if (tipoVideo.equals(tipoPieza))
 			{
-				cargarVideo(pieza, galeria, loginCompradores, identificacionPieza,loginAutores);
+				cargarVideo(pieza, galeria, loginUsuarios, identificacionPieza);
 			}
 			else if (tipoPintura.equals(tipoPieza))
 			{
-				cargarPintura(pieza, galeria, loginCompradores, identificacionPieza, loginAutores);
+				cargarPintura(pieza, galeria, loginUsuarios, identificacionPieza);
 			}
 			else if (tipoFotografia.equals(tipoPieza))
 			{
-				cargarFotografia(pieza, galeria, loginCompradores, identificacionPieza, loginAutores);
+				cargarFotografia(pieza, galeria, loginUsuarios, identificacionPieza);
 			}
 			else if (tipoImpresion.equals(tipoPieza))
 			{
-				cargarImpresion(pieza, galeria, loginCompradores, identificacionPieza, loginAutores);
+				cargarImpresion(pieza, galeria, loginUsuarios, identificacionPieza);
 			}
 			else if (tipoEscultura.equals(tipoPieza))
 			{
-				cargarEscultura(pieza, galeria, loginCompradores, identificacionPieza, loginAutores);
+				cargarEscultura(pieza, galeria, loginUsuarios, identificacionPieza);
 			}
 		}
 	}
 
-	public void cargarEscultura(JSONObject jEscultura, Galeria galeria, HashMap<String, Comprador> loginCompradores, HashMap<String, Pieza> identificacionPieza,
-			HashMap<String, Artista> loginAutores) throws LoginInexistenteException
+	public void cargarEscultura(JSONObject jEscultura, Galeria galeria, HashMap<String, Usuario> loginUsuarios, HashMap<String, Pieza> identificacionPieza) throws LoginInexistenteException
 	{
 		String loginsArtistas = jEscultura.getString("Autores");
 		ArrayList<Artista> nAutores = new ArrayList<Artista>();
@@ -468,7 +466,7 @@ public class PersistenciaPiezas {
 		{
 			for(String loginAutor: loginsArtistas.split(","))
 			{
-				nAutores.add(loginAutores.get(loginAutor));
+				nAutores.add((Artista) loginUsuarios.get(loginAutor));
 			}
 		}
 		String loginsDueños = jEscultura.getString("Historial Dueños");
@@ -477,7 +475,7 @@ public class PersistenciaPiezas {
 		{
 			for(String loginDueño: loginsDueños.split(","))
 			{
-				nDueños.add(loginAutores.get(loginDueño));
+				nDueños.add(loginUsuarios.get(loginDueño));
 			}
 		}
 		String fechasPrecios = jEscultura.getString("Fecha Precio");
@@ -491,33 +489,32 @@ public class PersistenciaPiezas {
 		}
 		String nLugarCreacion = jEscultura.getString(lugarCreacion);
 		String nTitulo = jEscultura.getString(titulo);
-		int nValor = jEscultura.getInt(valor);
+		int nValor = Integer.parseInt(jEscultura.getString(valor));
 		String nExhibaVendaoSubaste = jEscultura.getString(exhibaVendaoSubasta);
 		String nFechaCreacion = jEscultura.getString(fechaCreacion);
 		String loginComprador = jEscultura.getString("Proprietario");
-		if (! loginCompradores.containsKey(loginComprador))
+		if (! loginUsuarios.containsKey(loginComprador))
 		{
 			throw new LoginInexistenteException(loginComprador);
 		}
-		Comprador nPropietario = loginCompradores.get(loginComprador);
+		Comprador nPropietario = (Comprador) loginUsuarios.get(loginComprador);
 		boolean nExhibida = jEscultura.getBoolean(exhibida);
-		double nAlto = (double) jEscultura.getNumber("Alto");
-		double nAancho = (double) jEscultura.getNumber("Ancho");
-		double nProfundidad = (double) jEscultura.getNumber("Profundidad");
+		double nAlto = Double.parseDouble(jEscultura.getString("Alto"));
+		double nAncho = Double.parseDouble(jEscultura.getString("Ancho"));
+		double nProfundidad = Double.parseDouble(jEscultura.getString("Profundidad"));
 		String nMateriales = jEscultura.getString("Materiales");
-		double nPeso = (double) jEscultura.getNumber("Peso");
+		double nPeso = Double.parseDouble(jEscultura.getString("Peso"));
 		boolean nElectricidad = jEscultura.getBoolean("Electricidad");
 		boolean nOtroDetalle = jEscultura.getBoolean("Otro detalle");
 		boolean nConsignacion = jEscultura.getBoolean(consignacion);
 		boolean nDispsubasta = jEscultura.getBoolean(dispsubasta);
 		boolean nDispventa = jEscultura.getBoolean(dispventa);
-		Escultura escultura = galeria.getFabrica().crearEscultura(nTitulo, nValor, nFechaCreacion, nLugarCreacion, nPropietario, nAutores, nDueños, historialVentas, nExhibaVendaoSubaste, nConsignacion, nExhibida, nDispsubasta, nDispventa, nAlto, nAancho, nProfundidad, nMateriales, nPeso, nElectricidad, nOtroDetalle);
+		Escultura escultura = galeria.getFabrica().crearEscultura(nTitulo, nValor, nFechaCreacion, nLugarCreacion, nPropietario, nAutores, nDueños, historialVentas, nExhibaVendaoSubaste, nConsignacion, nExhibida, nDispsubasta, nDispventa, nAlto, nAncho, nProfundidad, nMateriales, nPeso, nElectricidad, nOtroDetalle);
 		identificacionPieza.put(jEscultura.getString(identificador), escultura);
 		
 	}
 
-	public void cargarFotografia(JSONObject jFotografia, Galeria galeria, HashMap<String, Comprador> loginCompradores, HashMap<String, Pieza> identificacionPieza,
-			HashMap<String, Artista> loginAutores) throws LoginInexistenteException
+	public void cargarFotografia(JSONObject jFotografia, Galeria galeria, HashMap<String, Usuario> loginUsuarios, HashMap<String, Pieza> identificacionPieza) throws LoginInexistenteException
 	{
 		String loginsArtistas = jFotografia.getString("Autores");
 		ArrayList<Artista> nAutores = new ArrayList<Artista>();
@@ -525,7 +522,7 @@ public class PersistenciaPiezas {
 		{
 			for(String loginAutor: loginsArtistas.split(","))
 			{
-				nAutores.add(loginAutores.get(loginAutor));
+				nAutores.add((Artista) loginUsuarios.get(loginAutor));
 			}
 		}
 		String loginsDueños = jFotografia.getString("Historial Dueños");
@@ -534,7 +531,7 @@ public class PersistenciaPiezas {
 		{
 			for(String loginDueño: loginsDueños.split(","))
 			{
-				nDueños.add(loginAutores.get(loginDueño));
+				nDueños.add(loginUsuarios.get(loginDueño));
 			}
 		}
 		String fechasPrecios = jFotografia.getString("Fecha Precio");
@@ -548,18 +545,18 @@ public class PersistenciaPiezas {
 		}
 		String nLugarCreacion = jFotografia.getString(lugarCreacion);
 		String nTitulo = jFotografia.getString(titulo);
-		int nValor = jFotografia.getInt(valor);
+		int nValor = Integer.parseInt(jFotografia.getString(valor));
 		String nExhibaVendaoSubaste = jFotografia.getString(exhibaVendaoSubasta);
 		String nFechaCreacion = jFotografia.getString(fechaCreacion);
 		String loginComprador = jFotografia.getString("Proprietario");
-		if (! loginCompradores.containsKey(loginComprador))
+		if (! loginUsuarios.containsKey(loginComprador))
 		{
 			throw new LoginInexistenteException(loginComprador);
 		}
-		Comprador nPropietario = loginCompradores.get(loginComprador);
+		Comprador nPropietario = (Comprador) loginUsuarios.get(loginComprador);
 		boolean nExhibida = jFotografia.getBoolean(exhibida);
-		int nAlto = jFotografia.getInt("Alto");
-		int nAancho = jFotografia.getInt("Ancho");
+		double nAlto = Double.parseDouble(jFotografia.getString("Alto"));
+		double nAancho = Double.parseDouble(jFotografia.getString("Ancho"));
 		String nFormato = jFotografia.getString("Formato");
 		boolean nEnmarcado = jFotografia.getBoolean("Enmarcado");
 		boolean nConsignacion = jFotografia.getBoolean(consignacion);
@@ -570,8 +567,7 @@ public class PersistenciaPiezas {
 
 	}
 
-	public void cargarImpresion(JSONObject jImpresion, Galeria galeria, HashMap<String, Comprador> loginCompradores, HashMap<String, Pieza> identificacionPieza,
-			HashMap<String, Artista> loginAutores) throws LoginInexistenteException
+	public void cargarImpresion(JSONObject jImpresion, Galeria galeria, HashMap<String, Usuario> loginUsuarios, HashMap<String, Pieza> identificacionPieza) throws LoginInexistenteException
 	{
 		String loginsArtistas = jImpresion.getString("Autores");
 		ArrayList<Artista> nAutores = new ArrayList<Artista>();
@@ -579,7 +575,7 @@ public class PersistenciaPiezas {
 		{
 			for(String loginAutor: loginsArtistas.split(","))
 			{
-				nAutores.add(loginAutores.get(loginAutor));
+				nAutores.add((Artista) loginUsuarios.get(loginAutor));
 			}
 		}
 		String loginsDueños = jImpresion.getString("Historial Dueños");
@@ -588,7 +584,7 @@ public class PersistenciaPiezas {
 		{
 			for(String loginDueño: loginsDueños.split(","))
 			{
-				nDueños.add(loginAutores.get(loginDueño));
+				nDueños.add(loginUsuarios.get(loginDueño));
 			}
 		}
 		String fechasPrecios = jImpresion.getString("Fecha Precio");
@@ -602,28 +598,27 @@ public class PersistenciaPiezas {
 		}
 		String nLugarCreacion = jImpresion.getString(lugarCreacion);
 		String nTitulo = jImpresion.getString(titulo);
-		int nValor = jImpresion.getInt(valor);
+		int nValor = Integer.parseInt(jImpresion.getString(valor));
 		String nExhibaVendaoSubaste = jImpresion.getString(exhibaVendaoSubasta);
 		String nFechaCreacion = jImpresion.getString(fechaCreacion);
 		String loginComprador = jImpresion.getString("Proprietario");
-		if (! loginCompradores.containsKey(loginComprador))
+		if (! loginUsuarios.containsKey(loginComprador))
 		{
 			throw new LoginInexistenteException(loginComprador);
 		}
-		Comprador nPropietario = loginCompradores.get(loginComprador);
+		Comprador nPropietario = (Comprador) loginUsuarios.get(loginComprador);
 		boolean nExhibida = jImpresion.getBoolean(exhibida);
-		int nAlto = jImpresion.getInt("Alto");
-		int nAncho = jImpresion.getInt("Ancho");
+		double nAlto = Double.parseDouble(jImpresion.getString("Alto"));
+		double nAncho = Double.parseDouble(jImpresion.getString("Ancho"));
 		boolean nConsignacion = jImpresion.getBoolean(consignacion);
 		boolean nDispsubasta = jImpresion.getBoolean(dispsubasta);
 		boolean nDispventa = jImpresion.getBoolean(dispventa);
-		Impresion impresion = galeria.getFabrica().crearImpresion(nTitulo, nValor, nFechaCreacion, nLugarCreacion, nPropietario, nAutores, nDueños, historialVentas, nExhibaVendaoSubaste, nConsignacion, nExhibida, nDispsubasta, nDispventa, nAncho, nAlto);
+		Impresion impresion = galeria.getFabrica().crearImpresion(nTitulo, nValor, nFechaCreacion, nLugarCreacion, nPropietario, nAutores, nDueños, historialVentas, nExhibaVendaoSubaste, nConsignacion, nExhibida, nDispsubasta, nDispventa, nAlto, nAncho);
 		identificacionPieza.put(jImpresion.getString(identificador), impresion);
 
 	}
 
-	public void cargarPintura(JSONObject jPintura, Galeria galeria, HashMap<String, Comprador> loginCompradores, HashMap<String, Pieza> identificacionPieza, 
-			HashMap<String, Artista> loginAutores) throws LoginInexistenteException
+	public void cargarPintura(JSONObject jPintura, Galeria galeria, HashMap<String, Usuario> loginUsuarios, HashMap<String, Pieza> identificacionPieza) throws LoginInexistenteException
 	{
 		String loginsArtistas = jPintura.getString("Autores");
 		ArrayList<Artista> nAutores = new ArrayList<Artista>();
@@ -631,7 +626,7 @@ public class PersistenciaPiezas {
 		{
 			for(String loginAutor: loginsArtistas.split(","))
 			{
-				nAutores.add(loginAutores.get(loginAutor));
+				nAutores.add((Artista) loginUsuarios.get(loginAutor));
 			}
 		}
 		String loginsDueños = jPintura.getString("Historial Dueños");
@@ -640,7 +635,7 @@ public class PersistenciaPiezas {
 		{
 			for(String loginDueño: loginsDueños.split(","))
 			{
-				nDueños.add(loginAutores.get(loginDueño));
+				nDueños.add(loginUsuarios.get(loginDueño));
 			}
 		}
 		String fechasPrecios = jPintura.getString("Fecha Precio");
@@ -654,29 +649,28 @@ public class PersistenciaPiezas {
 		}
 		String nLugarCreacion = jPintura.getString(lugarCreacion);
 		String nTitulo = jPintura.getString(titulo);
-		int nValor = jPintura.getInt(valor);
+		int nValor = Integer.parseInt(jPintura.getString(valor));
 		String nExhibaVendaoSubaste = jPintura.getString(exhibaVendaoSubasta);
 		String nFechaCreacion = jPintura.getString(fechaCreacion);
 		String loginComprador = jPintura.getString("Proprietario");
-		if (! loginCompradores.containsKey(loginComprador))
+		if (! loginUsuarios.containsKey(loginComprador))
 		{
 			throw new LoginInexistenteException(loginComprador);
 		}
-		Comprador nPropietario = loginCompradores.get(loginComprador);
+		Comprador nPropietario = (Comprador) loginUsuarios.get(loginComprador);
 		boolean nExhibida = jPintura.getBoolean(exhibida);
-		int nAlto = jPintura.getInt("Alto");
-		int nAncho = jPintura.getInt("Ancho");
+		double nAlto = Double.parseDouble(jPintura.getString("Alto"));
+		double nAncho = Double.parseDouble(jPintura.getString("Ancho"));
 		boolean nConsignacion = jPintura.getBoolean(consignacion);
 		boolean nDispsubasta = jPintura.getBoolean(dispsubasta);
 		boolean nDispventa = jPintura.getBoolean(dispventa);
-		Pintura pintura = galeria.getFabrica().crearPintura(nTitulo, nValor, nFechaCreacion, nLugarCreacion, nPropietario, nAutores, nDueños, historialVentas, nExhibaVendaoSubaste, nConsignacion, nExhibida, nDispsubasta, nDispventa, nAncho, nAlto);
+		Pintura pintura = galeria.getFabrica().crearPintura(nTitulo, nValor, nFechaCreacion, nLugarCreacion, nPropietario, nAutores, nDueños, historialVentas, nExhibaVendaoSubaste, nConsignacion, nExhibida, nDispsubasta, nDispventa, nAlto, nAncho);
 		identificacionPieza.put(jPintura.getString(identificador), pintura);
 
 	}
 
 
-	public void cargarVideo(JSONObject jVideo, Galeria galeria, HashMap<String, Comprador> loginCompradores, HashMap<String, Pieza> identificacionPieza,
-			HashMap<String, Artista> loginAutores ) throws LoginInexistenteException
+	public void cargarVideo(JSONObject jVideo, Galeria galeria, HashMap<String, Usuario> loginUsuarios, HashMap<String, Pieza> identificacionPieza) throws LoginInexistenteException
 	{
 		String loginsArtistas = jVideo.getString("Autores");
 		ArrayList<Artista> nAutores = new ArrayList<Artista>();
@@ -684,7 +678,7 @@ public class PersistenciaPiezas {
 		{
 			for(String loginAutor: loginsArtistas.split(","))
 			{
-				nAutores.add(loginAutores.get(loginAutor));
+				nAutores.add((Artista) loginUsuarios.get(loginAutor));
 			}
 		}
 		String loginsDueños = jVideo.getString("Historial Dueños");
@@ -693,7 +687,7 @@ public class PersistenciaPiezas {
 		{
 			for(String loginDueño: loginsDueños.split(","))
 			{
-				nDueños.add(loginAutores.get(loginDueño));
+				nDueños.add(loginUsuarios.get(loginDueño));
 			}
 		}
 		String fechasPrecios = jVideo.getString("Fecha Precio");
@@ -707,19 +701,19 @@ public class PersistenciaPiezas {
 		}
 		String nLugarCreacion = jVideo.getString(lugarCreacion);
 		String nTitulo = jVideo.getString(titulo);
-		int nValor = jVideo.getInt(valor);
+		int nValor = Integer.parseInt(jVideo.getString(valor));
 		String nExhibaVendaoSubaste = jVideo.getString(exhibaVendaoSubasta);
 		String nFechaCreacion = jVideo.getString(fechaCreacion);
 		String loginComprador = jVideo.getString("Proprietario");
-		if (! loginCompradores.containsKey(loginComprador))
+		if (! loginUsuarios.containsKey(loginComprador))
 		{
 			throw new LoginInexistenteException(loginComprador);
 		}
-		Comprador nPropietario = loginCompradores.get(loginComprador);
+		Comprador nPropietario = (Comprador) loginUsuarios.get(loginComprador);
 		boolean nExhibida = jVideo.getBoolean(exhibida);
-		int nAlto = jVideo.getInt("Alto");
-		int nAncho = jVideo.getInt("Ancho");
-		int nDuracion = jVideo.getInt("Duracion");
+		double nAlto = Double.parseDouble(jVideo.getString("Alto"));
+		double nAncho = Double.parseDouble(jVideo.getString("Ancho"));
+		int nDuracion = Integer.parseInt(jVideo.getString("Duracion"));
 		String nFormato = jVideo.getString("Formato");
 		boolean nConsignacion = jVideo.getBoolean(consignacion);
 		boolean nDispsubasta = jVideo.getBoolean(dispsubasta);

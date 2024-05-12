@@ -52,31 +52,45 @@ public static void main(String[] args ) throws PropietarioErroneoException, Usua
 		
 		
 		//Compradores
-		Comprador primerComprador = fabricaGuardarDos.crearComprador("loginalice", "hola123", "Alice", 2000000, 2003,
-				new HashMap<Pieza, String>(), new ArrayList<Pieza>(), 100000, "1234567890", galeriaInicio);
-		Comprador segundoComprador = fabricaGuardarDos.crearComprador("loginlucy", "lucy456", "Lucy", 3000000, 256,
-                new HashMap<Pieza, String>(), new ArrayList<Pieza>(), 200000, "567890123", galeriaInicio);
-		Comprador tercerComprador = fabricaGuardarDos.crearComprador("loginjohn", "john789", "John", 1800000, 400,
-                new HashMap<Pieza, String>(), new ArrayList<Pieza>(), 80000, "234567890", galeriaInicio);
-		Comprador compradorGaleria = fabricaGuardarDos.crearComprador("fake", "fake", "fake", 1800000, 400,
-				new HashMap<Pieza, String>(), new ArrayList<Pieza>(), 80000, "fake", galeriaInicio);
+		galeriaInicio.crearComprador("loginalice", "hola123", "Alice", 2000000, 2003,
+				new HashMap<Pieza, String>(), new ArrayList<Pieza>(), 100000, "1234567890");
+		galeriaInicio.crearComprador("loginlucy", "lucy456", "Lucy", 3000000, 256,
+                new HashMap<Pieza, String>(), new ArrayList<Pieza>(), 200000, "567890123");
+		galeriaInicio.crearComprador("loginjohn", "john789", "John", 1800000, 400,
+                new HashMap<Pieza, String>(), new ArrayList<Pieza>(), 80000, "234567890");
+		galeriaInicio.crearComprador("fake", "fake", "fake", 1800000, 400,
+				new HashMap<Pieza, String>(), new ArrayList<Pieza>(), 80000, "fake");
+		Comprador primerComprador = (Comprador) galeriaInicio.obtenerUsuarioPorLogin("loginalice");
+		Comprador segundoComprador = (Comprador) galeriaInicio.obtenerUsuarioPorLogin("loginlucy");
+		Comprador tercerComprador = (Comprador) galeriaInicio.obtenerUsuarioPorLogin("loginjohn");
+		Comprador compradorGaleria = (Comprador) galeriaInicio.obtenerUsuarioPorLogin("fake");
 		
 		
 		
 		//Empleados
-		Administrador administrador = fabricaGuardarDos.crearAdministrador("loginbob", "adios456","912345678", "Bob", galeriaInicio);
-		Cajero cajero = fabricaGuardarDos.crearCajero("logineve", "saludos789","891234567", "Eve", galeriaInicio);
-		Operador operador = fabricaGuardarDos.crearOperador("loginneo", "secreto","789123456", "Neo", galeriaInicio);
-		Empleado empleado = fabricaGuardarDos.crearEmpleado("logiThomasAnderson", "enlamatrix","789123456", "Thomas Anderson", galeriaInicio);
+		galeriaInicio.crearAdministrador("loginbob", "adios456","912345678", "Bob");
+		galeriaInicio.crearCajero("logineve", "saludos789","891234567", "Eve");
+		galeriaInicio.crearOperador("loginneo", "secreto","789123456", "Neo");
+		galeriaInicio.crearEmpleado("loginThomasAnderson", "enlamatrix","789123456", "Thomas Anderson");
+		Administrador administrador = (Administrador) galeriaInicio.obtenerUsuarioPorLogin("loginbob");
+		Cajero cajero = (Cajero) galeriaInicio.obtenerUsuarioPorLogin("logineve");
+		Operador operador = (Operador) galeriaInicio.obtenerUsuarioPorLogin("loginneo");
+		Empleado empleado = (Empleado) galeriaInicio.obtenerUsuarioPorLogin("loginThomasAnderson");
 		
 		
 		//Artistas
-		Artista artista1 = fabricaGuardarDos.crearArtista("loginvincent", "dai", "Vincent", "31256789", galeriaInicio);
-		Artista artista2 = fabricaGuardarDos.crearArtista("loginpicasso", "guernica", "Picasso", "32198765", galeriaInicio);
-		Artista artista3 = fabricaGuardarDos.crearArtista("loginkahlo", "frida", "Kahlo", "33344455", galeriaInicio);
-		Artista artista4 = fabricaGuardarDos.crearArtista("loginmonet", "impression", "Monet", "44455566", galeriaInicio);
-		Artista artista5 = fabricaGuardarDos.crearArtista("loginvangogh", "starrynight", "Van Gogh", "55566677", galeriaInicio);
-		Artista artista6 = fabricaGuardarDos.crearArtista("logindali", "surrealism", "Dali", "66677788", galeriaInicio);
+		galeriaInicio.crearArtista("loginvincent", "dai", "Vincent", "31256789", new ArrayList<Pieza>() );
+		galeriaInicio.crearArtista("loginpicasso", "guernica", "Picasso", "32198765", new ArrayList<Pieza>());
+		galeriaInicio.crearArtista("loginkahlo", "frida", "Kahlo", "33344455", new ArrayList<Pieza>());
+		galeriaInicio.crearArtista("loginmonet", "impression", "Monet", "44455566", new ArrayList<Pieza>());
+		galeriaInicio.crearArtista("loginvangogh", "starrynight", "Van Gogh", "55566677", new ArrayList<Pieza>());
+		galeriaInicio.crearArtista("logindali", "surrealism", "Dali", "66677788", new ArrayList<Pieza>());
+		Artista artista1 = (Artista) galeriaInicio.obtenerUsuarioPorLogin("loginvincent");
+		Artista artista2 = (Artista) galeriaInicio.obtenerUsuarioPorLogin("loginpicasso");
+		Artista artista3 = (Artista) galeriaInicio.obtenerUsuarioPorLogin("loginkahlo");
+		Artista artista4 = (Artista) galeriaInicio.obtenerUsuarioPorLogin("loginmonet");
+		Artista artista5 = (Artista) galeriaInicio.obtenerUsuarioPorLogin("loginvangogh");
+		Artista artista6 = (Artista) galeriaInicio.obtenerUsuarioPorLogin("logindali");
 		
 		
 		ArrayList<Artista> autoresVideo1 = new ArrayList<Artista>();
@@ -104,38 +118,48 @@ public static void main(String[] args ) throws PropietarioErroneoException, Usua
 		
 		
 		//Piezas pertenecientes a compradores
-		Video video1 = fabricaGuardarDos.crearVideo("Video artístico", 50, "20220201" ,"Puerto Rico",  primerComprador, autoresVideo1, new ArrayList<Usuario>(),
+		galeriaInicio.crearVideo("Video artístico", 50, "20220201" ,"Puerto Rico",  primerComprador, autoresVideo1, new ArrayList<Usuario>(),
 				new HashMap<String, Integer>(), "123", false, false, true,true, 92.3, 80.2,24, "mp4"  );
+		Video video1 = (Video) galeriaInicio.obtenerPiezaGlobalesporTitulo("Video artístico");
 	
-	    Pintura pintura1 = fabricaGuardarDos.crearPintura("Selene", 1880, "19921008" ,"Francia" , primerComprador, autoresPintura1 , new ArrayList<Usuario>(),
+		galeriaInicio.crearPintura("Selene", 1880, "19921008" ,"Francia" , primerComprador, autoresPintura1 , new ArrayList<Usuario>(),
 	    		new HashMap<String, Integer>(),"123", false, false, true, true,  15.6, 78);
+	    Pintura pintura1 = (Pintura) galeriaInicio.obtenerPiezaGlobalesporTitulo("Selene"); 
 	    
-		Impresion impresion1 = fabricaGuardarDos.crearImpresion("Esperanza", 73, "19980822" ,"Colombia" , primerComprador, autoresImpresion1, new ArrayList<Usuario>(),
+		galeriaInicio.crearImpresion("Esperanza", 73, "19980822" ,"Colombia" , primerComprador, autoresImpresion1, new ArrayList<Usuario>(),
 	    		new HashMap<String, Integer>(),"123", false, false, true, true,  72, 25);
+		Impresion impresion1 = (Impresion) galeriaInicio.obtenerPiezaGlobalesporTitulo("Esperanza");
 		
-		Fotografia fotografia = fabricaGuardarDos.crearFotografia("Posibilidad", 256, "20200319" ,"Estonia" , segundoComprador, autoresFotografia1, new ArrayList<Usuario>(),
+		galeriaInicio.crearFotografia("Posibilidad", 256, "20200319" ,"Estonia" , segundoComprador, autoresFotografia1, new ArrayList<Usuario>(),
 	    		new HashMap<String, Integer>(),"123", false, false, true, true,  50, 50, "jpg", true);
+		Fotografia fotografia1 = (Fotografia) galeriaInicio.obtenerPiezaGlobalesporTitulo("Posibilidad");
 		
-		Escultura escultura = fabricaGuardarDos.crearEscultura("Venus de Milo", 400, "18760426" ,"Italia" , tercerComprador, autoresEscultura1, new ArrayList<Usuario>(),
+		galeriaInicio.crearEscultura("Venus de Milo", 400, "18760426" ,"Italia" , tercerComprador, autoresEscultura1, new ArrayList<Usuario>(),
 	    		new HashMap<String, Integer>(),"123", false, false, true, true,  750, 60,70, "Marmol", 456, false, false);
+		Escultura escultura1 = (Escultura) galeriaInicio.obtenerPiezaGlobalesporTitulo("Venus de Milo");
 		
 		
 		
 		//Piezas pertenencientes a la galería
-		Video video2 = fabricaGuardarDos.crearVideo("Video abstruso", 60, "20220315", "Argentina", compradorGaleria, autoresVideo1, new ArrayList<Usuario>(),
+		galeriaInicio.crearVideo("Video abstruso", 60, "20220315", "Argentina", compradorGaleria, autoresVideo1, new ArrayList<Usuario>(),
                 new HashMap<String, Integer>(), "123", false, false, true, true, 100.5, 90.1, 30, "avi");
-
-		Pintura pintura2 = fabricaGuardarDos.crearPintura("Amanecer en París", 1915, "19900805", "España", compradorGaleria, autoresPintura1, new ArrayList<Usuario>(),
-        new HashMap<String, Integer>(), "123", false, false, true, true, 20.8, 67);
-
-		Impresion impresion2 = fabricaGuardarDos.crearImpresion("Reflejos urbanos", 90, "20011230", "México", compradorGaleria, autoresImpresion1, new ArrayList<Usuario>(),
-        new HashMap<String, Integer>(), "123", false, false, true, true, 85, 35);
-
-		Fotografia fotografia2 = fabricaGuardarDos.crearFotografia("Serenidad en la playa", 180, "20180704", "Grecia", compradorGaleria, autoresFotografia1, new ArrayList<Usuario>(),
-        new HashMap<String, Integer>(), "123", false, false, true, true, 45, 35, "png", false);
-
-		Escultura escultura2 = fabricaGuardarDos.crearEscultura("La musa del renacimiento", 550, "14980315", "Francia", compradorGaleria, autoresEscultura1, new ArrayList<Usuario>(),
-        new HashMap<String, Integer>(), "123", false, false, true, true, 900, 70, 80, "Bronce", 789, false, false);
+		Video video2 = (Video) galeriaInicio.obtenerPiezaGlobalesporTitulo("Video abstruso");
+	
+		galeriaInicio.crearPintura("Amanecer en París", 1915, "19900805", "España", compradorGaleria, autoresPintura1, new ArrayList<Usuario>(),
+		        new HashMap<String, Integer>(), "123", false, false, true, true, 20.8, 67);
+	    Pintura pintura2 = (Pintura) galeriaInicio.obtenerPiezaGlobalesporTitulo("Amanecer en París"); 
+	    
+		galeriaInicio.crearImpresion("Reflejos urbanos", 90, "20011230", "México", compradorGaleria, autoresImpresion1, new ArrayList<Usuario>(),
+		        new HashMap<String, Integer>(), "123", false, false, true, true, 85, 35);
+		Impresion impresion2 = (Impresion) galeriaInicio.obtenerPiezaGlobalesporTitulo("Reflejos urbanos");
+		
+		galeriaInicio.crearFotografia("Serenidad en la playa", 180, "20180704", "Grecia", compradorGaleria, autoresFotografia1, new ArrayList<Usuario>(),
+		        new HashMap<String, Integer>(), "123", false, false, true, true, 45, 35, "png", false);
+		Fotografia fotografia2 = (Fotografia) galeriaInicio.obtenerPiezaGlobalesporTitulo("Serenidad en la playa");
+		
+		galeriaInicio.crearEscultura("La musa del renacimiento", 550, "14980315", "Francia", compradorGaleria, autoresEscultura1, new ArrayList<Usuario>(),
+		        new HashMap<String, Integer>(), "123", false, false, true, true, 900, 70, 80, "Bronce", 789, false, false);
+		Escultura escultura2 = (Escultura) galeriaInicio.obtenerPiezaGlobalesporTitulo("La musa del renacimiento");
 		
 		galeriaInicio.añadirPieza(video2);
 		galeriaInicio.añadirPieza(pintura2);
@@ -143,7 +167,63 @@ public static void main(String[] args ) throws PropietarioErroneoException, Usua
 		galeriaInicio.añadirPieza(fotografia2);
 		galeriaInicio.añadirPieza(escultura2);
 		
+		HashMap<Pieza, String> historial1 = primerComprador.getHistorialPiezas();
+		historial1.put(fotografia1, fotografia1.getFechaCreacion());
+		primerComprador.setHistorialPiezas(historial1);
 		
+		HashMap<Pieza, String> historial2 = segundoComprador.getHistorialPiezas();
+		historial2.put(pintura1, pintura1.getFechaCreacion());
+		historial2.put(fotografia2, fotografia2.getFechaCreacion());
+		historial2.put(video2, video2.getFechaCreacion());
+		segundoComprador.setHistorialPiezas(historial2);
+		
+		ArrayList<Usuario> participantes1 = new ArrayList<Usuario>();
+		participantes1.add(primerComprador);
+		participantes1.add(segundoComprador);
+		participantes1.add(tercerComprador);
+		
+		ArrayList<Integer> valoresVideo = new ArrayList<Integer>();
+		valoresVideo.add(100000);
+		valoresVideo.add(150000);
+		
+		ArrayList<Integer> valoresEscultura = new ArrayList<Integer>();
+		valoresEscultura.add(123456);
+		valoresEscultura.add(654321);
+		
+		ArrayList<Integer> valoresPintura = new ArrayList<Integer>();
+		valoresPintura.add(8765343);
+		valoresPintura.add(8765344);
+		
+		HashMap<Pieza, ArrayList<Integer>> subasta1 = new HashMap<Pieza, ArrayList<Integer>>();
+		subasta1.put(video1, valoresVideo);
+		subasta1.put(escultura2, valoresEscultura);
+		subasta1.put(pintura2, valoresPintura);
+		
+		HashMap<Pieza, HashMap<Usuario, Integer>> ofertas1 = new HashMap<Pieza, HashMap<Usuario, Integer>>();
+		
+		HashMap<Usuario, Integer> ofertaVideo = new HashMap<Usuario, Integer>();
+		ofertaVideo.put(primerComprador, 123456);
+		ofertaVideo.put(tercerComprador, 123457);
+		ofertaVideo.put(segundoComprador, 20000);
+		ofertas1.put(video1, ofertaVideo);
+		
+		HashMap<Usuario, Integer> ofertaEscultura = new HashMap<Usuario, Integer>();
+		ofertaEscultura.put(segundoComprador, 1232456);
+		ofertaEscultura.put(tercerComprador, 1235457);
+		ofertaEscultura.put(primerComprador, 125900);
+		ofertas1.put(escultura2, ofertaEscultura);
+		
+		HashMap<Usuario, Integer> ofertaPintura = new HashMap<Usuario, Integer>();
+		ofertas1.put(pintura2, ofertaPintura);
+		
+		galeriaInicio.crearSubasta(participantes1, operador, ofertas1, subasta1);
+		
+		galeriaInicio.salvarGaleria("Consola.json");
+		Galeria galeriaClonada = fabricaInicio.crearGaleria("Galeria Clonada", new ArrayList<Subasta>(), new ArrayList<Pieza>(),
+				new ArrayList<Pieza>(), new ArrayList<Pieza>(), new ArrayList<Usuario>());
+		galeriaClonada.cargarGaleria("Consola.json");
+		galeriaClonada.salvarGaleria("ConsolaClonada.json");
+		System.out.println("Se clonó :D.");
 		/*fabricaGuardarDos.getPersistencia().salvarGaleria("Prueba.json" , fabricaGuardarDos.getUsuariosCreados(), fabricaGuardarDos.getPiezasCreadas());
 		/*Fabrica fabricaCargar = new Fabrica();
 		fabricaCargar.getPersistencia().cargarGaleria(rutaPersistencia, galeriaCargar);
@@ -335,7 +415,10 @@ public static void main(String[] args ) throws PropietarioErroneoException, Usua
 						}
 					}
 					
-					else if()
+					else if(eleccionDos == 123237892)
+					{
+						
+					}
 					
 					}
 				}

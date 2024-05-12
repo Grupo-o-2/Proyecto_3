@@ -43,6 +43,21 @@ public class Galeria {
 	public ArrayList<Pieza> getHistorialPiezas() {
 		return historialPiezas;
 	}
+	
+	public void setHistorialPiezas(ArrayList<Pieza> historialPiezas)
+	{
+		this.historialPiezas = historialPiezas;
+	}
+	
+	public void setPiezasAntiguas(ArrayList<Pieza> piezasAntiguas)
+	{
+		this.piezasAntiguas = piezasAntiguas;
+	}
+	
+	public void setPiezasActuales(ArrayList<Pieza> piezasActuales)
+	{
+		this.piezasActuales = piezasActuales;
+	}
 
 	public ArrayList<Pieza> getPiezasActuales() {
 		return piezasActuales;
@@ -87,8 +102,11 @@ public class Galeria {
 	public void añadirPieza(Pieza nuevaPieza){
 		this.piezasActuales.add(nuevaPieza);
 		this.historialPiezas.add(nuevaPieza);
-		
-		
+	}
+	
+	public void añadirPiezaHistorial(Pieza pieza)
+	{
+		this.historialPiezas.add(pieza);
 	}
 	
 	public boolean verificarUsuario(Usuario usuarioAVerificar) throws UsuarioInexistenteException {
@@ -226,14 +244,6 @@ public class Galeria {
 		getFabrica().crearVideo(titulo, valor, fecha, lugar, creador, autores, dueños, ventas, exhibaVendaoSubasta, consignacion, exhibida, dispsubasta, dispventa, alto, ancho, duracion, formato);
 	}
 	
-	public HashMap<String, Usuario> obtenerLoginUsuario()
-	{
-		HashMap<String, Usuario> loginUsuario = new HashMap<String, Usuario>();
-		for (Usuario usuario : this.usuarios) {
-			loginUsuario.put(usuario.getLogin(),usuario);
-		}
-		return loginUsuario;	
-	}
 	
 	public void cargarGaleria(String archivo)
 	{
@@ -295,6 +305,15 @@ public class Galeria {
 
 	public Pieza obtenerPiezaporTitulo(String titulo) {
 		for (Pieza pieza:this.piezasActuales) {
+			if (pieza.getTitulo().compareTo(titulo) == 0) {
+				return pieza;
+			}
+		}
+		return null;
+	}
+	
+	public Pieza obtenerPiezaGlobalesporTitulo(String titulo) {
+		for (Pieza pieza:getFabrica().getPiezasCreadas()) {
 			if (pieza.getTitulo().compareTo(titulo) == 0) {
 				return pieza;
 			}

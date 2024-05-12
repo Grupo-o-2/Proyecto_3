@@ -14,7 +14,7 @@ public class Comprador extends Usuario{
 	private String telefono;
 	private int valorMaximoCompras;
 	private int valorColeccion;
-	private HashMap<Pieza, String> historialPiezas;
+	private HashMap<Pieza, String> historialPiezas; //Pieza con fecha
 	private ArrayList<Pieza> piezasActuales;
 	private static final String TIPO = "Comprador";
 	

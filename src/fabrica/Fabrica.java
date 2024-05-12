@@ -12,7 +12,6 @@ import java.nio.file.Files;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.junit.jupiter.api.Test;
 
 public class Fabrica {
 
@@ -368,10 +367,10 @@ public class Fabrica {
 	
 	public void salvarGaleria(String archivo, Galeria galeria) throws IOException
 	{
-			persistencia.salvarGaleria(archivo, galeria.getUsuarios(), this.piezasCreadas);
+			persistencia.salvarGaleria(archivo, galeria.getUsuarios(), this.piezasCreadas, galeria);
 	}
 	
-	public void cargarGaleria(String archivo, Galeria galeria) throws IOException, LoginException, LoginInexistenteException
+	public void cargarGaleria(String archivo, Galeria galeria) throws IOException, LoginException, LoginInexistenteException, UsuarioInexistenteException
 	{
 			persistencia.cargarGaleria(archivo, galeria);
 	}

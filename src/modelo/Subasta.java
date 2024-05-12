@@ -36,6 +36,15 @@ public ArrayList<Usuario> getParticipantes() {
 	public Usuario getOperador() {
 	return operador;
 }
+	public HashMap<Pieza,HashMap<Usuario, Integer>> getRegistroSubasta()
+	{
+		return this.registroSubasta;
+	}
+	
+	public HashMap<Pieza,ArrayList<Integer>> getPiezasSubastadas()
+	{
+		return this.piezasSubastadas;
+	}
 
 	public boolean revisarOferta(Pieza piezaEnRevision, int valorOfertado, Usuario ofertador ) throws DineroOfrecidoInsuficienteException, DineroInsuficienteException {
 		Integer valorInicial = this.piezasSubastadas.get(piezaEnRevision).get(1);

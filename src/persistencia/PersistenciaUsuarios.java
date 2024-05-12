@@ -63,7 +63,7 @@ public class PersistenciaUsuarios {
 			}
 			else if (tipoArtista.equals(usuario.getTipo()))
 			{
-				salvarArtista((Artista) usuario, jUsuarios, identificadorPieza);
+				salvarArtista((Artista) usuario, jUsuarios);
 			}
 		}
 		jobject.put("Usuarios", jUsuarios);
@@ -84,35 +84,35 @@ public class PersistenciaUsuarios {
 		{
 			for (Pieza pieza: comprador.getPiezasActuales())
 			{
-				piezasActuales = piezasActuales + "," + identificadorPieza.get(pieza);
+				piezasActuales = piezasActuales + identificadorPieza.get(pieza) + ",";
 				comprador.getHistorialPiezas().remove(pieza);
 			}
-			jComprador.put( "Piezas Actuales", piezasActuales );
 		}
 		else
 		{
-			jComprador.put( "Piezas Actuales", "Vacío");
+			piezasActuales= "Vacío";
 		}
+		jComprador.put( "Piezas Actuales", piezasActuales );
 		String historialPiezas = "";
 		HashMap<Pieza, String> historialPiezasComprador = comprador.getHistorialPiezas();
 		if (! historialPiezasComprador.keySet().isEmpty())
 		{
 			for (Pieza pieza: comprador.getHistorialPiezas().keySet())
 			{
-				historialPiezas = historialPiezas + "," + identificadorPieza.get(pieza) + ";" + historialPiezasComprador.get(pieza);
+				historialPiezas = historialPiezas + identificadorPieza.get(pieza) + "," + historialPiezasComprador.get(pieza) + ";";
 			}
-			jComprador.put( "Historial Piezas", historialPiezas);
 		}
 		else
 		{
-			jComprador.put( "Historial Piezas", "Vacío");
+			historialPiezas= "Vacío";
 		}
+		jComprador.put( "Historial Piezas", historialPiezas);
 		jComprador.put( tipo, comprador.getTipo( ) );
 
 		jCompradores.put( jComprador );
 	}
 	
-	public void salvarArtista(Artista artista, JSONArray jArtistas, HashMap<Pieza, String> identificadorPieza)
+	public void salvarArtista(Artista artista, JSONArray jArtistas)
 	{
 		JSONObject jArtista = new JSONObject( );
 		jArtista.put( login, artista.getLogin() );
@@ -120,16 +120,6 @@ public class PersistenciaUsuarios {
 		jArtista.put( nombre, artista.getNombre( ) );
 		jArtista.put( telefono, artista.getTelefono() );
 		jArtista.put( tipo, artista.getTipo( ) );
-		String piezasActuales = "";
-		if (! artista.getPiezasCreadas().isEmpty())
-		{
-			for (Pieza pieza: artista.getPiezasCreadas())
-			{
-				piezasActuales = piezasActuales + "," + identificadorPieza.get(pieza);
-			}
-			jArtista.put( "Historial Piezas", piezasActuales );
-		}
-		
 		jArtistas.put( jArtista );
 	}
 	
@@ -157,9 +147,8 @@ public class PersistenciaUsuarios {
 		jCompradores.put( jComprador );
 	}
 
-	public void cargarUsuarios(JSONArray jUsuarios, Galeria galeria, HashMap<String, Comprador> loginCompradores,
-			HashMap<Comprador , String> historialCompradores, HashMap<String, Artista> loginAutores,
-			HashMap<Artista , String> historialAutores) throws LoginException
+	public void cargarUsuarios(JSONArray jUsuarios, Galeria galeria, HashMap<String, Usuario> loginUsuarios, HashMap<Comprador , String> piezasActuales,
+			HashMap<Comprador , String> historialCompradores) throws LoginException
 	{
 		Fabrica fabrica = galeria.getFabrica(); 
 		int numeroCompradores = jUsuarios.length();
@@ -169,36 +158,34 @@ public class PersistenciaUsuarios {
 			String tipoUsuario = usuario.getString(tipo);
 				if (tipoComprador.equals(tipoUsuario))
 				{
-					cargarComprador(usuario, galeria, loginCompradores, 
-							historialCompradores, fabrica);
+					cargarComprador(usuario, galeria, loginUsuarios, piezasActuales ,historialCompradores, fabrica);
 				}
 				else if (tipoEmpleado.equals(tipoUsuario))
 				{
-					cargarAdministrador(usuario, galeria, fabrica);
+					cargarEmpleado(usuario, galeria, loginUsuarios, fabrica);
 				}
 				else if (tipoAdministrador.equals(tipoUsuario))
 				{
-					cargarCajero(usuario, galeria, fabrica);						
+					cargarAdministrador(usuario, galeria, loginUsuarios, fabrica);						
 				}
 				else if (tipoCajero.equals(tipoUsuario))
 				{
-					cargarOperador(usuario, galeria, fabrica);
+					cargarCajero(usuario, galeria, loginUsuarios, fabrica);
 				}
 				else if (tipoOperador.equals(tipoUsuario))
 				{
-					cargarEmpleado(usuario, galeria, fabrica);
+					cargarOperador(usuario, galeria, loginUsuarios, fabrica);
 				}
-				else if (tipoArtista.equals(tipoArtista))
+				else if (tipoArtista.equals(tipoUsuario))
 				{
-					cargarArtista(usuario, galeria, loginAutores, 
-							historialAutores, fabrica);
+					cargarArtista(usuario, galeria, loginUsuarios, fabrica);
 				}
 		}
 
 	}
 	
-	public void cargarComprador(JSONObject jComprador, Galeria galeria, HashMap<String, Comprador> loginCompradores,
-			HashMap<Comprador , String> historialCompradores, Fabrica fabrica) throws LoginException
+	public void cargarComprador(JSONObject jComprador, Galeria galeria, HashMap<String, Usuario> loginUsuarios,
+			HashMap<Comprador , String> piezasActuales, HashMap<Comprador , String> historialCompradores, Fabrica fabrica) throws LoginException
 	{
 			String nLogin = jComprador.getString(login);
 			String nPassword = jComprador.getString(password);
@@ -210,16 +197,23 @@ public class PersistenciaUsuarios {
 			HashMap<Pieza, String> nHistorialPiezas = new HashMap<Pieza, String>();
 			ArrayList<Pieza> nPiezasActuales = new ArrayList<Pieza>();
 			Comprador nComprador = fabrica.crearComprador(nLogin, nPassword, nNombre, nValorMaximoCompras, nValorColeccion, nHistorialPiezas, nPiezasActuales, nDinero, nTelefono, galeria);
-			loginCompradores.put(nLogin, nComprador);
-			String nHistorialPiezasString = jComprador.getString("Historial Piezas");
+			loginUsuarios.put(nLogin, nComprador);
+			String nHistorialPiezasString = jComprador.getString("Piezas Actuales");
 			if (! nHistorialPiezasString.equals("Vacío"))
 			{
-				historialCompradores.put(nComprador,nHistorialPiezasString );
+				piezasActuales.put(nComprador,nHistorialPiezasString );
 			}
-		}
+			String nPiezasActualesString = jComprador.getString("Historial Piezas");
+			if (! nPiezasActualesString.equals("Vacío"))
+			{
+				historialCompradores.put(nComprador, nPiezasActualesString);
+			}
+	}
 	
-	public void cargarArtista(JSONObject jArtista, Galeria galeria, HashMap<String, Artista> loginAutores,
-			HashMap<Artista , String> historialAutores, Fabrica fabrica) throws LoginException
+	
+	
+	
+	public void cargarArtista(JSONObject jArtista, Galeria galeria, HashMap<String, Usuario> loginUsuarios, Fabrica fabrica) throws LoginException
 	{
 			String nLogin = jArtista.getString(login);
 			String nPassword = jArtista.getString(password);
@@ -227,16 +221,10 @@ public class PersistenciaUsuarios {
 			String nTelefono = jArtista.getString(telefono);
 			ArrayList<Pieza> nPiezasCreadas = new ArrayList<Pieza>();
 			Artista nArtista = fabrica.crearArtista(nLogin, nPassword, nNombre, nTelefono, nPiezasCreadas, galeria);
-			loginAutores.put(nLogin, nArtista);
-			String nHistorialPiezasString = jArtista.getString("Historial Piezas");
-			if (! nHistorialPiezasString.equals("Vacío"))
-			{
-				historialAutores.put(nArtista,nHistorialPiezasString );
-			}
-			
+			loginUsuarios.put(nLogin, nArtista);			
 		}
 	
-	public void cargarAdministrador(JSONObject jAdministrador, Galeria galeria,
+	public void cargarAdministrador(JSONObject jAdministrador, Galeria galeria,  HashMap<String, Usuario> loginUsuarios,
 			Fabrica fabrica) throws LoginException
 	{
 			String nLogin = jAdministrador.getString(login);
@@ -244,9 +232,10 @@ public class PersistenciaUsuarios {
 			String nNombre = jAdministrador.getString(nombre);
 			String nTelefono = jAdministrador.getString(telefono);
 			Administrador nAdministrador = fabrica.crearAdministrador(nLogin, nPassword,nTelefono, nNombre, galeria);
+			loginUsuarios.put(nLogin, nAdministrador);
 		}
 	
-	public void cargarCajero(JSONObject jCajero, Galeria galeria,
+	public void cargarCajero(JSONObject jCajero, Galeria galeria,  HashMap<String, Usuario> loginUsuarios,
 			Fabrica fabrica) throws LoginException
 	{
 		String nLogin = jCajero.getString(login);
@@ -254,9 +243,10 @@ public class PersistenciaUsuarios {
 		String nNombre = jCajero.getString(nombre);
 		String nTelefono = jCajero.getString(telefono);
 		Cajero nCajero = fabrica.crearCajero(nLogin, nPassword,nTelefono, nNombre, galeria);
+		loginUsuarios.put(nLogin, nCajero);
 		}
 	
-	public void cargarOperador(JSONObject jOperador, Galeria galeria,
+	public void cargarOperador(JSONObject jOperador, Galeria galeria,  HashMap<String, Usuario> loginUsuarios,
 			Fabrica fabrica) throws LoginException
 	{
 			String nLogin = jOperador.getString(login);
@@ -264,9 +254,10 @@ public class PersistenciaUsuarios {
 			String nNombre = jOperador.getString(nombre);
 			String nTelefono = jOperador.getString(telefono);
 			Operador nOperador = fabrica.crearOperador(nLogin, nPassword, nTelefono, nNombre, galeria);
+			loginUsuarios.put(nLogin, nOperador);
 		}
 
-	public void cargarEmpleado(JSONObject jEmpleado, Galeria galeria,
+	public void cargarEmpleado(JSONObject jEmpleado, Galeria galeria, HashMap<String, Usuario> loginUsuarios,
 			Fabrica fabrica) throws LoginException
 	{
 			String nLogin = jEmpleado.getString(login);
@@ -274,5 +265,6 @@ public class PersistenciaUsuarios {
 			String nNombre = jEmpleado.getString(nombre);
 			String nTelefono = jEmpleado.getString(telefono);
 			Empleado nEmpleado = fabrica.crearEmpleado(nLogin, nPassword, nTelefono, nNombre, galeria);
+			loginUsuarios.put(nLogin, nEmpleado);
 		}	
 }

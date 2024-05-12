@@ -56,9 +56,9 @@ public class Video extends Pieza {
 		{
 		galeria.crearArtista("Prueba", "abeurP", "Pepe", "123456", new ArrayList<Pieza>());
 		ArrayList<Artista> autor = new ArrayList<Artista>();
-		autor.add((Artista) galeria.obtenerLoginUsuario().get("Prueba"));
+		autor.add((Artista) galeria.obtenerUsuarioPorLogin("Prueba"));
 		galeria.crearComprador("PruebaNoArtista", "Ped", "Manuel", 1000, 0, new HashMap<Pieza, String>(), new ArrayList<Pieza>(), 10000, "4839274");
-		galeria.crearVideo("Titulo", 100, "Fecha", "Lugar",(Comprador) galeria.obtenerLoginUsuario().get("PruebaNoArtista"), autor, new ArrayList<Usuario>() , new HashMap<String, Integer>(), "exhibaVendaoSubasta", true, false, true,
+		galeria.crearVideo("Titulo", 100, "Fecha", "Lugar",(Comprador) galeria.obtenerUsuarioPorLogin("PruebaNoArtista"), autor, new ArrayList<Usuario>() , new HashMap<String, Integer>(), "exhibaVendaoSubasta", true, false, true,
 				false, 1720, 1980, 13, "Formato");
 		galeria.salvarGaleria("Video.json");
 		Fabrica fabricaDos = new Fabrica();

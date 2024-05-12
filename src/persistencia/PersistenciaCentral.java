@@ -20,18 +20,22 @@ public class PersistenciaCentral {
 
 	private PersistenciaPiezas persistenciaPiezas = new PersistenciaPiezas();
 	private PersistenciaUsuarios persistenciaUsuarios = new PersistenciaUsuarios();
+	private PersistenciaSubastas persistenciaSubastas = new PersistenciaSubastas();
+	private PersistenciaGalerias persistenciaGalerias = new PersistenciaGalerias();
 	
 	public PersistenciaCentral()
 	{
 		
 	}
 	
-	public void salvarGaleria(String archivo, ArrayList<Usuario> usuarios, ArrayList<Pieza> piezas) throws IOException
+	public void salvarGaleria(String archivo, ArrayList<Usuario> usuarios, ArrayList<Pieza> piezas, Galeria galeria) throws IOException
 	{
 		JSONObject jobject = new JSONObject( );
 		HashMap<Pieza, String> identificadorPieza = new HashMap<Pieza, String>();
 		persistenciaPiezas.salvarPiezas(piezas, jobject, identificadorPieza);
 		persistenciaUsuarios.salvarUsuarios(usuarios, jobject, identificadorPieza);
+		persistenciaSubastas.salvarSubastas(galeria.getSubastas(), jobject, identificadorPieza);
+		persistenciaGalerias.salvarGaleria(galeria, jobject, identificadorPieza);
 		File carpeta = new File("C:\\Users\\naran\\Desktop\\workspace_eclipse\\Proyecto-1\\Entrega 2\\ProyectoGaleria\\Persistencia\\Galeria");
 		File nArchivo = new File(carpeta, archivo);
 		PrintWriter pw = new PrintWriter( new FileWriter(nArchivo) );
@@ -39,29 +43,31 @@ public class PersistenciaCentral {
 		pw.close( );
 	}
 
-	public void cargarGaleria(String archivo, Galeria galeria) throws IOException, LoginException, LoginInexistenteException
+	public void cargarGaleria(String archivo, Galeria galeria) throws IOException, LoginException, LoginInexistenteException, UsuarioInexistenteException
 	{
-		HashMap<String, Comprador> loginCompradores = new HashMap<String, Comprador>();
+		HashMap<String, Usuario> loginUsuarios = new HashMap<String, Usuario>();
 		HashMap<String, Pieza> identificacionPieza = new HashMap<String, Pieza>();
 		HashMap<Comprador , String> historialCompradores = new HashMap<Comprador, String>();
-		HashMap<String, Artista> loginAutores = new HashMap<String, Artista>();
-		HashMap<Artista , String> historialAutores = new HashMap<Artista, String>();		
+		HashMap<Comprador , String> piezasActuales = new HashMap<Comprador, String>();
 		String jsonCompleto = new String( Files.readAllBytes( new File("C:\\Users\\naran\\Desktop\\workspace_eclipse\\Proyecto-1\\Entrega 2\\ProyectoGaleria\\Persistencia\\Galeria\\"+archivo ).toPath( ) ) );
 		JSONObject raiz = new JSONObject( jsonCompleto );
 
 		JSONArray usuarios = raiz.getJSONArray( "Usuarios" ); 
-		persistenciaUsuarios.cargarUsuarios(usuarios , galeria, loginCompradores, historialCompradores, loginAutores, historialAutores );
+		persistenciaUsuarios.cargarUsuarios(usuarios , galeria, loginUsuarios, piezasActuales, historialCompradores);
 		JSONArray piezas = raiz.getJSONArray( "Piezas" );
-		persistenciaPiezas.cargarPiezas(piezas, galeria, loginCompradores, identificacionPieza, loginAutores);
-		for (Comprador comprador: historialCompradores.keySet())
-		{
-			for (String identificador : historialCompradores.get(comprador).split(","))
+		persistenciaPiezas.cargarPiezas(piezas, galeria, loginUsuarios, identificacionPieza);
+		JSONArray subastas = raiz.getJSONArray( "Subastas" );
+		persistenciaSubastas.cargarSubastas(subastas, galeria, loginUsuarios, identificacionPieza);
+		JSONObject pGaleria = raiz.getJSONObject( "Galeria" );
+		persistenciaGalerias.cargarGalerias(pGaleria, galeria, identificacionPieza);
+		if (! historialCompradores.keySet().isEmpty())
+			for (Comprador comprador: historialCompradores.keySet())
 			{
-				comprador.añadirPiezaHistorial(identificacionPieza.get(identificador), "Arreglar");
-			}
-
-		}
-		
+				for (String llaveValor : historialCompradores.get(comprador).split(";"))
+				{
+					comprador.añadirPiezaHistorial(identificacionPieza.get(llaveValor.split(",")[0]), identificacionPieza.get(llaveValor.split(",")[0]).getFechaCreacion());
+				}
+			}		
 	}
 
 	public PersistenciaPiezas getPersistenciaPiezas() {
