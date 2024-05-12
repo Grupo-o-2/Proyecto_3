@@ -69,7 +69,7 @@ public static void main(String[] args ) throws PropietarioErroneoException, Usua
 		
 		//Compradores
 		galeriaInicio.crearComprador("loginalice", "hola123", "Alice", 2000000, 2003,
-				historialComprador1, new ArrayList<Pieza>(), 100000, "1234567890");
+				historialComprador1, new ArrayList<Pieza>(), 1000000000, "1234567890");
 		galeriaInicio.crearComprador("loginlucy", "lucy456", "Lucy", 3000000, 256,
 				historialComprador2, new ArrayList<Pieza>(), 200000, "567890123");
 		galeriaInicio.crearComprador("loginjohn", "john789", "John", 1800000, 400,

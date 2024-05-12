@@ -73,7 +73,7 @@ public class Comprador extends Usuario{
 	}
 
 	public int getValorColeccion() {
-		return valorColeccion;
+		return this.valorColeccion;
 	}
 
 	public void setValorColeccion(int nuevoValor) {
@@ -110,6 +110,7 @@ public class Comprador extends Usuario{
 	public void añadirPieza(Pieza pieza, String fecha){
 		this.historialPiezas.put(pieza, fecha);
 		this.piezasActuales.add(pieza);
+		valorColeccion += pieza.getValor();
 		
 	}
 	

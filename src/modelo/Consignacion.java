@@ -60,16 +60,27 @@ public class Consignacion {
 		}
 	}
 	
-	public void revisionFechaLimite(Pieza piezaConsignada, String fechaActual, Usuario propietario, Galeria galeria) {
+	public boolean revisionFechaLimite(Pieza piezaConsignada, String fechaActual, Usuario propietario, Galeria galeria) throws FechaInvalidaException {
 		
+		if (Galeria.esFechaValida(fechaActual) == false) {
+			throw new FechaInvalidaException(fechaActual);
+		}
 		
-		if (((piezaConsignada.getFechaLimite().compareTo(fechaActual) == 0) || 
+		else if (((piezaConsignada.getFechaLimite().compareTo(fechaActual) == 0) || 
 				(piezaConsignada.getFechaLimite().compareTo(fechaActual) < 0) ) 
 				&& (piezaConsignada.getPropietario() == propietario )){
 			
 			piezaConsignada.setConsignacion(false);
 			piezaConsignada.setDispsubasta(false);
+			piezaConsignada.setDispventa(false);
+			piezaConsignada.setExhibida(false);
 			galeria.getPiezasActuales().remove(piezaConsignada);
+			
+			return true;
+		}
+		
+		else {
+			return false;
 		}
 	}
 }
