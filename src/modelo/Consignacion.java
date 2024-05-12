@@ -46,6 +46,7 @@ public class Consignacion {
 			galeria.getHistorialPiezas().add(piezaAConsignar);
 			piezaAConsignar.setConsignacion(true);
 			piezaAConsignar.setExhibaVendaoSubasta(exhibaVendaoSubasta);
+			piezaAConsignar.setFechaLimite(fechaLimite);
 			
 			if ( exhibaVendaoSubasta.contains("3")) {
 				piezaAConsignar.setDispsubasta(true);

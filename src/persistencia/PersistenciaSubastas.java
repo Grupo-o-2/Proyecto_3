@@ -93,75 +93,87 @@ public class PersistenciaSubastas {
 					registroSubasta = "Vacio";
 				} 
 				jSubasta.put("Piezas Subastadas",piezasSubastadas);
+				jSubasta.put("Vacio", "No");
 				jSubastas.put(jSubasta);	
 			}
 			jObject.put("Subastas",jSubastas);
+		}
+		else
+		{
+			JSONArray jsonarray = new JSONArray();
+			JSONObject jsonobject = new JSONObject();
+			jsonobject.put("Vacio", "Sí");
+			jsonarray.put(jsonobject);
+			jObject.put("Subastas",jsonarray);
 		}
 	}
 	
 	
 	public void cargarSubastas(JSONArray jSubastas, Galeria galeria, HashMap<String, Usuario> loginUsuarios, HashMap<String, Pieza> identificacionPieza) throws LoginInexistenteException, UsuarioInexistenteException
 	{
-		int numeroSubastas = jSubastas.length();
-		for (int i = 0 ; i < numeroSubastas ; i++)
-		{
-			JSONObject subasta = jSubastas.getJSONObject( i );
-			String loginOperador = subasta.getString("Operador");
-			if (! loginUsuarios.containsKey(loginOperador))
+		if(!jSubastas.getJSONObject(0).getString("Vacio").equals("Sí"))
+		{		
+			int numeroSubastas = jSubastas.length();
+			for (int i = 0 ; i < numeroSubastas ; i++)
 			{
-				throw new LoginInexistenteException(loginOperador);
-			}
-			Operador nOperador = (Operador) loginUsuarios.get(subasta.getString("Operador"));
-			String nNombre = subasta.getString("Nombre");
-			ArrayList<Usuario> nParticipantes = new ArrayList<Usuario>();
-			if(! subasta.getString("Participantes").equals("Vacio"))
-			{
-				for (String login: subasta.getString("Participantes").split(","))
-					{
-					if (! loginUsuarios.containsKey(loginOperador))
-					{
-						throw new LoginInexistenteException(loginOperador);
-					}
-					nParticipantes.add(loginUsuarios.get(login));
-					}
-			}	
-			HashMap<Pieza,HashMap<Usuario, Integer>> nRegistroSubasta = new HashMap<Pieza,HashMap<Usuario, Integer>>();
-			if (! subasta.getString("Registro Subasta").equals("Vacio"))
-			{
-				for (String pieza: subasta.getString("Registro Subasta").split("/"))
+				JSONObject subasta = jSubastas.getJSONObject( i );
+				String loginOperador = subasta.getString("Operador");
+				if (! loginUsuarios.containsKey(loginOperador))
 				{
-					HashMap<Usuario, Integer> oferta = new HashMap<Usuario, Integer>();
-					if (! pieza.split("'")[1].equals("Vacio"))
-					{
-						for (String login: pieza.split("'")[1].split(";"))
+					throw new LoginInexistenteException(loginOperador);
+				}
+				Operador nOperador = (Operador) loginUsuarios.get(subasta.getString("Operador"));
+				String nNombre = subasta.getString("Nombre");
+				ArrayList<Usuario> nParticipantes = new ArrayList<Usuario>();
+				if(! subasta.getString("Participantes").equals("Vacio"))
+				{
+					for (String login: subasta.getString("Participantes").split(","))
 						{
-							if (! loginUsuarios.containsKey(loginOperador))
+						if (! loginUsuarios.containsKey(loginOperador))
+						{
+							throw new LoginInexistenteException(loginOperador);
+						}
+						nParticipantes.add(loginUsuarios.get(login));
+						}
+				}	
+				HashMap<Pieza,HashMap<Usuario, Integer>> nRegistroSubasta = new HashMap<Pieza,HashMap<Usuario, Integer>>();
+				if (! subasta.getString("Registro Subasta").equals("Vacio"))
+				{
+					for (String pieza: subasta.getString("Registro Subasta").split("/"))
+					{
+						HashMap<Usuario, Integer> oferta = new HashMap<Usuario, Integer>();
+						if (! pieza.split("'")[1].equals("Vacio"))
+						{
+							for (String login: pieza.split("'")[1].split(";"))
 							{
-								throw new LoginInexistenteException(loginOperador);
+								if (! loginUsuarios.containsKey(loginOperador))
+								{
+									throw new LoginInexistenteException(loginOperador);
+								}
+								oferta.put(loginUsuarios.get(login.split(",")[0]), Integer.parseInt(login.split(",")[1]));
 							}
-							oferta.put(loginUsuarios.get(login.split(",")[0]), Integer.parseInt(login.split(",")[1]));
 						}
+						nRegistroSubasta.put(identificacionPieza.get(pieza.split("'")[0]), oferta);
 					}
-					nRegistroSubasta.put(identificacionPieza.get(pieza.split("'")[0]), oferta);
 				}
-			}
-			HashMap<Pieza,ArrayList<Integer>> nPiezasSubastadas = new HashMap<Pieza,ArrayList<Integer>>();
-			if (! subasta.getString("Piezas Subastadas").equals("Vacio"))
-			{
-				for (String identificadorPieza: subasta.getString("Piezas Subastadas").split("'"))
+				HashMap<Pieza,ArrayList<Integer>> nPiezasSubastadas = new HashMap<Pieza,ArrayList<Integer>>();
+				if (! subasta.getString("Piezas Subastadas").equals("Vacio"))
 				{
-					ArrayList<Integer> valores = new ArrayList<Integer>(); 
-					if (! identificadorPieza.split(";")[1].equals("Vacio"))
+					for (String identificadorPieza: subasta.getString("Piezas Subastadas").split("'"))
 					{
-						for (String valoresString:identificadorPieza.split(";")[1].split(","))
+						ArrayList<Integer> valores = new ArrayList<Integer>(); 
+						if (! identificadorPieza.split(";")[1].equals("Vacio"))
 						{
-							valores.add(Integer.parseInt(valoresString));
+							for (String valoresString:identificadorPieza.split(";")[1].split(","))
+							{
+								valores.add(Integer.parseInt(valoresString));
+							}
 						}
+						nPiezasSubastadas.put(identificacionPieza.get(identificadorPieza.split(";")[0]), valores);
 					}
-					nPiezasSubastadas.put(identificacionPieza.get(identificadorPieza.split(";")[0]), valores);
 				}
+				galeria.crearSubasta(nNombre, nParticipantes, nOperador, nRegistroSubasta, nPiezasSubastadas);
 			}
-			galeria.crearSubasta(nNombre, nParticipantes, nOperador, nRegistroSubasta, nPiezasSubastadas);
 		}
 	}
 }
