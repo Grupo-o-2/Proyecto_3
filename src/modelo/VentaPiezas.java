@@ -44,7 +44,7 @@ public class VentaPiezas {
 			}
 			else if(piezaAVender.isConsignacion() == true) {
 				
-				
+				//cambiar plata consginada
 				((Comprador)comprador).añadirPieza(piezaAVender, fecha);
 				galeria.getPiezasActuales().remove(piezaAVender);
 				((Comprador)piezaAVender.getPropietario()).getPiezasActuales().remove(piezaAVender); //Elimina de la lista de piezas actuales del propietario anterior

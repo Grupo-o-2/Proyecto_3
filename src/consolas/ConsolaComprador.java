@@ -82,7 +82,7 @@ public static void main(String[] args ) throws PropietarioErroneoException, Usua
 		
 		
 		//Artistas
-		Artista artista1 = fabricaGuardarDos.crearArtista("loginvincent", "dai", "Vincent", "31256789",new ArrayList<Pieza>(), galeriaInicio);
+		Artista artista1 = fabricaGuardarDos.crearArtista("loginvincent", "dai", "Vincent", "31256789", new ArrayList<Pieza>(), galeriaInicio);
 		Artista artista2 = fabricaGuardarDos.crearArtista("loginpicasso", "guernica", "Picasso", "32198765", new ArrayList<Pieza>(),galeriaInicio);
 		Artista artista3 = fabricaGuardarDos.crearArtista("loginkahlo", "frida", "Kahlo", "33344455",new ArrayList<Pieza>(), galeriaInicio);
 		Artista artista4 = fabricaGuardarDos.crearArtista("loginmonet", "impression", "Monet", "44455566",new ArrayList<Pieza>(), galeriaInicio);
@@ -493,8 +493,9 @@ public static void main(String[] args ) throws PropietarioErroneoException, Usua
 							
 							if (galeriaInicio.getUsuarios().contains(artistaSeleccionado)) {
 								System.out.println("Historial del artista:"+ "\n");
-								for (Pieza pieza: ((Artista)artistaSeleccionado).obtenerPiezasCreadas(galeriaInicio) ) {
+								for (Pieza pieza:  ((Artista)artistaSeleccionado).getPiezasCreadas()) {
 									System.out.println(pieza.getTitulo()+ "\n");
+								
 								}
 							}
 							
@@ -520,7 +521,7 @@ public static void main(String[] args ) throws PropietarioErroneoException, Usua
 			}
 			
 			else if( verificacion == 3) {
-				System.out.println("LLa contraseña no es correcta. \n");
+				System.out.println("La contraseña no es correcta. \n");
 				System.out.println("Vuelve a intentarlo. \n");
 				
 			}
