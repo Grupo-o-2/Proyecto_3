@@ -18,19 +18,35 @@ public class ConsolaAdministrador extends Consola{
 		System.out.println("------------------------------------------------------------------------------------------\n");
 		System.out.println("Opciones disponibles:\n\n");
 		System.out.println("0: Salir de la aplicación.\n");
-		System.out.println("1: Registrar ingreso de una pieza al inventario.\n");
-		System.out.println("2: Confirmar realización de una venta.\n");
-		System.out.println("3: Revisión y devolución de piezas consignadas en la galería.\n");
-		System.out.println("4: Crear nueva subasta.\n");
+		System.out.println("1: Registrar ingreso de una pieza nueva al inventario.\n");
+		System.out.println("2: Revisión y devolución de piezas consignadas en la galería.\n");
+		System.out.println("3: Crear nueva subasta.\n");
+		System.out.println("4: Mostrar subastas actuales.\n");
 		System.out.println("5: Aumentar valor máximo de compras de un comprador. \n");
 		System.out.println("6: Ver la historia de un comprador. \n");
 		System.out.println("7: Ver la historia de un artista.\n");
 		System.out.println("8: Ver la historia de una pieza.\n");
 	}
 	
+	public static void mostrarMenuSubasta(){
+		System.out.println("1: Sí.\n");
+		System.out.println("2: No.\n");
+	
+	}
+	
+	public static void mostrarMenuPieza(){
+		System.out.println("1: Vídeo.\n");
+		System.out.println("2: Pintura.\n");
+		System.out.println("2: Impresión.\n");
+		System.out.println("2: Fotografía.\n");
+		System.out.println("2: Escultura.\n");
+	
+	}
+	
+	
 	public ConsolaAdministrador(){}
 	
-	public static void main(String[] args ) throws PropietarioErroneoException, UsuarioInexistenteException, DineroInsuficienteException, VentaImposibleException, MismoCompradorException, ValorMaximoExcedidoException, FechaInvalidaException, ConsignacionExistenteException, DineroOfrecidoInsuficienteException {
+	public static void main(String[] args ) throws PropietarioErroneoException, UsuarioInexistenteException, DineroInsuficienteException, VentaImposibleException, MismoCompradorException, ValorMaximoExcedidoException, FechaInvalidaException, ConsignacionExistenteException, DineroOfrecidoInsuficienteException, FormatoIncorrectoException {
 		Fabrica fabricaInicio= new Fabrica();
 		
 		ArrayList<Pieza> historialpiezasGaleria = new ArrayList<Pieza>();
@@ -52,11 +68,13 @@ public class ConsolaAdministrador extends Consola{
 			
 			//Compradores
 			galeriaInicio.crearComprador("loginalice", "hola123", "Alice", 2000000, 2003,
-					historialComprador1, new ArrayList<Pieza>(), 100000, "1234567890");
+					historialComprador1, new ArrayList<Pieza>(), 1000000000, "1234567890");
 			galeriaInicio.crearComprador("loginlucy", "lucy456", "Lucy", 3000000, 256,
 					historialComprador2, new ArrayList<Pieza>(), 200000, "567890123");
 			galeriaInicio.crearComprador("loginjohn", "john789", "John", 1800000, 400,
 					historialComprador3, new ArrayList<Pieza>(), 80000, "234567890");
+			
+			//Comprador de prueba -> no usar
 			galeriaInicio.crearComprador("fake", "fake", "fake", 1800000, 400,
 					new HashMap<Pieza, String>(), new ArrayList<Pieza>(), 80000, "fake");
 			
@@ -166,7 +184,7 @@ public class ConsolaAdministrador extends Consola{
 					historialPintura1,"123", false, false, false, false, null , 15.6, 78);
 		    Pintura pintura1 = (Pintura) galeriaInicio.obtenerPiezaGlobalesporTitulo("Selene"); 
 			galeriaInicio.crearImpresion("Esperanza", 73, "19980822" ,"Colombia" , primerComprador, autoresImpresion1, usuariosImpresion1,
-					historialImpresion1,"123", false, false, false, false, null , 72, 25);
+					historialImpresion1,"123", true, true, true, true, "20241212" , 72, 25);
 			Impresion impresion1 = (Impresion) galeriaInicio.obtenerPiezaGlobalesporTitulo("Esperanza");
 			galeriaInicio.crearFotografia("Posibilidad", 256, "20000319" ,"Estonia" , segundoComprador, autoresFotografia1, usuariosFotografia1,
 					historialFotografia1,"123", false, false, false, false, null , 50, 50, "jpg", true);
@@ -242,11 +260,13 @@ public class ConsolaAdministrador extends Consola{
 			galeriaInicio.añadirPieza(impresion2);
 			galeriaInicio.añadirPieza(fotografia2);
 			galeriaInicio.añadirPieza(escultura2);
+			galeriaInicio.añadirPieza(impresion1);
+			
 			
 			
 			galeriaInicio.getHistorialPiezas().add(video1);
 			galeriaInicio.getHistorialPiezas().add(pintura1);
-			galeriaInicio.getHistorialPiezas().add(impresion1);
+			
 			galeriaInicio.getHistorialPiezas().add(escultura1);
 			galeriaInicio.getHistorialPiezas().add(fotografia1);
 			
@@ -399,13 +419,19 @@ public class ConsolaAdministrador extends Consola{
 				System.out.println("Inicie sesión para empezar\n");
 				String usuario= pedirCadenaAlUsuario("Login");
 				String contraseña= pedirCadenaAlUsuario("Password");
-				Usuario comprador;
+				Usuario administrador;
 				int verificacion = galeriaInicio.verificacionSesion(usuario, contraseña, TIPO_ADMINISTRADOR);
 				if (verificacion == 1) {
-					comprador = galeriaInicio.obtenerUsuarioPorLogin(usuario);
+					administrador = galeriaInicio.obtenerUsuarioPorLogin(usuario);
 					int eleccionDos;
 					int deseaConsultar;
 					boolean centinelaDos = true;
+					boolean nuevaPieza = true;
+					boolean crearSubasta = true;
+					boolean mostrarSubasta = true;
+					boolean valorCompras = true;
+					boolean revision = true; 
+					boolean historiaComprador = true;
 					boolean historiaArtista = true;
 					boolean historiaPieza = true;
 					mostrarMenu();
@@ -417,6 +443,328 @@ public class ConsolaAdministrador extends Consola{
 							System.out.println("Se cerró la sesión. \n");
 							centinelaDos=false;
 						}
+						
+						//Confirmar realización de venta
+						else if (eleccionDos == 1) {
+							nuevaPieza = true;
+							while(nuevaPieza) {
+								System.out.println("Eliga el tipo de pieza de la nueva pieza: \n");
+								mostrarMenuPieza();
+								int tipoPieza= (int) pedirNumeroAlUsuario("Escribe el número correspondiente al tipo de pieza deseado");
+								
+								String nombrePieza = pedirCadenaAlUsuario("Desígnale el nombre de tu preferencia la nueva pieza");
+								String fechaCreacion = pedirCadenaAlUsuario("Ingresa la fecha de creación de la pieza (Formato -> añomesdía (Ej: 20280529))");
+								String lugarCreacion = pedirCadenaAlUsuario("Ingresa el lugar de creación de la pieza");
+								int valor = (int) pedirNumeroAlUsuario("Ingresa el valor fijo de la pieza");
+								
+								System.out.println("Seleccione los autores de la nueva pieza: \n");
+								for (Usuario artista : galeriaInicio.obtenerArtistas()) {
+									if (artista.getNombre() != "Van Gogh") {
+										System.out.println(" • "+artista.getNombre()+ "\n");
+										
+									}
+								}
+								String artistasEscogidos = pedirCadenaAlUsuario("Ingrese los nombres de los autores de esta pieza (Formato -> Nombre-Nombre (Ej: Dali-Kahlo))");
+								ArrayList<Artista> autores = new ArrayList<Artista>();
+								
+								for (Usuario artista: galeriaInicio.obtenerArtistas()){
+									if (artista.getNombre() != "fake" && Galeria.verificarFormato(artistasEscogidos) == true) {
+										if ( artistasEscogidos.contains(artista.getNombre()) ) {
+											autores.add(((Artista)artista));
+										}
+									}
+								}
+								ArrayList<Usuario>  dueños = new ArrayList<Usuario>();
+								HashMap<String, Integer> ventas = new HashMap<String, Integer>();
+								if (tipoPieza == 1) {
+									int alto= (int) pedirNumeroAlUsuario("Ingrese el alto del vídeo");
+									int ancho= (int) pedirNumeroAlUsuario("Ingrese el ancho del vídeo");
+									int duración= (int) pedirNumeroAlUsuario("Ingrese la duración del vídeo en minutos");
+									String formato = pedirCadenaAlUsuario("Ingrese el tipo de formato en que se encuentra el vídeo (Ej: mp4)");
+									
+									
+									galeriaInicio.crearVideo(nombrePieza, valor, fechaCreacion, lugarCreacion, ((Comprador)galeriaInicio.obtenerUsuarioPorLogin("fake")), autores , dueños, ventas, "123", false, true, true, true, null, alto, ancho, duración, formato);
+									Video videoN = (Video) galeriaInicio.obtenerPiezaGlobalesporTitulo(nombrePieza);
+									galeriaInicio.añadirPieza(videoN);
+									
+									System.out.println(" La pieza de tipo vídeo fue creada exitosamente.\n");
+								}
+								
+								else if (tipoPieza == 2) {
+									int alto= (int) pedirNumeroAlUsuario("Ingrese el alto de la pintura");
+									int ancho= (int) pedirNumeroAlUsuario("Ingrese el ancho de la pintura");
+									galeriaInicio.crearPintura(nombrePieza, valor, fechaCreacion, lugarCreacion, ((Comprador)galeriaInicio.obtenerUsuarioPorLogin("fake")), autores, dueños, ventas, "123", false, true, true, true, null, alto, ancho);
+									
+									Pintura pinturaN = (Pintura) galeriaInicio.obtenerPiezaGlobalesporTitulo(nombrePieza);
+									galeriaInicio.añadirPieza(pinturaN);
+									
+									System.out.println(" La pieza de tipo pintura fue creada exitosamente.\n");
+								}
+								
+								else if (tipoPieza == 3) {
+									int alto= (int) pedirNumeroAlUsuario("Ingrese el alto de la impresión");
+									int ancho= (int) pedirNumeroAlUsuario("Ingrese el ancho de la impresión");
+									galeriaInicio.crearImpresion(nombrePieza, valor, fechaCreacion, lugarCreacion, ((Comprador)galeriaInicio.obtenerUsuarioPorLogin("fake")), autores, dueños, ventas, "123", false, true, true, true, null, alto, ancho);
+									
+									Impresion impresionN = (Impresion) galeriaInicio.obtenerPiezaGlobalesporTitulo(nombrePieza);
+									galeriaInicio.añadirPieza(impresionN);
+									
+									System.out.println(" La pieza de tipo impresión fue creada exitosamente.\n");
+								}
+								
+								else if (tipoPieza == 4) {
+									int alto= (int) pedirNumeroAlUsuario("Ingrese el alto de la fotografía");
+									int ancho= (int) pedirNumeroAlUsuario("Ingrese el ancho de la fotografía");
+									String formato = pedirCadenaAlUsuario("Ingrese el tipo de formato en que se encuentra la fotografía (Ej: jpg)");
+
+									galeriaInicio.crearFotografia(nombrePieza, valor, fechaCreacion, lugarCreacion, ((Comprador)galeriaInicio.obtenerUsuarioPorLogin("fake")), autores, dueños, ventas, "123", false, true, true, true, null, alto, ancho, formato, true);
+									
+									Fotografia fotografiaN = (Fotografia) galeriaInicio.obtenerPiezaGlobalesporTitulo(nombrePieza);
+									galeriaInicio.añadirPieza(fotografiaN);
+									
+									System.out.println(" La pieza de tipo fotografía fue creada exitosamente.\n");
+								}
+								
+								else if (tipoPieza == 5) {
+									int alto= (int) pedirNumeroAlUsuario("Ingrese el alto de la escultura");
+									int ancho= (int) pedirNumeroAlUsuario("Ingrese el ancho de la escultura");
+									int profundidad= (int) pedirNumeroAlUsuario("Ingrese la profundidad de la escultura");
+									String materiales = pedirCadenaAlUsuario("Ingrese el tipo de materiales que se utilizaron para la escultura");
+									int peso= (int) pedirNumeroAlUsuario("Ingrese el peso de la escultura");
+									galeriaInicio.crearEscultura(nombrePieza, valor, fechaCreacion, lugarCreacion, ((Comprador)galeriaInicio.obtenerUsuarioPorLogin("fake")), autores, dueños, ventas, "123", false, true, true, true, null, alto, ancho, profundidad, materiales, peso, false, false);
+								
+									Escultura esculturaN = (Escultura) galeriaInicio.obtenerPiezaGlobalesporTitulo(nombrePieza);
+									galeriaInicio.añadirPieza(esculturaN);
+									
+									System.out.println(" La pieza de tipo escultura fue creada exitosamente.\n");
+								
+								}
+								
+								
+								
+								nuevaPieza = false;
+								mostrarMenu();
+								eleccionDos= (int) pedirNumeroAlUsuario("Elección");
+							}
+						}
+						
+						//Revisión y devolución de piezas
+						else if(eleccionDos == 2) {
+							revision = true;
+							while (revision) {
+								ArrayList<Pieza> consignadas = new ArrayList<Pieza>(); 
+								
+								for (Pieza pieza : galeriaInicio.getPiezasActuales()) {
+									if ( pieza.isConsignacion() == true) {
+										consignadas.add(pieza);
+										
+									}
+								}
+								
+								if  ( consignadas.isEmpty() == true ){
+									System.out.println(" No se encuentran piezas consginadas en este momento.\n");
+								}
+								
+								else {
+									System.out.println(" Las piezas que se encuentran en consignación actualmente son:\n");
+									for (Pieza pieza : consignadas ) {
+							
+											System.out.println(" • "+pieza.getTitulo()+ "\n");
+										}
+									
+									String tituloPieza = pedirCadenaAlUsuario("Escoge la pieza para verificar su fecha límite y en caso de ser necesario devolverla a su dueño");
+									Pieza piezaEscogida = galeriaInicio.obtenerPiezaGlobalesporTitulo(tituloPieza);
+									String fechaActual= pedirCadenaAlUsuario("Ingrese la fecha actual (Formato -> añomesdía (Ej: 20280529))");
+									
+									if  ( ((Administrador) administrador).devolverPiezasConsignadas(piezaEscogida.getPropietario(), piezaEscogida, fechaActual, galeriaInicio) == true ){
+										System.out.println("\n");
+										System.out.println(" Fecha límite:"+Galeria.formatearFecha(piezaEscogida.getFechaLimite())+"\n");
+										System.out.println(" Fecha actual:"+Galeria.formatearFecha(fechaActual)+"\n");
+										System.out.println(" La fecha límite había expirado, por tanto, la pieza fue devuelta a su propietario.\n");
+									}
+									
+									else {
+										System.out.println("\n");
+										System.out.println(" Fecha límite:"+Galeria.formatearFecha(piezaEscogida.getFechaLimite())+"\n");
+										System.out.println(" Fecha actual:"+Galeria.formatearFecha(fechaActual)+"\n");
+										System.out.println(" La fecha límite no ha sucedido, por tanto, la pieza sigue en la galería.\n");
+									}
+									}
+								
+								
+								revision = false;
+								mostrarMenu();
+								eleccionDos= (int) pedirNumeroAlUsuario("Elección");
+							}
+							}
+			
+						
+						//Crear nueva subasta
+						else if (eleccionDos == 3) {
+							crearSubasta = true;
+							while(crearSubasta) {
+								String nombreSubasta = pedirCadenaAlUsuario("Desígnale el nombre de tu preferencia la nueva subasta");
+								System.out.println(" Escoge los compradores que pueden participar de esta subasta:"+"\n");
+								
+								for (Usuario comprador1: galeriaInicio.obtenerCompradores()){
+									if (comprador1.getNombre() != "fake") {
+										System.out.println(" • "+comprador1.getNombre()+ "\n");
+									}
+								}
+								String nombresCompradores = pedirCadenaAlUsuario("Escribe los nombres elegidos (Formato: Alice-Lucy o John)");
+								ArrayList<Usuario> participantes = new ArrayList<Usuario>();
+								
+								for (Usuario comprador1: galeriaInicio.obtenerCompradores()){
+									if (comprador1.getNombre() != "fake" && Galeria.verificarFormato(nombresCompradores) == true) {
+										if ( nombresCompradores.contains(comprador1.getNombre()) ) {
+											participantes.add(comprador1);
+										}
+									}
+								}
+								
+								System.out.println(" Escoge las piezas que serán subastadas, así mismo, elige el valor inicial y el valor final de cada pieza: "+"\n");
+								
+								HashMap<Pieza, ArrayList<Integer>> piezasSubastadas = new  HashMap<Pieza, ArrayList<Integer>>();
+								
+								for (Pieza pieza : galeriaInicio.getPiezasActuales()) {
+									ArrayList<Integer> valores = new ArrayList<Integer>();
+									if (pieza.isDispsubasta() == true) {
+										System.out.println("\n");
+										System.out.println(" • "+pieza.getTitulo()+"\n");
+										mostrarMenuSubasta();
+										int eleccionSubasta = (int) pedirNumeroAlUsuario("  ¿Deseas añadir esta pieza a la subasta?");
+										if (eleccionSubasta == 1) {
+											int valorMinimo = (int) pedirNumeroAlUsuario("  Escribe el valor mínimo para esta pieza");
+											int valorInicial = (int) pedirNumeroAlUsuario("  Escribe el valor inicial para esta pieza");
+											valores.add(0, valorMinimo);
+											valores.add(1, valorInicial);
+											piezasSubastadas.put(pieza, valores);
+										}
+										else if( eleccionSubasta != 1 && eleccionSubasta != 2) {
+											System.out.println(" Esta no es una opción válida.\n");
+										}
+									}
+								}
+								if (piezasSubastadas.size() == 0) {
+									System.out.println(" La subasta no pudo ser creada debido a que no se eligió ninguna pieza para que fuera subastada.\n");
+								}
+								
+								else {
+									
+									HashMap<Pieza,HashMap<Usuario, Integer>> registroOfertas = new HashMap<Pieza,HashMap<Usuario, Integer>>();
+									galeriaInicio.crearSubasta(nombreSubasta, participantes, galeriaInicio.getUnOperador(), registroOfertas , piezasSubastadas);
+									
+									System.out.println(" La subasta fue creada exitosamente.\n");
+								}
+								
+								crearSubasta = false;
+								mostrarMenu();
+								eleccionDos= (int) pedirNumeroAlUsuario("Elección");
+							}
+						}
+						
+						
+						//Mostrar subastas actuales
+						else if (eleccionDos == 4) {
+							mostrarSubasta = true;
+							while(mostrarSubasta) {
+								System.out.println(" La subastas actuales son:\n");
+								for (Subasta subasta1 : galeriaInicio.getSubastas()) {
+									System.out.println(" •" +subasta1.getNombre()+"\n");
+								}
+								
+								mostrarSubasta = false;
+								mostrarMenu();
+								eleccionDos= (int) pedirNumeroAlUsuario("Elección");
+							}
+						}
+						
+						//Aumentar valor máximo de compras
+						else if (eleccionDos == 5) {
+							valorCompras = true;
+							while(valorCompras) {
+								
+								System.out.println(" Compradores con solicitudes actuales para aumentar el valor máximo de sus compras:"+"\n");
+								for (Usuario comprador1: galeriaInicio.obtenerCompradores()){
+									if (comprador1.getNombre() != "fake") {
+										System.out.println(" • "+comprador1.getNombre()+ "\n");
+									}
+								}
+								String nombreComprador = pedirCadenaAlUsuario("Escribe el nombre del comprador del cuál deseas atender la solicitud");
+								Usuario compradorSeleccionado = galeriaInicio.obtenerUsuarioPorNombre(nombreComprador);
+								
+								String textoItalico = "\u001B[3mEl valor se aumentará únicamente si el dinero actual del comprador es mayor al valor máximo de compras actual.\u001B[0m";
+								System.out.println(" "+ textoItalico +"\n");
+								String textoItalico2 = "\u001B[3mSi el valor de compras se aumenta, se cambiará por el dinero actual del comprador.\u001B[0m";
+								System.out.println(" "+ textoItalico2 +"\n");
+								
+								if ( ((Administrador) administrador).verificarValorMaximo(compradorSeleccionado) == true ) {
+									((Administrador) administrador).aumentarValorMaximo(compradorSeleccionado, ((Comprador)compradorSeleccionado).getDinero());
+									System.out.println(" La solicitud fue aceptada y el valor máximo de compras aumentó."+ "\n");
+								}
+								
+								else {
+									System.out.println(" La solicitud fue rechazada debido a que el dinero del comprador es menor que su valor máximo de compras."+ "\n");
+								}
+								
+								valorCompras = false;
+								mostrarMenu();
+								eleccionDos= (int) pedirNumeroAlUsuario("Elección");
+							}							
+						}
+						
+						
+						//Historia de un comprador
+						else if (eleccionDos == 6) {
+							historiaComprador = true;
+							while(historiaComprador) {
+								System.out.println(" Compradores de la galería:"+"\n");
+								for (Usuario comprador1: galeriaInicio.obtenerCompradores()){
+									if (comprador1.getNombre() != "fake") {
+										System.out.println(" • "+comprador1.getNombre()+ "\n");
+									}
+								}
+								String nombreComprador = pedirCadenaAlUsuario("Escribe el nombre del comprador que deseas ver su historia");
+								Usuario compradorSeleccionado = galeriaInicio.obtenerUsuarioPorNombre(nombreComprador);
+								
+								if (galeriaInicio.getUsuarios().contains(compradorSeleccionado)) {
+									System.out.println("Historial del comprador:"+ "\n");
+									System.out.println(" • Valor de su colección: "+Integer.toString(((Comprador)compradorSeleccionado).getValorColeccion())+ "\n");
+									System.out.println(" • Piezas actuales del comprador: \n");
+									for (Pieza pieza : ((Comprador)compradorSeleccionado).getPiezasActuales() ) {
+										System.out.println("    • "+pieza.getTitulo() +"\n");
+									}
+									
+									System.out.println(" • Historial de compras: \n");
+									for (Pieza pieza : ((Comprador)compradorSeleccionado).getHistorialPiezas().keySet() ) {
+										
+										if ( ((Comprador)compradorSeleccionado).getHistorialPiezas().keySet().isEmpty() == false ) {
+											
+												System.out.println("    • "+pieza.getTitulo()+": "+((Comprador)compradorSeleccionado).getHistorialPiezas().get(pieza) +"\n");	
+												
+										}
+										
+										else {
+											System.out.println("         • Esta pieza nunca ha sido vendida. "+ "\n");
+										}
+									}
+									System.out.println("\n");
+								}
+								
+								
+								else {
+										System.out.println("Este comprador no existe."+ "\n");
+									}
+								
+								historiaComprador = false;
+								mostrarMenu();
+								eleccionDos= (int) pedirNumeroAlUsuario("Elección");
+								}
+							}
+							
+							
+						
+						
 						
 						
 						//Historia Artista

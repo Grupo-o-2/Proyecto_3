@@ -43,6 +43,17 @@ public class Administrador extends Empleado{
 	
  	}
  	
+ 	public boolean devolverPiezasConsignadas(Usuario propietario, Pieza piezaAConsginar, String fechaActual, Galeria galeria) throws FechaInvalidaException {
+ 		Consignacion nuevaConsignacion = new Consignacion(propietario, piezaAConsginar);
+ 		if (nuevaConsignacion.revisionFechaLimite(piezaAConsginar, fechaActual, propietario, galeria) == true) {
+ 			return true;
+ 		}
+ 		else 
+ 		{
+ 			return false;
+ 		}
+ 	}
+ 	
  	
  	public boolean verificarUsuariosSubasta(ArrayList<Usuario> participantes, Galeria galeria) throws UsuarioInexistenteException {
  		ArrayList<Boolean>  usuariosVerificados = new ArrayList<Boolean>();

@@ -68,7 +68,6 @@ public class VentaPiezas {
 				
 				
 				int dineroActualizado = ((Comprador)comprador).getDinero() - piezaAVender.getValor();
-				((Comprador)comprador).setValorColeccion(piezaAVender.getValor());
 				((Comprador)comprador).setDinero(dineroActualizado);
 				
 				
@@ -87,7 +86,6 @@ public class VentaPiezas {
 				
 				int valorPiezaAVender = piezaAVender.getValor();
 				int dineroActualizado = ((Comprador)comprador).getDinero() - valorPiezaAVender;
-				((Comprador)comprador).setValorColeccion(piezaAVender.getValor());
 				((Comprador)comprador).setDinero(dineroActualizado);
 				
 				}
