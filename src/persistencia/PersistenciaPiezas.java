@@ -137,21 +137,7 @@ public class PersistenciaPiezas {
 		{
 			fechaPrecio = "Vacio";
 		}
-		jVideo.put( "Historial Dueños", fechaPrecio );
-		String historialVentas = "";
-		HashMap<String, Integer> historialPiezasComprador = video.getHistorialVentas();
-		if (! historialPiezasComprador.keySet().isEmpty())
-		{
-			for (String fecha: historialPiezasComprador.keySet())
-			{
-				historialVentas = historialVentas + "," + fecha + ";" + historialPiezasComprador.get(fecha).toString() ;
-			}
-		}
-		else
-		{
-			historialVentas = "Vacio";
-		}
-		jVideo.put( "Fecha Precio", historialVentas);
+		jVideo.put( "Fecha Precio", fechaPrecio );
 		jVideo.put( exhibida, video.isExhibida() );
 		jVideo.put( valor, String.valueOf(video.getValor( )));
 		jVideo.put( "Proprietario", video.getPropietario( ).getLogin() );
@@ -404,7 +390,7 @@ public class PersistenciaPiezas {
 		{
 			for (String fecha: historialPiezasComprador.keySet())
 			{
-				historialVentas = historialVentas + fecha + "," + historialPiezasComprador.get(fecha).toString() +  "," ;
+				historialVentas = historialVentas + fecha + "," + historialPiezasComprador.get(fecha).toString() +  ";" ;
 			}
 		}
 		else

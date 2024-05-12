@@ -42,6 +42,7 @@ public class PersistenciaSubastas {
 				}
 				jSubasta.put("Participantes", participantes);
 				jSubasta.put("Operador", subasta.getOperador().getLogin());
+				jSubasta.put("Nombre", subasta.getNombre());
 				String registroSubasta = "";
 				if(! subasta.getRegistroSubasta().keySet().isEmpty())
 				{
@@ -111,6 +112,7 @@ public class PersistenciaSubastas {
 				throw new LoginInexistenteException(loginOperador);
 			}
 			Operador nOperador = (Operador) loginUsuarios.get(subasta.getString("Operador"));
+			String nNombre = subasta.getString("Nombre");
 			ArrayList<Usuario> nParticipantes = new ArrayList<Usuario>();
 			if(! subasta.getString("Participantes").equals("Vacio"))
 			{
@@ -159,7 +161,7 @@ public class PersistenciaSubastas {
 					nPiezasSubastadas.put(identificacionPieza.get(identificadorPieza.split(";")[0]), valores);
 				}
 			}
-			galeria.crearSubasta(nParticipantes, nOperador, nRegistroSubasta, nPiezasSubastadas);
+			galeria.crearSubasta(nNombre, nParticipantes, nOperador, nRegistroSubasta, nPiezasSubastadas);
 		}
 	}
 }

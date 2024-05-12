@@ -113,7 +113,7 @@ abstract public class Pieza {
 
 
 	public ArrayList<Artista> getAutores() {
-		return autores;
+		return this.autores;
 	}
 
 

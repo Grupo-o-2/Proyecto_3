@@ -2,12 +2,13 @@ package usuarios;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import exceptions.ConsignacionExistenteException;
 import exceptions.DineroInsuficienteException;
-import exceptions.FechaInvalida;
-import exceptions.MismoComprador;
+import exceptions.FechaInvalidaException;
+import exceptions.MismoCompradorException;
 import exceptions.PropietarioErroneoException;
 import exceptions.UsuarioInexistenteException;
-import exceptions.ValorMaximoExcedido;
+import exceptions.ValorMaximoExcedidoException;
 import exceptions.VentaImposibleException;
 import modelo.*;
 import piezas.*;
@@ -61,7 +62,7 @@ public class Administrador extends Empleado{
 	
 
  	
- 	public void verificacionDeCompra(Pieza pieza, Usuario comprador, Galeria galeria, String fecha) throws UsuarioInexistenteException, DineroInsuficienteException, VentaImposibleException, MismoComprador, ValorMaximoExcedido {
+ 	public void verificacionDeCompra(Pieza pieza, Usuario comprador, Galeria galeria, String fecha) throws UsuarioInexistenteException, DineroInsuficienteException, VentaImposibleException, MismoCompradorException, ValorMaximoExcedidoException, FechaInvalidaException {
  	
  		VentaPiezas nuevaVenta = new VentaPiezas(comprador, pieza);
  		if ((nuevaVenta.verificarEstadoDeVenta(pieza, galeria)) == true ){
@@ -72,7 +73,7 @@ public class Administrador extends Empleado{
 	
  
  	
- 	public void registrarPiezaPorConsignacion(Usuario propietario, Pieza piezaAConsignar, String fechaLimite, Galeria galeria, String exhibaVendaoSubasta, String fechaActual) throws PropietarioErroneoException, FechaInvalida {
+ 	public void registrarPiezaPorConsignacion(Usuario propietario, Pieza piezaAConsignar, String fechaLimite, Galeria galeria, String exhibaVendaoSubasta, String fechaActual) throws PropietarioErroneoException, FechaInvalidaException, ConsignacionExistenteException {
  		
  		Consignacion nuevaConsignacion = new Consignacion(propietario, piezaAConsignar);
  		nuevaConsignacion.generarConsignacion(propietario, piezaAConsignar, fechaLimite, galeria, exhibaVendaoSubasta, fechaActual);
@@ -80,6 +81,13 @@ public class Administrador extends Empleado{
  	
  	public void aumentarValorMaximo(Usuario usuario, int nuevoValor) {
  	((Comprador) usuario).setValorMaximoCompras(nuevoValor);
+ 	}
+ 	
+ 	public boolean verificarValorMaximo(Usuario usuario) {
+ 		 if (((Comprador) usuario).getDinero() > ((Comprador) usuario).getValorMaximoCompras()) {
+ 			 return true;
+ 		 }
+ 		 else return false;
  	}
 
 	}

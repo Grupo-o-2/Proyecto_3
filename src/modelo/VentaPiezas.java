@@ -30,28 +30,42 @@ public class VentaPiezas {
 	}
 	
 	
-	public void venderPieza( Usuario  comprador, Pieza piezaAVender, Galeria galeria, String fecha) throws DineroInsuficienteException, MismoComprador, ValorMaximoExcedido {
+	public void venderPieza( Usuario  comprador, Pieza piezaAVender, Galeria galeria, String fecha) throws DineroInsuficienteException, MismoCompradorException, ValorMaximoExcedidoException, FechaInvalidaException {
 		
 	
 			if (((Comprador)comprador).getDinero() < piezaAVender.getValor()) {
 				throw new DineroInsuficienteException(comprador.getNombre());
 				}
 			else if (  ((Comprador)comprador).getPiezasActuales().contains(piezaAVender)) {
-				throw new MismoComprador();
+				throw new MismoCompradorException();
 			}
 			else if (((Comprador)comprador).getValorMaximoCompras() < piezaAVender.getValor()) {
-				throw new ValorMaximoExcedido(comprador.getNombre());
+				throw new ValorMaximoExcedidoException(comprador.getNombre());
+			}
+			
+			else if (Galeria.esFechaValida2(fecha) == false) {
+				throw new FechaInvalidaException(fecha);
 			}
 			else if(piezaAVender.isConsignacion() == true) {
 				
-				
 				((Comprador)comprador).añadirPieza(piezaAVender, fecha);
 				galeria.getPiezasActuales().remove(piezaAVender);
+				
+				//cambiar plata consignada
+				int dineroActualizadoPropietarioAnterior = ((Comprador)piezaAVender.getPropietario()).getDinero() + piezaAVender.getValor();
+				((Comprador)piezaAVender.getPropietario()).setDinero(dineroActualizadoPropietarioAnterior);
+				((Comprador)piezaAVender.getPropietario()).setValorColeccionMenor(piezaAVender.getValor());
 				((Comprador)piezaAVender.getPropietario()).getPiezasActuales().remove(piezaAVender); //Elimina de la lista de piezas actuales del propietario anterior
+				
+				
 				piezaAVender.setConsignacion(false);
 				piezaAVender.setDispsubasta(false);	
 				piezaAVender.setExhibida(false);
+				piezaAVender.setDispventa(false);
 				piezaAVender.setPropietario(comprador);
+				piezaAVender.getHistorialVentas().put(fecha, piezaAVender.getValor());
+				piezaAVender.getHistorialDueños().add(comprador);
+				
 				
 				int dineroActualizado = ((Comprador)comprador).getDinero() - piezaAVender.getValor();
 				((Comprador)comprador).setValorColeccion(piezaAVender.getValor());
@@ -65,8 +79,11 @@ public class VentaPiezas {
 				galeria.getPiezasActuales().remove(piezaAVender);
 				piezaAVender.setConsignacion(false);
 				piezaAVender.setDispsubasta(false);	
+				piezaAVender.setDispventa(false);
 				piezaAVender.setExhibida(false);
 				piezaAVender.setPropietario(comprador);
+				piezaAVender.getHistorialVentas().put(fecha, piezaAVender.getValor());
+				piezaAVender.getHistorialDueños().add(comprador);
 				
 				int valorPiezaAVender = piezaAVender.getValor();
 				int dineroActualizado = ((Comprador)comprador).getDinero() - valorPiezaAVender;

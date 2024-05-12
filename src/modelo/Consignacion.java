@@ -15,7 +15,7 @@ public class Consignacion {
 		this.piezaAConsignar = piezaAConsignar;
 	}
 	
-	public void generarConsignacion(Usuario propietario, Pieza piezaAConsignar, String fechaLimite, Galeria galeria, String exhibaVendaoSubasta, String fechaActual) throws PropietarioErroneoException, FechaInvalida {
+	public void generarConsignacion(Usuario propietario, Pieza piezaAConsignar, String fechaLimite, Galeria galeria, String exhibaVendaoSubasta, String fechaActual) throws PropietarioErroneoException, FechaInvalidaException, ConsignacionExistenteException {
 		ArrayList <Pieza> piezasUsuario = ((Comprador) propietario).getPiezasActuales();
 		
 		if ((piezasUsuario.contains(piezaAConsignar) == false)) {
@@ -25,15 +25,19 @@ public class Consignacion {
 		}
 		
 		else if (Galeria.esFechaValida(fechaLimite) == false) {
-			throw new FechaInvalida(fechaLimite);
+			throw new FechaInvalidaException(fechaLimite);
 		}
 		
 		else if (Galeria.esFechaValida(fechaActual) == false) {
-			throw new FechaInvalida(fechaActual);
+			throw new FechaInvalidaException(fechaActual);
 		}
 		
 		else if ( fechaLimite.compareTo(fechaActual) < 0) {
-			throw new FechaInvalida();
+			throw new FechaInvalidaException();
+		}
+		
+		else if (piezaAConsignar.isConsignacion() == true) {
+			throw new ConsignacionExistenteException(piezaAConsignar.getTitulo());
 		}
 		else {
 			
