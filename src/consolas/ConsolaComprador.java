@@ -171,19 +171,19 @@ public static void main(String[] args ) throws PropietarioErroneoException, Usua
 		
 		//Piezas pertenecientes a compradores
 		galeriaInicio.crearVideo("Video artístico", 50, "20220201" ,"Puerto Rico",  primerComprador, autoresVideo1, new ArrayList<Usuario>(),
-				new HashMap<String, Integer>(), "123", false, false, true,true, 92.3, 80.2,24, "mp4"  );
+				new HashMap<String, Integer>(), "123", false, false, true,true, "20150201", 92.3, 80.2,24, "mp4"  );
 		Video video1 = (Video) galeriaInicio.obtenerPiezaGlobalesporTitulo("Video artístico");
 		galeriaInicio.crearPintura("Selene", 1880, "19921008" ,"Francia" , primerComprador, autoresPintura1 , new ArrayList<Usuario>(),
-	    		new HashMap<String, Integer>(),"123", false, false, true, true,  15.6, 78);
+	    		new HashMap<String, Integer>(),"123", false, false, true, true, "19921008" , 15.6, 78);
 	    Pintura pintura1 = (Pintura) galeriaInicio.obtenerPiezaGlobalesporTitulo("Selene"); 
 		galeriaInicio.crearImpresion("Esperanza", 73, "19980822" ,"Colombia" , primerComprador, autoresImpresion1, new ArrayList<Usuario>(),
-	    		new HashMap<String, Integer>(),"123", false, false, true, true,  72, 25);
+	    		new HashMap<String, Integer>(),"123", false, false, true, true, "19980822" , 72, 25);
 		Impresion impresion1 = (Impresion) galeriaInicio.obtenerPiezaGlobalesporTitulo("Esperanza");
 		galeriaInicio.crearFotografia("Posibilidad", 256, "20200319" ,"Estonia" , segundoComprador, autoresFotografia1, new ArrayList<Usuario>(),
-	    		new HashMap<String, Integer>(),"123", false, false, true, true,  50, 50, "jpg", true);
+	    		new HashMap<String, Integer>(),"123", false, false, true, true, "20100319" , 50, 50, "jpg", true);
 		Fotografia fotografia1 = (Fotografia) galeriaInicio.obtenerPiezaGlobalesporTitulo("Posibilidad");
 		galeriaInicio.crearEscultura("Venus de Milo", 400, "18760426" ,"Italia" , tercerComprador, autoresEscultura1, new ArrayList<Usuario>(),
-	    		new HashMap<String, Integer>(),"123", false, false, true, true,  750, 60,70, "Marmol", 456, false, false);
+	    		new HashMap<String, Integer>(),"123", false, false, true, true, "18760426" , 750, 60,70, "Marmol", 456, false, false);
 		Escultura escultura1 = (Escultura) galeriaInicio.obtenerPiezaGlobalesporTitulo("Venus de Milo");
 
 		
@@ -229,23 +229,23 @@ public static void main(String[] args ) throws PropietarioErroneoException, Usua
 		
 		//Piezas pertenencientes a la galería
 		galeriaInicio.crearVideo("Video abstruso", 60, "20220315", "Argentina", compradorGaleria, autoresVideo1, new ArrayList<Usuario>(),
-                new HashMap<String, Integer>(), "123", false, false, true, true, 100.5, 90.1, 30, "avi");
+                new HashMap<String, Integer>(), "123", false, false, true, true, "20160315" , 100.5, 90.1, 30, "avi");
 		Video video2 = (Video) galeriaInicio.obtenerPiezaGlobalesporTitulo("Video abstruso");
 	
 		galeriaInicio.crearPintura("Amanecer en París", 1915, "19900805", "España", compradorGaleria, autoresPintura1, new ArrayList<Usuario>(),
-		        new HashMap<String, Integer>(), "123", false, false, true, true, 20.8, 67);
+		        new HashMap<String, Integer>(), "123", false, false, true, true, "19900805" , 20.8, 67);
 	    Pintura pintura2 = (Pintura) galeriaInicio.obtenerPiezaGlobalesporTitulo("Amanecer en París"); 
 	    
 		galeriaInicio.crearImpresion("Reflejos urbanos", 90, "20011230", "México", compradorGaleria, autoresImpresion1, new ArrayList<Usuario>(),
-		        new HashMap<String, Integer>(), "123", false, false, true, true, 85, 35);
+		        new HashMap<String, Integer>(), "123", false, false, true, true, "20011230" ,85, 35);
 		Impresion impresion2 = (Impresion) galeriaInicio.obtenerPiezaGlobalesporTitulo("Reflejos urbanos");
 		
 		galeriaInicio.crearFotografia("Serenidad en la playa", 180, "20180704", "Grecia", compradorGaleria, autoresFotografia1, new ArrayList<Usuario>(),
-		        new HashMap<String, Integer>(), "123", false, false, true, true, 45, 35, "png", false);
+		        new HashMap<String, Integer>(), "123", false, false, true, true, "20011230" ,45, 35, "png", false);
 		Fotografia fotografia2 = (Fotografia) galeriaInicio.obtenerPiezaGlobalesporTitulo("Serenidad en la playa");
 		
 		galeriaInicio.crearEscultura("La musa del renacimiento", 550, "14980315", "Francia", compradorGaleria, autoresEscultura1, new ArrayList<Usuario>(),
-		        new HashMap<String, Integer>(), "123", false, false, true, true, 900, 70, 80, "Bronce", 789, false, false);
+		        new HashMap<String, Integer>(), "123", false, false, true, true, "20011230" , 900, 70, 80, "Bronce", 789, false, false);
 		Escultura escultura2 = (Escultura) galeriaInicio.obtenerPiezaGlobalesporTitulo("La musa del renacimiento");
 		
 		galeriaInicio.añadirPieza(video2);

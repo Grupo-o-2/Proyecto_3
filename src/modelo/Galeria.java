@@ -251,41 +251,41 @@ public class Galeria {
 	public void crearEscultura(String titulo, int valor, String fecha, String lugar, Comprador creador,
 			ArrayList<Artista> autores, ArrayList<Usuario> dueños, HashMap<String, Integer> ventas,
 			String exhibaVendaoSubasta, boolean consignacion, boolean exhibida, boolean dispsubasta,
-			boolean dispventa, double alto, double ancho, double profundidad, String materiales, double peso, boolean electricidad, boolean otroDetalle)
+			boolean dispventa, String fechaLimite, double alto, double ancho, double profundidad, String materiales, double peso, boolean electricidad, boolean otroDetalle)
 	{
-		getFabrica().crearEscultura(titulo, valor, fecha, lugar, creador, autores, dueños, ventas, exhibaVendaoSubasta, consignacion, exhibida, dispsubasta, dispventa, alto, ancho, profundidad, materiales, peso, electricidad, otroDetalle);
+		getFabrica().crearEscultura(titulo, valor, fecha, lugar, creador, autores, dueños, ventas, exhibaVendaoSubasta, consignacion, exhibida, dispsubasta, dispventa, fechaLimite, alto, ancho, profundidad, materiales, peso, electricidad, otroDetalle);
 	}
 	
 	public void crearFotografia(String titulo, int valor, String fecha, String lugar, Comprador creador,
 			ArrayList<Artista> autores, ArrayList<Usuario> dueños, HashMap<String, Integer> ventas,
 			String exhibaVendaoSubasta, boolean consignacion, boolean exhibida, boolean dispsubasta,
-			boolean dispventa, double alto, double ancho, String formato, boolean enmarcado)
+			boolean dispventa, String fechaLimite, double alto,double ancho, String formato, boolean enmarcado )
 	{
-		getFabrica().crearFotografia(titulo, valor, fecha, lugar, creador, autores, dueños, ventas, exhibaVendaoSubasta, consignacion, exhibida, dispsubasta, dispventa, alto, ancho, formato, enmarcado);
+		getFabrica().crearFotografia(titulo, valor, fecha, lugar, creador, autores, dueños, ventas, exhibaVendaoSubasta, consignacion, exhibida, dispsubasta, dispventa, fechaLimite, alto, ancho, formato, enmarcado);
 	}
 	
 	public void crearImpresion(String titulo, int valor, String fecha, String lugar, Comprador creador,
 			ArrayList<Artista> autores, ArrayList<Usuario> dueños, HashMap<String, Integer> ventas,
 			String exhibaVendaoSubasta, boolean consignacion, boolean exhibida, boolean dispsubasta,
-			boolean dispventa, double alto, double ancho)
+			boolean dispventa,String fechaLimite, double alto, double ancho)
 	{
-		getFabrica().crearImpresion(titulo, valor, fecha, lugar, creador, autores, dueños, ventas, exhibaVendaoSubasta, consignacion, exhibida, dispsubasta, dispventa, alto, ancho);
+		getFabrica().crearImpresion(titulo, valor, fecha, lugar, creador, autores, dueños, ventas, exhibaVendaoSubasta, consignacion, exhibida, dispsubasta, dispventa, fechaLimite, alto, ancho);
 	}
 	
 	public void crearPintura(String titulo, int valor, String fecha, String lugar, Comprador creador,
 			ArrayList<Artista> autores, ArrayList<Usuario> dueños, HashMap<String, Integer> ventas,
 			String exhibaVendaoSubasta, boolean consignacion, boolean exhibida, boolean dispsubasta,
-			boolean dispventa, double alto, double ancho)
+			boolean dispventa, String fechaLimite, double alto, double ancho )
 	{
-		getFabrica().crearPintura(titulo, valor, fecha, lugar, creador, autores, dueños, ventas, exhibaVendaoSubasta, consignacion, exhibida, dispsubasta, dispventa, alto, ancho);
+		getFabrica().crearPintura(titulo, valor, fecha, lugar, creador, autores, dueños, ventas, exhibaVendaoSubasta, consignacion, exhibida, dispsubasta, dispventa, fechaLimite, alto, ancho);
 	}
 	
 	public void crearVideo(String titulo, int valor, String fecha, String lugar, Comprador creador,
 			ArrayList<Artista> autores, ArrayList<Usuario> dueños, HashMap<String, Integer> ventas,
 			String exhibaVendaoSubasta, boolean consignacion, boolean exhibida, boolean dispsubasta,
-			boolean dispventa, double alto, double ancho, int duracion, String formato)
+			boolean dispventa, String fechaLimite, double alto, double ancho, int duracion, String formato)
 	{
-		getFabrica().crearVideo(titulo, valor, fecha, lugar, creador, autores, dueños, ventas, exhibaVendaoSubasta, consignacion, exhibida, dispsubasta, dispventa, alto, ancho, duracion, formato);
+		getFabrica().crearVideo(titulo, valor, fecha, lugar, creador, autores, dueños, ventas, exhibaVendaoSubasta, consignacion, exhibida, dispsubasta, dispventa, fechaLimite, alto, ancho, duracion, formato);
 	}
 	
 	

@@ -161,6 +161,7 @@ public class PersistenciaPiezas {
 		jVideo.put( "Ancho", String.valueOf(video.getAncho( )) );
 		jVideo.put( "Duracion", String.valueOf(video.getDuracion( )) );
 		jVideo.put( "Formato", video.getFormato( ) );
+		jVideo.put("Fecha Limite", video.getFechaLimite());
 		jVideo.put( consignacion, video.isConsignacion( ) );
 		jVideo.put( dispsubasta, video.isDispsubasta( ) );
 		jVideo.put( dispventa, video.isDispventa( ) );
@@ -222,6 +223,7 @@ public class PersistenciaPiezas {
 		jPintura.put( "Proprietario", pintura.getPropietario( ).getLogin() );
 		jPintura.put( exhibaVendaoSubasta, pintura.getExhibaVendaoSubasta() );
 		jPintura.put( tipo, pintura.getTipo( ) );
+		jPintura.put("Fecha Limite", pintura.getFechaLimite());
 		jPintura.put( "Alto", String.valueOf(pintura.getAlto( ) ));
 		jPintura.put( "Ancho", String.valueOf(pintura.getAncho( )) );
 		jPintura.put( consignacion, pintura.isConsignacion( ) );
@@ -285,6 +287,7 @@ public class PersistenciaPiezas {
 		jImpresion.put( "Proprietario", impresion.getPropietario( ).getLogin() );
 		jImpresion.put( exhibaVendaoSubasta, impresion.getExhibaVendaoSubasta() );
 		jImpresion.put( tipo, impresion.getTipo( ) );
+		jImpresion.put("Fecha Limite", impresion.getFechaLimite());
 		jImpresion.put( "Alto", String.valueOf(impresion.getAlto( )) );
 		jImpresion.put( "Ancho", String.valueOf(impresion.getAncho( ) ));
 		jImpresion.put( consignacion, impresion.isConsignacion( ) );
@@ -348,6 +351,7 @@ public class PersistenciaPiezas {
 		jFotografia.put( "Proprietario", fotografia.getPropietario( ).getLogin() );
 		jFotografia.put( exhibaVendaoSubasta, fotografia.getExhibaVendaoSubasta() );
 		jFotografia.put( tipo, fotografia.getTipo( ) );
+		jFotografia.put("Fecha Limite", fotografia.getFechaLimite());
 		jFotografia.put( "Alto", String.valueOf(fotografia.getAlto( )) );
 		jFotografia.put( "Ancho", String.valueOf(fotografia.getAncho( )) );
 		jFotografia.put( "Formato", fotografia.getFormato( ) );
@@ -413,6 +417,7 @@ public class PersistenciaPiezas {
 		jEscultura.put( "Proprietario", escultura.getPropietario( ).getLogin() );
 		jEscultura.put( exhibaVendaoSubasta, escultura.getExhibaVendaoSubasta() );
 		jEscultura.put( tipo, escultura.getTipo( ) );
+		jEscultura.put("Fecha Limite", escultura.getFechaLimite());
 		jEscultura.put( "Alto", String.valueOf(escultura.getAlto( ) ));
 		jEscultura.put( "Ancho", String.valueOf(escultura.getAncho( ) ));
 		jEscultura.put( "Profundidad", String.valueOf(escultura.getProfundidad( ) ));
@@ -499,6 +504,7 @@ public class PersistenciaPiezas {
 		}
 		Comprador nPropietario = (Comprador) loginUsuarios.get(loginComprador);
 		boolean nExhibida = jEscultura.getBoolean(exhibida);
+		String nFechaLimite = jEscultura.getString("Fecha Limite");
 		double nAlto = Double.parseDouble(jEscultura.getString("Alto"));
 		double nAncho = Double.parseDouble(jEscultura.getString("Ancho"));
 		double nProfundidad = Double.parseDouble(jEscultura.getString("Profundidad"));
@@ -509,7 +515,7 @@ public class PersistenciaPiezas {
 		boolean nConsignacion = jEscultura.getBoolean(consignacion);
 		boolean nDispsubasta = jEscultura.getBoolean(dispsubasta);
 		boolean nDispventa = jEscultura.getBoolean(dispventa);
-		Escultura escultura = galeria.getFabrica().crearEscultura(nTitulo, nValor, nFechaCreacion, nLugarCreacion, nPropietario, nAutores, nDueños, historialVentas, nExhibaVendaoSubaste, nConsignacion, nExhibida, nDispsubasta, nDispventa, nAlto, nAncho, nProfundidad, nMateriales, nPeso, nElectricidad, nOtroDetalle);
+		Escultura escultura = galeria.getFabrica().crearEscultura(nTitulo, nValor, nFechaCreacion, nLugarCreacion, nPropietario, nAutores, nDueños, historialVentas, nExhibaVendaoSubaste, nConsignacion, nExhibida, nDispsubasta, nDispventa, nFechaLimite, nAlto, nAncho, nProfundidad, nMateriales, nPeso, nElectricidad, nOtroDetalle);
 		identificacionPieza.put(jEscultura.getString(identificador), escultura);
 		
 	}
@@ -555,6 +561,7 @@ public class PersistenciaPiezas {
 		}
 		Comprador nPropietario = (Comprador) loginUsuarios.get(loginComprador);
 		boolean nExhibida = jFotografia.getBoolean(exhibida);
+		String nFechaLimite = jFotografia.getString("Fecha Limite");
 		double nAlto = Double.parseDouble(jFotografia.getString("Alto"));
 		double nAancho = Double.parseDouble(jFotografia.getString("Ancho"));
 		String nFormato = jFotografia.getString("Formato");
@@ -562,7 +569,7 @@ public class PersistenciaPiezas {
 		boolean nConsignacion = jFotografia.getBoolean(consignacion);
 		boolean nDispsubasta = jFotografia.getBoolean(dispsubasta);
 		boolean nDispventa = jFotografia.getBoolean(dispventa);
-		Fotografia fotografia = galeria.getFabrica().crearFotografia(nTitulo, nValor, nFechaCreacion, nLugarCreacion, nPropietario, nAutores, nDueños, historialVentas, nExhibaVendaoSubaste, nConsignacion, nExhibida, nDispsubasta, nDispventa, nAlto, nAancho, nFormato, nEnmarcado);
+		Fotografia fotografia = galeria.getFabrica().crearFotografia(nTitulo, nValor, nFechaCreacion, nLugarCreacion, nPropietario, nAutores, nDueños, historialVentas, nExhibaVendaoSubaste, nConsignacion, nExhibida, nDispsubasta, nDispventa, nFechaLimite, nAlto, nAancho, nFormato, nEnmarcado);
 		identificacionPieza.put(jFotografia.getString(identificador), fotografia);
 
 	}
@@ -608,12 +615,13 @@ public class PersistenciaPiezas {
 		}
 		Comprador nPropietario = (Comprador) loginUsuarios.get(loginComprador);
 		boolean nExhibida = jImpresion.getBoolean(exhibida);
+		String nFechaLimite = jImpresion.getString("Fecha Limite");
 		double nAlto = Double.parseDouble(jImpresion.getString("Alto"));
 		double nAncho = Double.parseDouble(jImpresion.getString("Ancho"));
 		boolean nConsignacion = jImpresion.getBoolean(consignacion);
 		boolean nDispsubasta = jImpresion.getBoolean(dispsubasta);
 		boolean nDispventa = jImpresion.getBoolean(dispventa);
-		Impresion impresion = galeria.getFabrica().crearImpresion(nTitulo, nValor, nFechaCreacion, nLugarCreacion, nPropietario, nAutores, nDueños, historialVentas, nExhibaVendaoSubaste, nConsignacion, nExhibida, nDispsubasta, nDispventa, nAlto, nAncho);
+		Impresion impresion = galeria.getFabrica().crearImpresion(nTitulo, nValor, nFechaCreacion, nLugarCreacion, nPropietario, nAutores, nDueños, historialVentas, nExhibaVendaoSubaste, nConsignacion, nExhibida, nDispsubasta, nDispventa, nFechaLimite, nAlto, nAncho);
 		identificacionPieza.put(jImpresion.getString(identificador), impresion);
 
 	}
@@ -659,12 +667,13 @@ public class PersistenciaPiezas {
 		}
 		Comprador nPropietario = (Comprador) loginUsuarios.get(loginComprador);
 		boolean nExhibida = jPintura.getBoolean(exhibida);
+		String nFechaLimite = jPintura.getString("Fecha Limite");
 		double nAlto = Double.parseDouble(jPintura.getString("Alto"));
 		double nAncho = Double.parseDouble(jPintura.getString("Ancho"));
 		boolean nConsignacion = jPintura.getBoolean(consignacion);
 		boolean nDispsubasta = jPintura.getBoolean(dispsubasta);
 		boolean nDispventa = jPintura.getBoolean(dispventa);
-		Pintura pintura = galeria.getFabrica().crearPintura(nTitulo, nValor, nFechaCreacion, nLugarCreacion, nPropietario, nAutores, nDueños, historialVentas, nExhibaVendaoSubaste, nConsignacion, nExhibida, nDispsubasta, nDispventa, nAlto, nAncho);
+		Pintura pintura = galeria.getFabrica().crearPintura(nTitulo, nValor, nFechaCreacion, nLugarCreacion, nPropietario, nAutores, nDueños, historialVentas, nExhibaVendaoSubaste, nConsignacion, nExhibida, nDispsubasta, nDispventa, nFechaLimite, nAlto, nAncho);
 		identificacionPieza.put(jPintura.getString(identificador), pintura);
 
 	}
@@ -711,6 +720,7 @@ public class PersistenciaPiezas {
 		}
 		Comprador nPropietario = (Comprador) loginUsuarios.get(loginComprador);
 		boolean nExhibida = jVideo.getBoolean(exhibida);
+		String nFechaLimite = jVideo.getString("Fecha Limite");
 		double nAlto = Double.parseDouble(jVideo.getString("Alto"));
 		double nAncho = Double.parseDouble(jVideo.getString("Ancho"));
 		int nDuracion = Integer.parseInt(jVideo.getString("Duracion"));
@@ -718,7 +728,7 @@ public class PersistenciaPiezas {
 		boolean nConsignacion = jVideo.getBoolean(consignacion);
 		boolean nDispsubasta = jVideo.getBoolean(dispsubasta);
 		boolean nDispventa = jVideo.getBoolean(dispventa);
-		Video video = galeria.getFabrica().crearVideo(nTitulo, nValor, nFechaCreacion, nLugarCreacion, nPropietario, nAutores, nDueños, historialVentas, nExhibaVendaoSubaste, nConsignacion, nExhibida, nDispsubasta, nDispventa, nAlto, nAncho, nDuracion, nFormato);
+		Video video = galeria.getFabrica().crearVideo(nTitulo, nValor, nFechaCreacion, nLugarCreacion, nPropietario, nAutores, nDueños, historialVentas, nExhibaVendaoSubaste, nConsignacion, nExhibida, nDispsubasta, nDispventa, nFechaLimite, nAlto, nAncho, nDuracion, nFormato);
 		identificacionPieza.put(jVideo.getString(identificador), video);
 	}
 }
