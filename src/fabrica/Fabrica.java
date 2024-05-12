@@ -172,10 +172,10 @@ public class Fabrica {
 	public Escultura crearEscultura(String titulo, int valor, String fecha, String lugar, Comprador creador,
 			ArrayList<Artista> autores, ArrayList<Usuario> dueños, HashMap<String, Integer> ventas,
 			String exhibaVendaoSubasta, boolean consignacion, boolean exhibida, boolean dispsubasta,
-			boolean dispventa, double alto, double ancho, double profundidad, String materiales, double peso, boolean electricidad, boolean otroDetalle) {
+			boolean dispventa, String fechaLimite, double alto, double ancho, double profundidad, String materiales, double peso, boolean electricidad, boolean otroDetalle) {
 		Escultura nEscultura  = new Escultura(titulo, valor, fecha, lugar, creador, autores, dueños, ventas,
 				 exhibaVendaoSubasta,  consignacion,  exhibida,  dispsubasta,
-				dispventa, alto, ancho, profundidad, materiales, peso, electricidad, otroDetalle); 
+				dispventa, fechaLimite, alto, ancho, profundidad, materiales, peso, electricidad, otroDetalle); 
 		this.cantidadPiezasCreadas++;
 		this.piezasCreadas.add(nEscultura);
 		this.cantidadEsculturasCreadas++;
@@ -187,10 +187,10 @@ public class Fabrica {
 	public Fotografia crearFotografia(String titulo, int valor, String fecha, String lugar, Comprador creador,
 			ArrayList<Artista> autores, ArrayList<Usuario> dueños, HashMap<String, Integer> ventas,
 			String exhibaVendaoSubasta, boolean consignacion, boolean exhibida, boolean dispsubasta,
-			boolean dispventa, double alto,double ancho, String formato, boolean enmarcado ) {
+			boolean dispventa, String fechaLimite, double alto,double ancho, String formato, boolean enmarcado ) {
 		Fotografia nFotografia  = new Fotografia(titulo, valor,  fecha, lugar, creador,
 				autores, dueños, ventas, exhibaVendaoSubasta,  consignacion,  exhibida,  dispsubasta,
-				 dispventa, alto, ancho, formato, enmarcado ); 
+				 dispventa, fechaLimite, alto, ancho, formato, enmarcado ); 
 		this.cantidadPiezasCreadas++;
 		this.piezasCreadas.add(nFotografia);
 		this.cantidadFotografiasCreadas++;
@@ -202,10 +202,10 @@ public class Fabrica {
 	public Impresion crearImpresion(String titulo, int valor, String fecha, String lugar, Comprador creador,
 			ArrayList<Artista> autores, ArrayList<Usuario> dueños, HashMap<String, Integer> ventas,
 			String exhibaVendaoSubasta, boolean consignacion, boolean exhibida, boolean dispsubasta,
-			boolean dispventa, double alto, double ancho) {
+			boolean dispventa,String fechaLimite, double alto, double ancho) {
 		Impresion nImpresion  = new Impresion(titulo, valor, fecha, lugar, creador,
 				 autores, dueños, ventas, exhibaVendaoSubasta, consignacion, exhibida, dispsubasta,
-				 dispventa,  alto,  ancho); 
+				 dispventa, fechaLimite, alto,  ancho); 
 		this.cantidadPiezasCreadas++;
 		this.piezasCreadas.add(nImpresion);
 		this.cantidadImpresionesCreadas++;
@@ -217,10 +217,10 @@ public class Fabrica {
 	public Pintura crearPintura(String titulo, int valor, String fecha, String lugar, Comprador creador,
 			ArrayList<Artista> autores, ArrayList<Usuario> dueños, HashMap<String, Integer> ventas,
 			String exhibaVendaoSubasta, boolean consignacion, boolean exhibida, boolean dispsubasta,
-			boolean dispventa, double alto, double ancho ) {
+			boolean dispventa, String fechaLimite, double alto, double ancho ) {
 		Pintura nPintura  = new Pintura(titulo, valor, fecha, lugar, creador, autores, dueños,  ventas,
 		exhibaVendaoSubasta, consignacion, exhibida, dispsubasta,
-				 dispventa,  alto,  ancho ); 
+				 dispventa, fechaLimite, alto,  ancho ); 
 		this.cantidadPiezasCreadas++;
 		this.piezasCreadas.add(nPintura);
 		this.cantidadPinturasCreadas++;
@@ -232,10 +232,10 @@ public class Fabrica {
 	public Video crearVideo(String titulo, int valor, String fecha, String lugar, Comprador creador,
 			ArrayList<Artista> autores, ArrayList<Usuario> dueños, HashMap<String, Integer> ventas,
 			String exhibaVendaoSubasta, boolean consignacion, boolean exhibida, boolean dispsubasta,
-			boolean dispventa, double alto, double ancho, int duracion, String formato) {
+			boolean dispventa, String fechaLimite, double alto, double ancho, int duracion, String formato) {
 		Video nVideo  = new Video(titulo, valor, fecha, lugar,  creador,
 			 autores, dueños, ventas, exhibaVendaoSubasta, consignacion, exhibida, dispsubasta,
-			 dispventa, alto, ancho, duracion, formato); 
+			 dispventa, fechaLimite, alto, ancho, duracion, formato); 
 		this.cantidadPiezasCreadas++;
 		this.piezasCreadas.add(nVideo);
 		this.cantidadVideosCreados++;

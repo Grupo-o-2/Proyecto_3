@@ -17,9 +17,9 @@ public class Fotografia extends Pieza{
 	public Fotografia(String titulo, int valor, String fecha, String lugar, Usuario propietario,
 			ArrayList<Artista> autores, ArrayList<Usuario> dueños, HashMap<String, Integer> ventas,
 			String exhibaVendaoSubasta, boolean consignacion, boolean exhibida, boolean dispsubasta,
-			boolean dispventa, double alto,double ancho, String formato, boolean enmarcado ) {
+			boolean dispventa, String fechaLimite, double alto,double ancho, String formato, boolean enmarcado ) {
 		super(titulo, valor, fecha, lugar, propietario, autores, dueños, ventas, exhibaVendaoSubasta, consignacion, exhibida,
-				dispsubasta, dispventa);
+				dispsubasta, dispventa, fechaLimite);
 	
 		this.alto = alto;
 		this.ancho = ancho;

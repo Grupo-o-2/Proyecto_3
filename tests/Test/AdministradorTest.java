@@ -80,10 +80,10 @@ public class AdministradorTest {
     }
     
     
-<<<<<<< HEAD
+
     void crearGaleria1( ) {
     	
-=======
+
     /*void crearGaleria1( ) {
 >>>>>>> refs/remotes/origin/main
     	ArrayList<Subasta> subastas = new ArrayList<Subasta>();
@@ -108,14 +108,6 @@ public class AdministradorTest {
     	
     }*/
     
-    void cargarGaleria1() {
-    	
     }
-
-    @AfterEach
-    void tearDown( ) throws Exception
-    {
-    }
-
 }
 //(String login, String password, String nombre, int telefono)

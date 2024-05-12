@@ -36,14 +36,24 @@ public class ConsolaComprador extends Consola{
 		
 	}
 	
+	public static void mostrarHistorialPieza() {
+		
+	}
 
 
-public static void main(String[] args ) throws PropietarioErroneoException, UsuarioInexistenteException, DineroInsuficienteException, VentaImposibleException {
+public static void main(String[] args ) throws PropietarioErroneoException, UsuarioInexistenteException, DineroInsuficienteException, VentaImposibleException, MismoComprador, ValorMaximoExcedido, FechaInvalida {
 	Fabrica fabricaInicio= new Fabrica();
 	
 	ArrayList<Pieza> historialpiezasGaleria = new ArrayList<Pieza>();
 	ArrayList<Pieza> actualesPiezasGaleria = new ArrayList<Pieza>();
 	ArrayList<Pieza> antiguasPiezasGaleria = new ArrayList<Pieza>();
+
+	HashMap<Pieza, String> historialComprador1 = new HashMap<Pieza, String>();
+	HashMap<Pieza, String> historialComprador2 = new HashMap<Pieza, String>();
+	HashMap<Pieza, String> historialComprador3 = new HashMap<Pieza, String>();
+	
+	
+	
 	
 	Galeria galeriaInicio = fabricaInicio.crearGaleria("Galeria de Prueba", new ArrayList<Subasta>(), historialpiezasGaleria,
 			actualesPiezasGaleria, antiguasPiezasGaleria, new ArrayList<Usuario>());
@@ -64,9 +74,7 @@ public static void main(String[] args ) throws PropietarioErroneoException, Usua
 		Comprador segundoComprador = (Comprador) galeriaInicio.obtenerUsuarioPorLogin("loginlucy");
 		Comprador tercerComprador = (Comprador) galeriaInicio.obtenerUsuarioPorLogin("loginjohn");
 		Comprador compradorGaleria = (Comprador) galeriaInicio.obtenerUsuarioPorLogin("fake");
-		
-		
-		
+				
 		//Empleados
 		galeriaInicio.crearAdministrador("loginbob", "adios456","912345678", "Bob");
 		galeriaInicio.crearCajero("logineve", "saludos789","891234567", "Eve");
@@ -79,6 +87,7 @@ public static void main(String[] args ) throws PropietarioErroneoException, Usua
 		
 		
 		//Artistas
+
 		galeriaInicio.crearArtista("loginvincent", "dai", "Vincent", "31256789", new ArrayList<Pieza>() );
 		galeriaInicio.crearArtista("loginpicasso", "guernica", "Picasso", "32198765", new ArrayList<Pieza>());
 		galeriaInicio.crearArtista("loginkahlo", "frida", "Kahlo", "33344455", new ArrayList<Pieza>());
@@ -90,8 +99,7 @@ public static void main(String[] args ) throws PropietarioErroneoException, Usua
 		Artista artista3 = (Artista) galeriaInicio.obtenerUsuarioPorLogin("loginkahlo");
 		Artista artista4 = (Artista) galeriaInicio.obtenerUsuarioPorLogin("loginmonet");
 		Artista artista5 = (Artista) galeriaInicio.obtenerUsuarioPorLogin("loginvangogh");
-		Artista artista6 = (Artista) galeriaInicio.obtenerUsuarioPorLogin("logindali");
-		
+		Artista artista6 = (Artista) galeriaInicio.obtenerUsuarioPorLogin("logindali");		
 		
 		ArrayList<Artista> autoresVideo1 = new ArrayList<Artista>();
 		autoresVideo1.add(artista1);
@@ -115,28 +123,107 @@ public static void main(String[] args ) throws PropietarioErroneoException, Usua
 		autoresEscultura1.add(artista6);
 		
 		
+		//Usuarios de cada pieza (personas que han tenido o tienen la pieza) - compradores
+		ArrayList<Usuario> usuariosVideo1 = new ArrayList<Usuario>();
+		usuariosVideo1.add(primerComprador);
+		usuariosVideo1.add(segundoComprador);
+		
+		ArrayList<Usuario> usuariosPintura1 = new ArrayList<Usuario>();
+		usuariosPintura1.add(primerComprador);
+		usuariosPintura1.add(tercerComprador);
+		usuariosPintura1.add(segundoComprador);
+		
+		ArrayList<Usuario> usuariosImpresion1 = new ArrayList<Usuario>();
+		usuariosImpresion1.add(primerComprador);
+		
+		ArrayList<Usuario> usuariosFotografia1 = new ArrayList<Usuario>();
+		usuariosFotografia1.add(segundoComprador);
+		usuariosFotografia1.add(tercerComprador);
+		
+		ArrayList<Usuario> usuariosEscultura1 = new ArrayList<Usuario>();
+		usuariosEscultura1.add(tercerComprador);
+	
+		
+		//Historial de ventas de piezas - compradores
+		HashMap<String, Integer> historialVideo1 = new HashMap<String, Integer>();
+		historialVideo1.put("2024-03-19", 50);
+		historialVideo1.put("2020-10-08", 30);
+		
+		HashMap<String, Integer> historialPintura1 = new HashMap<String, Integer>();
+		historialPintura1.put("2023-12-12", 1800);
+		historialPintura1.put("2018-05-13", 1500);
+		historialPintura1.put("2010-01-29", 1000);
+		
+		HashMap<String, Integer> historialImpresion1 = new HashMap<String, Integer>();
+		historialImpresion1.put("2024-01-05", 73);
+
+		HashMap<String, Integer> historialFotografia1 = new HashMap<String, Integer>();
+		historialFotografia1.put("2022-07-07", 256);
+		historialFotografia1.put("2012-09-25", 150);
+		
+		HashMap<String, Integer> historialEscultura1 = new HashMap<String, Integer>();
+		historialEscultura1.put("2021-08-14", 400);
+
+
+
+
 		
 		
 		//Piezas pertenecientes a compradores
 		galeriaInicio.crearVideo("Video artístico", 50, "20220201" ,"Puerto Rico",  primerComprador, autoresVideo1, new ArrayList<Usuario>(),
 				new HashMap<String, Integer>(), "123", false, false, true,true, 92.3, 80.2,24, "mp4"  );
 		Video video1 = (Video) galeriaInicio.obtenerPiezaGlobalesporTitulo("Video artístico");
-	
 		galeriaInicio.crearPintura("Selene", 1880, "19921008" ,"Francia" , primerComprador, autoresPintura1 , new ArrayList<Usuario>(),
 	    		new HashMap<String, Integer>(),"123", false, false, true, true,  15.6, 78);
 	    Pintura pintura1 = (Pintura) galeriaInicio.obtenerPiezaGlobalesporTitulo("Selene"); 
-	    
 		galeriaInicio.crearImpresion("Esperanza", 73, "19980822" ,"Colombia" , primerComprador, autoresImpresion1, new ArrayList<Usuario>(),
 	    		new HashMap<String, Integer>(),"123", false, false, true, true,  72, 25);
 		Impresion impresion1 = (Impresion) galeriaInicio.obtenerPiezaGlobalesporTitulo("Esperanza");
-		
 		galeriaInicio.crearFotografia("Posibilidad", 256, "20200319" ,"Estonia" , segundoComprador, autoresFotografia1, new ArrayList<Usuario>(),
 	    		new HashMap<String, Integer>(),"123", false, false, true, true,  50, 50, "jpg", true);
 		Fotografia fotografia1 = (Fotografia) galeriaInicio.obtenerPiezaGlobalesporTitulo("Posibilidad");
-		
 		galeriaInicio.crearEscultura("Venus de Milo", 400, "18760426" ,"Italia" , tercerComprador, autoresEscultura1, new ArrayList<Usuario>(),
 	    		new HashMap<String, Integer>(),"123", false, false, true, true,  750, 60,70, "Marmol", 456, false, false);
 		Escultura escultura1 = (Escultura) galeriaInicio.obtenerPiezaGlobalesporTitulo("Venus de Milo");
+
+		
+		
+		
+		//Usuarios de cada pieza (personas que han tenido o tienen la pieza) - galería
+		ArrayList<Usuario> usuariosVideo2 = new ArrayList<Usuario>();
+		usuariosVideo2.add(segundoComprador);
+		
+		ArrayList<Usuario> usuariosPintura2 = new ArrayList<Usuario>();
+
+		
+		ArrayList<Usuario> usuariosImpresion2 = new ArrayList<Usuario>();
+		usuariosImpresion2.add(segundoComprador);
+		usuariosImpresion2.add(tercerComprador);
+		
+		ArrayList<Usuario> usuariosFotografia2 = new ArrayList<Usuario>();
+		usuariosFotografia2.add(primerComprador);
+		
+		ArrayList<Usuario> usuariosEscultura2 = new ArrayList<Usuario>();
+		
+	
+		
+		//Historial de ventas de piezas galería
+		HashMap<String, Integer> historialVideo2 = new HashMap<String, Integer>();
+		historialVideo2.put("2017-06-24", 55);
+
+		
+		HashMap<String, Integer> historialPintura2 = new HashMap<String, Integer>();
+
+		
+		HashMap<String, Integer> historialImpresion2 = new HashMap<String, Integer>();
+		historialImpresion2.put("2015-05-15", 84);
+		historialImpresion2.put("2014-05-15", 74);
+
+		HashMap<String, Integer> historialFotografia2 = new HashMap<String, Integer>();
+		historialFotografia2.put("2021-02-14", 153);
+		
+		
+		HashMap<String, Integer> historialEscultura2 = new HashMap<String, Integer>();
 		
 		
 		
@@ -170,6 +257,36 @@ public static void main(String[] args ) throws PropietarioErroneoException, Usua
 		HashMap<Pieza, String> historial1 = primerComprador.getHistorialPiezas();
 		historial1.put(fotografia1, fotografia1.getFechaCreacion());
 		primerComprador.setHistorialPiezas(historial1);
+		
+		galeriaInicio.getHistorialPiezas().add(video1);
+		galeriaInicio.getHistorialPiezas().add(pintura1);
+		galeriaInicio.getHistorialPiezas().add(impresion1);
+		galeriaInicio.getHistorialPiezas().add(escultura1);
+		galeriaInicio.getHistorialPiezas().add(fotografia1);
+		
+		galeriaInicio.getPiezasAntiguas().add(video1);
+		galeriaInicio.getPiezasAntiguas().add(pintura1);
+		galeriaInicio.getPiezasAntiguas().add(impresion1);
+		galeriaInicio.getPiezasAntiguas().add(escultura1);
+		galeriaInicio.getPiezasAntiguas().add(fotografia1);
+		
+		
+		//Historial piezas compradores
+		historialComprador1.put(video1, "2024-03-19");
+		historialComprador1.put(pintura1, "2023-12-12");
+		historialComprador1.put(impresion1, "2024-01-05");
+		historialComprador1.put(fotografia2, "2021-02-14");
+		
+		historialComprador2.put(video1, "2020-10-08");
+		historialComprador2.put(pintura1, "2010-01-29");
+		historialComprador2.put(fotografia1, "2022-07-07");
+		historialComprador2.put(video2, "2017-06-24");
+		historialComprador2.put(impresion2, "2015-05-15");
+		
+		historialComprador3.put(pintura1, "2018-05-13");
+		historialComprador3.put(fotografia1, "2012-09-25");
+		historialComprador3.put(escultura1, "2021-08-14");
+		historialComprador3.put(impresion2, "2014-05-15");
 		
 		HashMap<Pieza, String> historial2 = segundoComprador.getHistorialPiezas();
 		historial2.put(pintura1, pintura1.getFechaCreacion());
@@ -292,7 +409,7 @@ public static void main(String[] args ) throws PropietarioErroneoException, Usua
 		System.out.println("Escoja una opción:\n");
 		System.out.println("1. Entrar a galería.\n");
 		System.out.println("0. salir.\n");
-		int eleccion= (int) pedirNumeroAlUsuario("Elección:\n");
+		int eleccion= (int) pedirNumeroAlUsuario("Elección");
 		if(eleccion == 1)
 		{
 			System.out.println("------------------------------------------------------------------------------------------\n");
@@ -309,8 +426,9 @@ public static void main(String[] args ) throws PropietarioErroneoException, Usua
 				boolean consignacion = true;
 				boolean compra = true;
 				boolean observar = true;
+				boolean historiaArtista = true;
 				mostrarMenu();
-				eleccionDos= (int) pedirNumeroAlUsuario("Elección:\n");
+				eleccionDos= (int) pedirNumeroAlUsuario("Elección");
 				while (centinelaDos)
 				{
 					if (eleccionDos == 0)
@@ -321,13 +439,14 @@ public static void main(String[] args ) throws PropietarioErroneoException, Usua
 					
 					//Hacer consginación
 					else if (eleccionDos == 1 ) {
+						consignacion = true;{
 						while(consignacion) {
 						ArrayList<Pieza> piezasDisponibles = ((Comprador)comprador).getPiezasActuales();
 						
 						if (piezasDisponibles.isEmpty() == true) {
-							System.out.println("No tienes piezas disponibles para consignar \n");
+							System.out.println("No tienes piezas disponibles para consignar. \n");
 							mostrarMenu();
-							eleccionDos= (int) pedirNumeroAlUsuario("Elección:\n");
+							eleccionDos= (int) pedirNumeroAlUsuario("Elección");
 						}
 						else {
 							System.out.println("Las piezas disponibles para consignar son: \n");
@@ -335,40 +454,49 @@ public static void main(String[] args ) throws PropietarioErroneoException, Usua
 							System.out.println(pieza.getTitulo()+ "\n");
 						}
 							String tituloPieza = pedirCadenaAlUsuario("Ingrese el nombre la pieza a consignar");
+							
+							String utilización = pedirCadenaAlUsuario("Si desea que la pieza sea exhibida escriba -> 1 \n"
+									+ "Si desea que la pieza sea vendida escriba -> 2  \n"
+									+ "Si desea que la pieza sea subastada escriba -> 3 \n"
+									+ "Si desea dos o tres de estas opciones escriba los números correspondientes juntos (Ej: 123 o 12) \n");
+							
+							String fechaLimite = pedirCadenaAlUsuario("Ingrese la fecha límite de la consignación (Formato -> añomesdía (Ej: 20280529))");
+							String fechaActual = pedirCadenaAlUsuario("Ingrese la fecha actual (Formato -> añomesdía (Ej: 20280529))");
 							Pieza piezaAConsignar = ((Comprador)comprador).obtenerPiezaporTitulo(tituloPieza);
 							
 							if (piezasDisponibles.contains(piezaAConsignar)) {
-								((Comprador)comprador).consignarPieza(piezaAConsignar, "20280505", galeriaInicio, "123");
-								System.out.println("La pieza ha sido consignada en la galería"+"\n");
+								((Comprador)comprador).consignarPieza(piezaAConsignar, fechaLimite, galeriaInicio, utilización, fechaActual );
+								System.out.println("La pieza ha sido consignada exitosamente en la galería."+"\n");
 								consignacion = false;
 								mostrarMenu();
-								eleccionDos= (int) pedirNumeroAlUsuario("Elección:\n");
+								eleccionDos= (int) pedirNumeroAlUsuario("Elección");
 							}
 							
-							else {System.out.println("Esta pieza no existe o no se encuentra disponible para consignar"+"\n");
+							else {System.out.println("Esta pieza no existe o no se encuentra disponible para consignar."+"\n");
 							consignacion = false;
 							mostrarMenu();
-							eleccionDos= (int) pedirNumeroAlUsuario("Elección:\n");}
+							eleccionDos= (int) pedirNumeroAlUsuario("Elección");}
 						
 						
 					}
 						}
 
 					}
+					}
 					
 					//Comprar una pieza
 					else if(eleccionDos == 2) {
+						compra = true;
 						while(compra) {
 						ArrayList<Pieza> piezasEnGaleria = galeriaInicio.getPiezasActuales();
 						
 						if (piezasEnGaleria.isEmpty() == true) {
-							System.out.println("La galería no tiene piezas en venta \n");
-							mostrarMenu();
-							eleccionDos= (int) pedirNumeroAlUsuario("Elección:\n");
+							System.out.println("La galería no tiene piezas en venta. \n");
+							
 							}
 						
 						else {
-							System.out.println("Las piezas disponibles para comprar son: \n");	
+							System.out.println("\n Las piezas disponibles para comprar y sus respectivos precios son: \n");	
 						ArrayList<Pieza> piezasDisponibles = new ArrayList<Pieza>();		
 						for (Pieza pieza: piezasEnGaleria) {
 							if (pieza.isDispventa() == true) {
@@ -377,8 +505,9 @@ public static void main(String[] args ) throws PropietarioErroneoException, Usua
 						}
 						
 						for (Pieza pieza: piezasDisponibles) {
-							System.out.println(pieza.getTitulo()+ "\n");
+							System.out.println(pieza.getTitulo()+": "+pieza.getValor()+" "+"\n");
 						}
+						System.out.println(" --> Escriba 'Ninguna' si no desea comprar ninguna de las piezas anteriores. \n");
 						String tituloPieza = pedirCadenaAlUsuario("Ingrese el nombre la pieza a comprar");
 						Pieza piezaAComprar = galeriaInicio.obtenerPiezaporTitulo(tituloPieza);
 						
@@ -388,36 +517,59 @@ public static void main(String[] args ) throws PropietarioErroneoException, Usua
 							System.out.println("Has comprado esta pieza exitosamente."+"\n");
 							compra = false;
 							mostrarMenu();
-							eleccionDos= (int) pedirNumeroAlUsuario("Elección:\n");
+							eleccionDos= (int) pedirNumeroAlUsuario("Elección");
 								
 						}
 						
-						else {
-							System.out.println("Esta pieza no existe o no se encuentra disponible para comprar"+"\n");
+						else if (tituloPieza.compareToIgnoreCase("Ninguna")== 0) {
 							compra = false;
 							mostrarMenu();
-							eleccionDos= (int) pedirNumeroAlUsuario("Elección:\n");
+							eleccionDos= (int) pedirNumeroAlUsuario("Elección");
+						}
+						else {
+							System.out.println("Esta pieza no existe o no se encuentra disponible para comprar."+"\n");
+							compra = false;
+						
 						}
 						
 						
 						}
 						}
+						
 					}
 					
 					else if(eleccionDos == 4) {
+						observar = true;
 						while(observar) {
 							for(Pieza pieza:((Comprador)comprador).getPiezasActuales()) {
 								System.out.println(pieza.getTitulo()+ "\n");
 							}
 							observar = false;
 							mostrarMenu();
-							eleccionDos= (int) pedirNumeroAlUsuario("Elección:\n");
+							eleccionDos= (int) pedirNumeroAlUsuario("Elección");
 						}
 					}
-					
-					else if(eleccionDos == 123237892)
-					{
-						
+					else if(eleccionDos == 5) {
+						historiaArtista = true;
+						while(historiaArtista) {
+							System.out.println("Artistas de la galería"+"\n");
+							for (Usuario artista: galeriaInicio.obtenerArtistas()) {
+								System.out.println(artista.getNombre()+ "\n");
+							}
+							String artistaEscogido = pedirCadenaAlUsuario("Escribe el nombre del artista que quieres ver su historia");
+							Usuario artistaSeleccionado = galeriaInicio.obtenerUsuarioPorNombre(artistaEscogido);
+							
+							if (galeriaInicio.getUsuarios().contains(artistaSeleccionado)) {
+								System.out.println("Historial del artista:"+ "\n");
+								for (Pieza pieza: ((Artista)artistaSeleccionado).obtenerPiezasCreadas(galeriaInicio) ) {
+									System.out.println(pieza.getTitulo()+ "\n");
+								}
+							}
+							
+							historiaArtista = false;
+							mostrarMenu();
+							eleccionDos= (int) pedirNumeroAlUsuario("Elección");
+						}
 					}
 					
 					}

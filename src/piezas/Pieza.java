@@ -15,6 +15,7 @@ abstract public class Pieza {
 	private String fechaCreacion; //Estaba el año pero con la fecha es suficiente
 	private String lugarCreacion;
 	private Usuario propietario;
+	private String fechaLimite;
 	
 	private ArrayList<Artista> autores; //cambiado
 	private ArrayList<Usuario> historialDueños;  //nuevo
@@ -31,7 +32,7 @@ abstract public class Pieza {
 	public Pieza(String titulo,  int valor, String fechaCreacion, String lugarCreacion, Usuario propietario,  
 			ArrayList<Artista> autores, ArrayList<Usuario> historialDueños, HashMap<String, Integer> historialVentas, 
 			String exhibaVendaoSubasta, boolean consignacion,
-			boolean exhibida, boolean dispsubasta, boolean dispventa) {
+			boolean exhibida, boolean dispsubasta, boolean dispventa, String fechaLimite) {
 		
 		this.titulo = titulo;
 		this.valor = valor;
@@ -45,10 +46,13 @@ abstract public class Pieza {
 		this.consignacion = consignacion; 
 		this.dispsubasta = dispsubasta;
 		this.dispventa = dispventa;
+		this.fechaLimite = fechaLimite;
+
 		for (Artista autor: autores)
 		{
 			autor.añadirPieza(this);
 		}
+
 		
 		
 	}
@@ -186,6 +190,16 @@ abstract public class Pieza {
 	public void setDispventa(boolean dispventa) {
 		this.dispventa = dispventa;
 	}
+
+	public String getFechaLimite() {
+		return fechaLimite;
+	}
+
+	public void setFechaLimite(String fechaLimite) {
+		this.fechaLimite = fechaLimite;
+	}
+	
+	
 	
 	
 

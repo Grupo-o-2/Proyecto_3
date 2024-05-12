@@ -18,6 +18,7 @@ public class Galeria {
 	private ArrayList<Pieza> piezasAntiguas;
 	private ArrayList<Usuario> usuarios;
 	private Fabrica fabrica = new Fabrica();
+	private static final String TIPO_ARTISTA = "Artista";
 
 	public Galeria(String nombre, ArrayList<Subasta> subastas, ArrayList<Pieza> historialPiezas,
 			ArrayList<Pieza> piezasActuales, ArrayList<Pieza> piezasAntiguas, ArrayList<Usuario> usuarios )
@@ -143,6 +144,49 @@ public class Galeria {
 		}
 		return usuario1;
 	}
+	
+	public Usuario obtenerUsuarioPorNombre(String nombre) {
+		Usuario usuario1 = null;
+		for (Usuario usuario:this.usuarios) {
+			if (usuario.getNombre().compareTo(nombre) == 0) {
+				usuario1 = usuario;
+			}
+		}
+		return usuario1;
+	}
+	
+	public static boolean esFechaValida(String fecha) {
+        if (fecha == null || fecha.length() != 8) {
+            return false;
+        }
+
+        try {
+            int año = Integer.parseInt(fecha.substring(0, 4));
+            int mes = Integer.parseInt(fecha.substring(4, 6));
+            int dia = Integer.parseInt(fecha.substring(6));
+
+            if (mes < 1 || mes > 12 || dia < 1 || dia > 31) {
+                return false;
+            }
+
+            boolean esBisiesto = (año % 4 == 0 && año % 100 != 0) || (año % 400 == 0);
+            int diasEnMes = diasEnMes(mes, esBisiesto);
+            return dia <= diasEnMes;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+	
+	private static int diasEnMes(int mes, boolean esBisiesto) {
+        switch (mes) {
+            case 4: case 6: case 9: case 11:
+                return 30;
+            case 2:
+                return esBisiesto ? 29 : 28;
+            default:
+                return 31;
+        }
+    }
 	
 	//Si retorna 0, pertenece a los usuarios y es el tipo adecuado, si retorna 1 no pertenece a los usuarios, si retorna 2 no es el tipo adecuado.
 	public int verificacionSesion (String login, String contraseña, String tipo) {
@@ -312,6 +356,7 @@ public class Galeria {
 		return null;
 	}
 	
+
 	public Pieza obtenerPiezaGlobalesporTitulo(String titulo) {
 		for (Pieza pieza:getFabrica().getPiezasCreadas()) {
 			if (pieza.getTitulo().compareTo(titulo) == 0) {
@@ -321,9 +366,21 @@ public class Galeria {
 		return null;
 	}
 	
-	public void realizarConsignacion(Usuario propietario, Pieza piezaAConsignar, String fechaLimite, Galeria galeria, String exhibaVendaoSubasta) throws PropietarioErroneoException {
-
-		((Administrador )this.getAdministrador()).registrarPiezaPorConsignacion(propietario, piezaAConsignar, fechaLimite, this, exhibaVendaoSubasta);
+	public ArrayList<Usuario> obtenerArtistas() {
+		ArrayList<Usuario> artistas = new ArrayList<Usuario>();
+		 
+		for (Usuario artista: this.getUsuarios()) {
+			if (artista.getTipo() == TIPO_ARTISTA ) {
+				artistas.add(artista);
+			}
+		}
+		
+		return artistas;
+	}
+	
+	
+	public void realizarConsignacion(Usuario propietario, Pieza piezaAConsignar, String fechaLimite, Galeria galeria, String exhibaVendaoSubasta, String fechaActual) throws PropietarioErroneoException, FechaInvalida {
+		((Administrador )this.getAdministrador()).registrarPiezaPorConsignacion(propietario, piezaAConsignar, fechaLimite, this, exhibaVendaoSubasta,  fechaActual);
 
 	}
 
