@@ -36,7 +36,8 @@ public class PersistenciaCentral {
 		persistenciaUsuarios.salvarUsuarios(usuarios, jobject, identificadorPieza);
 		persistenciaSubastas.salvarSubastas(galeria.getSubastas(), jobject, identificadorPieza);
 		persistenciaGalerias.salvarGaleria(galeria, jobject, identificadorPieza);
-		File carpeta = new File("C:\\Users\\naran\\Desktop\\workspace_eclipse\\Proyecto-1\\Entrega 2\\ProyectoGaleria\\Persistencia\\Galeria");
+		File ruta = new File("Persistencia\\Galeria");
+		File carpeta= new File(ruta.getAbsolutePath());
 		File nArchivo = new File(carpeta, archivo);
 		PrintWriter pw = new PrintWriter( new FileWriter(nArchivo) );
 		jobject.write( pw, 2, 0 );
@@ -49,7 +50,9 @@ public class PersistenciaCentral {
 		HashMap<String, Pieza> identificacionPieza = new HashMap<String, Pieza>();
 		HashMap<Comprador , String> historialCompradores = new HashMap<Comprador, String>();
 		HashMap<Comprador , String> piezasActuales = new HashMap<Comprador, String>();
-		String jsonCompleto = new String( Files.readAllBytes( new File("C:\\Users\\naran\\Desktop\\workspace_eclipse\\Proyecto-1\\Entrega 2\\ProyectoGaleria\\Persistencia\\Galeria\\"+archivo ).toPath( ) ) );
+		File ruta = new File("Persistencia\\Galeria");
+		File carpeta= new File(ruta.getAbsolutePath());
+		String jsonCompleto = new String( Files.readAllBytes( new File(carpeta,archivo ).toPath( ) ) );
 		JSONObject raiz = new JSONObject( jsonCompleto );
 
 		JSONArray usuarios = raiz.getJSONArray( "Usuarios" ); 
