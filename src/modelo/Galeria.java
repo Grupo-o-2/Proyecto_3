@@ -44,6 +44,21 @@ public class Galeria {
 	public ArrayList<Pieza> getHistorialPiezas() {
 		return historialPiezas;
 	}
+	
+	public void setHistorialPiezas(ArrayList<Pieza> historialPiezas)
+	{
+		this.historialPiezas = historialPiezas;
+	}
+	
+	public void setPiezasAntiguas(ArrayList<Pieza> piezasAntiguas)
+	{
+		this.piezasAntiguas = piezasAntiguas;
+	}
+	
+	public void setPiezasActuales(ArrayList<Pieza> piezasActuales)
+	{
+		this.piezasActuales = piezasActuales;
+	}
 
 	public ArrayList<Pieza> getPiezasActuales() {
 		return piezasActuales;
@@ -88,8 +103,11 @@ public class Galeria {
 	public void añadirPieza(Pieza nuevaPieza){
 		this.piezasActuales.add(nuevaPieza);
 		this.historialPiezas.add(nuevaPieza);
-		
-		
+	}
+	
+	public void añadirPiezaHistorial(Pieza pieza)
+	{
+		this.historialPiezas.add(pieza);
 	}
 	
 	public boolean verificarUsuario(Usuario usuarioAVerificar) throws UsuarioInexistenteException {
@@ -233,51 +251,43 @@ public class Galeria {
 	public void crearEscultura(String titulo, int valor, String fecha, String lugar, Comprador creador,
 			ArrayList<Artista> autores, ArrayList<Usuario> dueños, HashMap<String, Integer> ventas,
 			String exhibaVendaoSubasta, boolean consignacion, boolean exhibida, boolean dispsubasta,
-			boolean dispventa, double alto, double ancho, double profundidad, String materiales, double peso, boolean electricidad, boolean otroDetalle)
+			boolean dispventa, String fechaLimite, double alto, double ancho, double profundidad, String materiales, double peso, boolean electricidad, boolean otroDetalle)
 	{
-		getFabrica().crearEscultura(titulo, valor, fecha, lugar, creador, autores, dueños, ventas, exhibaVendaoSubasta, consignacion, exhibida, dispsubasta, dispventa, alto, ancho, profundidad, materiales, peso, electricidad, otroDetalle);
+		getFabrica().crearEscultura(titulo, valor, fecha, lugar, creador, autores, dueños, ventas, exhibaVendaoSubasta, consignacion, exhibida, dispsubasta, dispventa, fechaLimite, alto, ancho, profundidad, materiales, peso, electricidad, otroDetalle);
 	}
 	
 	public void crearFotografia(String titulo, int valor, String fecha, String lugar, Comprador creador,
 			ArrayList<Artista> autores, ArrayList<Usuario> dueños, HashMap<String, Integer> ventas,
 			String exhibaVendaoSubasta, boolean consignacion, boolean exhibida, boolean dispsubasta,
-			boolean dispventa, double alto, double ancho, String formato, boolean enmarcado)
+			boolean dispventa, String fechaLimite, double alto,double ancho, String formato, boolean enmarcado )
 	{
-		getFabrica().crearFotografia(titulo, valor, fecha, lugar, creador, autores, dueños, ventas, exhibaVendaoSubasta, consignacion, exhibida, dispsubasta, dispventa, alto, ancho, formato, enmarcado);
+		getFabrica().crearFotografia(titulo, valor, fecha, lugar, creador, autores, dueños, ventas, exhibaVendaoSubasta, consignacion, exhibida, dispsubasta, dispventa, fechaLimite, alto, ancho, formato, enmarcado);
 	}
 	
 	public void crearImpresion(String titulo, int valor, String fecha, String lugar, Comprador creador,
 			ArrayList<Artista> autores, ArrayList<Usuario> dueños, HashMap<String, Integer> ventas,
 			String exhibaVendaoSubasta, boolean consignacion, boolean exhibida, boolean dispsubasta,
-			boolean dispventa, double alto, double ancho)
+			boolean dispventa,String fechaLimite, double alto, double ancho)
 	{
-		getFabrica().crearImpresion(titulo, valor, fecha, lugar, creador, autores, dueños, ventas, exhibaVendaoSubasta, consignacion, exhibida, dispsubasta, dispventa, alto, ancho);
+		getFabrica().crearImpresion(titulo, valor, fecha, lugar, creador, autores, dueños, ventas, exhibaVendaoSubasta, consignacion, exhibida, dispsubasta, dispventa, fechaLimite, alto, ancho);
 	}
 	
 	public void crearPintura(String titulo, int valor, String fecha, String lugar, Comprador creador,
 			ArrayList<Artista> autores, ArrayList<Usuario> dueños, HashMap<String, Integer> ventas,
 			String exhibaVendaoSubasta, boolean consignacion, boolean exhibida, boolean dispsubasta,
-			boolean dispventa, double alto, double ancho)
+			boolean dispventa, String fechaLimite, double alto, double ancho )
 	{
-		getFabrica().crearPintura(titulo, valor, fecha, lugar, creador, autores, dueños, ventas, exhibaVendaoSubasta, consignacion, exhibida, dispsubasta, dispventa, alto, ancho);
+		getFabrica().crearPintura(titulo, valor, fecha, lugar, creador, autores, dueños, ventas, exhibaVendaoSubasta, consignacion, exhibida, dispsubasta, dispventa, fechaLimite, alto, ancho);
 	}
 	
 	public void crearVideo(String titulo, int valor, String fecha, String lugar, Comprador creador,
 			ArrayList<Artista> autores, ArrayList<Usuario> dueños, HashMap<String, Integer> ventas,
 			String exhibaVendaoSubasta, boolean consignacion, boolean exhibida, boolean dispsubasta,
-			boolean dispventa, double alto, double ancho, int duracion, String formato)
+			boolean dispventa, String fechaLimite, double alto, double ancho, int duracion, String formato)
 	{
-		getFabrica().crearVideo(titulo, valor, fecha, lugar, creador, autores, dueños, ventas, exhibaVendaoSubasta, consignacion, exhibida, dispsubasta, dispventa, alto, ancho, duracion, formato);
+		getFabrica().crearVideo(titulo, valor, fecha, lugar, creador, autores, dueños, ventas, exhibaVendaoSubasta, consignacion, exhibida, dispsubasta, dispventa, fechaLimite, alto, ancho, duracion, formato);
 	}
 	
-	public HashMap<String, Usuario> obtenerLoginUsuario()
-	{
-		HashMap<String, Usuario> loginUsuario = new HashMap<String, Usuario>();
-		for (Usuario usuario : this.usuarios) {
-			loginUsuario.put(usuario.getLogin(),usuario);
-		}
-		return loginUsuario;	
-	}
 	
 	public void cargarGaleria(String archivo)
 	{
@@ -346,6 +356,15 @@ public class Galeria {
 		return null;
 	}
 	
+
+	public Pieza obtenerPiezaGlobalesporTitulo(String titulo) {
+		for (Pieza pieza:getFabrica().getPiezasCreadas()) {
+			if (pieza.getTitulo().compareTo(titulo) == 0) {
+				return pieza;
+			}
+		}
+		return null;
+	}
 	
 	public ArrayList<Usuario> obtenerArtistas() {
 		ArrayList<Usuario> artistas = new ArrayList<Usuario>();
@@ -361,7 +380,6 @@ public class Galeria {
 	
 	
 	public void realizarConsignacion(Usuario propietario, Pieza piezaAConsignar, String fechaLimite, Galeria galeria, String exhibaVendaoSubasta, String fechaActual) throws PropietarioErroneoException, FechaInvalida {
-
 		((Administrador )this.getAdministrador()).registrarPiezaPorConsignacion(propietario, piezaAConsignar, fechaLimite, this, exhibaVendaoSubasta,  fechaActual);
 
 	}
