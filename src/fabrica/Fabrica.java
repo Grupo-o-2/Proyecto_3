@@ -94,14 +94,14 @@ public class Fabrica {
 		}
 	}
 	
-	public Artista crearArtista(String login, String password, String nombre, String telefono, Galeria galeria  ) throws LoginException {
+	public Artista crearArtista(String login, String password, String nombre, String telefono, ArrayList<Pieza> piezasCreadas, Galeria galeria  ) throws LoginException {
 		if (this.logins.contains(login))
 		{
 			throw new LoginException(login);
 		}
 		else 
 		{
-			Artista nArtista = new Artista(login, password, nombre, telefono); 
+			Artista nArtista = new Artista(login, password, nombre, telefono, piezasCreadas); 
 			this.logins.add(login);
 			this.cantidadUsariosCreados++;
 			this.usuariosCreados.add(nArtista);

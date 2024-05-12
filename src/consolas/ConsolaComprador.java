@@ -82,12 +82,12 @@ public static void main(String[] args ) throws PropietarioErroneoException, Usua
 		
 		
 		//Artistas
-		Artista artista1 = fabricaGuardarDos.crearArtista("loginvincent", "dai", "Vincent", "31256789", galeriaInicio);
-		Artista artista2 = fabricaGuardarDos.crearArtista("loginpicasso", "guernica", "Picasso", "32198765", galeriaInicio);
-		Artista artista3 = fabricaGuardarDos.crearArtista("loginkahlo", "frida", "Kahlo", "33344455", galeriaInicio);
-		Artista artista4 = fabricaGuardarDos.crearArtista("loginmonet", "impression", "Monet", "44455566", galeriaInicio);
-		Artista artista5 = fabricaGuardarDos.crearArtista("loginvangogh", "starrynight", "Van Gogh", "55566677", galeriaInicio);
-		Artista artista6 = fabricaGuardarDos.crearArtista("logindali", "surrealism", "Dali", "66677788", galeriaInicio);
+		Artista artista1 = fabricaGuardarDos.crearArtista("loginvincent", "dai", "Vincent", "31256789",new ArrayList<Pieza>(), galeriaInicio);
+		Artista artista2 = fabricaGuardarDos.crearArtista("loginpicasso", "guernica", "Picasso", "32198765", new ArrayList<Pieza>(),galeriaInicio);
+		Artista artista3 = fabricaGuardarDos.crearArtista("loginkahlo", "frida", "Kahlo", "33344455",new ArrayList<Pieza>(), galeriaInicio);
+		Artista artista4 = fabricaGuardarDos.crearArtista("loginmonet", "impression", "Monet", "44455566",new ArrayList<Pieza>(), galeriaInicio);
+		Artista artista5 = fabricaGuardarDos.crearArtista("loginvangogh", "starrynight", "Van Gogh", "55566677",new ArrayList<Pieza>(), galeriaInicio);
+		Artista artista6 = fabricaGuardarDos.crearArtista("logindali", "surrealism", "Dali", "66677788",new ArrayList<Pieza>(), galeriaInicio);
 		
 		
 		ArrayList<Artista> autoresVideo1 = new ArrayList<Artista>();

@@ -47,6 +47,12 @@ abstract public class Pieza {
 		this.dispsubasta = dispsubasta;
 		this.dispventa = dispventa;
 		this.fechaLimite = fechaLimite;
+
+		for (Artista autor: autores)
+		{
+			autor.añadirPieza(this);
+		}
+
 		
 		
 	}

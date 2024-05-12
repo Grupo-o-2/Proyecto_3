@@ -3,6 +3,7 @@ package piezas;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import fabrica.Fabrica;
 import modelo.*;
 import usuarios.*;
 
@@ -25,7 +26,7 @@ public class Video extends Pieza {
 		this.duracion = duracion;
 		this.formato = formato;
 	}
-		
+	
 	public String getTipo() {
 		return TIPO;	
 	}
@@ -46,5 +47,30 @@ public class Video extends Pieza {
 		return formato;
 	}
 	
+	public static void main(String[] args)
+	{
+		Fabrica fabrica = new Fabrica();
+		Galeria galeria = fabrica.crearGaleria("Probar nueva persistencia", new ArrayList<Subasta>(), new ArrayList<Pieza>(),
+				new ArrayList<Pieza>(), new ArrayList<Pieza>(), new ArrayList<Usuario>());
+		try
+		{
+		galeria.crearArtista("Prueba", "abeurP", "Pepe", "123456", new ArrayList<Pieza>());
+		ArrayList<Artista> autor = new ArrayList<Artista>();
+		autor.add((Artista) galeria.obtenerLoginUsuario().get("Prueba"));
+		galeria.crearComprador("PruebaNoArtista", "Ped", "Manuel", 1000, 0, new HashMap<Pieza, String>(), new ArrayList<Pieza>(), 10000, "4839274");
+		galeria.crearVideo("Titulo", 100, "Fecha", "Lugar",(Comprador) galeria.obtenerLoginUsuario().get("PruebaNoArtista"), autor, new ArrayList<Usuario>() , new HashMap<String, Integer>(), "exhibaVendaoSubasta", true, false, true,
+				false, 1720, 1980, 13, "Formato");
+		galeria.salvarGaleria("Video.json");
+		Fabrica fabricaDos = new Fabrica();
+		Galeria galeriaDos = fabrica.crearGaleria("Galeria Dos", new ArrayList<Subasta>(), new ArrayList<Pieza>(),
+				new ArrayList<Pieza>(), new ArrayList<Pieza>(), new ArrayList<Usuario>());
+		galeriaDos.cargarGaleria("Video.json");
+		galeriaDos.salvarGaleria("VideoClonado.json");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
 	
 }

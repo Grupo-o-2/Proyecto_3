@@ -80,7 +80,12 @@ public class AdministradorTest {
     }
     
     
+
+    void crearGaleria1( ) {
+    	
+
     /*void crearGaleria1( ) {
+>>>>>>> refs/remotes/origin/main
     	ArrayList<Subasta> subastas = new ArrayList<Subasta>();
     	ArrayList<Pieza> piezas = new ArrayList<Pieza>();
     	HashMap<Pieza, String> historialPiezas = new HashMap<Pieza, String>();
@@ -103,14 +108,6 @@ public class AdministradorTest {
     	
     }*/
     
-    void cargarGaleria1() {
-    	
     }
-
-    @AfterEach
-    void tearDown( ) throws Exception
-    {
-    }
-
 }
 //(String login, String password, String nombre, int telefono)

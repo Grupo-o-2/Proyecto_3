@@ -7,6 +7,7 @@ import fabrica.*;
 import exceptions.*;
 import java.util.*;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,27 +39,29 @@ public class PersistenciaCentral {
 		pw.close( );
 	}
 
-	public void cargarGaleria(String archivo, Galeria galeria) throws IOException, LoginException, LoginInexistenteException 
+	public void cargarGaleria(String archivo, Galeria galeria) throws IOException, LoginException, LoginInexistenteException
 	{
 		HashMap<String, Comprador> loginCompradores = new HashMap<String, Comprador>();
 		HashMap<String, Pieza> identificacionPieza = new HashMap<String, Pieza>();
 		HashMap<Comprador , String> historialCompradores = new HashMap<Comprador, String>();
-		String jsonCompleto = new String( Files.readAllBytes( new File( archivo ).toPath( ) ) );
+		HashMap<String, Artista> loginAutores = new HashMap<String, Artista>();
+		HashMap<Artista , String> historialAutores = new HashMap<Artista, String>();		
+		String jsonCompleto = new String( Files.readAllBytes( new File("C:\\Users\\naran\\Desktop\\workspace_eclipse\\Proyecto-1\\Entrega 2\\ProyectoGaleria\\Persistencia\\Galeria\\"+archivo ).toPath( ) ) );
 		JSONObject raiz = new JSONObject( jsonCompleto );
 
 		JSONArray usuarios = raiz.getJSONArray( "Usuarios" ); 
-		persistenciaUsuarios.cargarUsuarios(usuarios , galeria, loginCompradores, historialCompradores );
+		persistenciaUsuarios.cargarUsuarios(usuarios , galeria, loginCompradores, historialCompradores, loginAutores, historialAutores );
 		JSONArray piezas = raiz.getJSONArray( "Piezas" );
-		persistenciaPiezas.cargarPiezas(piezas, galeria, loginCompradores, identificacionPieza);
+		persistenciaPiezas.cargarPiezas(piezas, galeria, loginCompradores, identificacionPieza, loginAutores);
 		for (Comprador comprador: historialCompradores.keySet())
 		{
-			String[] piezasHistorial = historialCompradores.get(comprador).split(",");
-			for (String identificador : piezasHistorial)
+			for (String identificador : historialCompradores.get(comprador).split(","))
 			{
 				comprador.añadirPiezaHistorial(identificacionPieza.get(identificador), "Arreglar");
 			}
 
 		}
+		
 	}
 
 	public PersistenciaPiezas getPersistenciaPiezas() {
