@@ -22,7 +22,7 @@ public class Cajero extends Empleado {
 		return TIPO;
 	}
 
-	public void venderPieza (Comprador comprador, Pieza pieza, Galeria galeria, String fecha) throws UsuarioInexistenteException, DineroInsuficienteException, VentaImposibleException, MismoComprador, ValorMaximoExcedido {
+	public void venderPieza (Comprador comprador, Pieza pieza, Galeria galeria, String fecha) throws UsuarioInexistenteException, DineroInsuficienteException, VentaImposibleException, MismoCompradorException, ValorMaximoExcedidoException, FechaInvalidaException {
 		
 		((Administrador )galeria.getAdministrador()).verificacionDeCompra(pieza, comprador, galeria, fecha);
 			

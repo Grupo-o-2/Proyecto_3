@@ -1,13 +1,13 @@
 package exceptions;
 
 @SuppressWarnings("serial")
-public class FechaInvalida extends Exception{	
+public class FechaInvalidaException extends Exception{	
 	
-	public  FechaInvalida(String fecha) {
+	public  FechaInvalidaException(String fecha) {
 		super("La fecha " + fecha + " es inválida. \n");	
 	}
 	
-	public FechaInvalida() {
+	public FechaInvalidaException() {
 		super("La fecha límite ya sucedió. \n");
 	}
 }

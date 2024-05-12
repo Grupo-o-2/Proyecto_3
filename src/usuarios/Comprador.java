@@ -79,6 +79,10 @@ public class Comprador extends Usuario{
 	public void setValorColeccion(int nuevoValor) {
 		this.valorColeccion = this.valorColeccion + nuevoValor;
 	}
+	
+	public void setValorColeccionMenor(int nuevoValor) {
+		this.valorColeccion = this.valorColeccion - nuevoValor;
+	}
 
 	public  String revisarEstadoPieza( Pieza pieza) {
 		String estado = null;
@@ -91,10 +95,22 @@ public class Comprador extends Usuario{
 		return estado;
 	}
 	
+	public ArrayList<Pieza> obtenerPiezasAntiguas(){
+		ArrayList<Pieza> piezasAntiguas = new ArrayList<Pieza>();
+		
+		for (Pieza pieza : this.historialPiezas.keySet()) {
+			if (this.piezasActuales.contains(pieza) != true) {
+				piezasAntiguas.add(pieza);
+			}
+		}
+		
+		return piezasAntiguas;
+	}
+	
 	public void añadirPieza(Pieza pieza, String fecha){
 		this.historialPiezas.put(pieza, fecha);
 		this.piezasActuales.add(pieza);
-		this.valorColeccion+= pieza.getValor();
+		
 	}
 	
 	public void añadirPiezaHistorial(Pieza pieza, String fecha){
@@ -110,11 +126,29 @@ public class Comprador extends Usuario{
 		return null;
 	}
 	
-	public void consignarPieza(Pieza piezaAConsignar, String fechaLimite, Galeria galeria, String exhibaVendaoSubasta, String fechaActual ) throws PropietarioErroneoException, FechaInvalida {
+	
+	public String obtenerFechaAdquisicion(Pieza pieza) {
+		
+		return this.historialPiezas.get(pieza);
+	}
+	
+	public boolean solicitudAumentoValorCompra(Galeria galeria) {
+		
+		if ( ((Administrador)galeria.getAdministrador()).verificarValorMaximo(this) == true){
+			((Administrador)galeria.getAdministrador()).aumentarValorMaximo(this, this.getDinero());	
+			return true;
+		}
+		
+		else return false;
+	}
+	
+	
+	
+	public void consignarPieza(Pieza piezaAConsignar, String fechaLimite, Galeria galeria, String exhibaVendaoSubasta, String fechaActual ) throws PropietarioErroneoException, FechaInvalidaException, ConsignacionExistenteException {
 			galeria.realizarConsignacion(this, piezaAConsignar, fechaLimite, galeria, exhibaVendaoSubasta, fechaActual);	
 	}
 	
-	public void comprarPieza(Pieza piezaAcomprar, Galeria galeria, String fecha) throws UsuarioInexistenteException, DineroInsuficienteException, VentaImposibleException, MismoComprador, ValorMaximoExcedido {
+	public void comprarPieza(Pieza piezaAcomprar, Galeria galeria, String fecha) throws UsuarioInexistenteException, DineroInsuficienteException, VentaImposibleException, MismoCompradorException, ValorMaximoExcedidoException, FechaInvalidaException {
 		((Cajero)galeria.getUnCajero()).venderPieza(this, piezaAcomprar, galeria, fecha);
 	}
 	

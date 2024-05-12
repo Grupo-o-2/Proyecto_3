@@ -378,27 +378,87 @@ public class Galeria {
 		return artistas;
 	}
 	
+	public static boolean esFechaValida2(String fecha) {
+        if (fecha == null || fecha.length() != 10) {
+            return false;
+        }
+
+        try {
+            int año = Integer.parseInt(fecha.substring(0, 4));
+            int mes = Integer.parseInt(fecha.substring(5, 7));
+            int dia = Integer.parseInt(fecha.substring(8));
+
+            if (mes < 1 || mes > 12 || dia < 1 || dia > 31) {
+                return false;
+            }
+
+            boolean esBisiesto = (año % 4 == 0 && año % 100 != 0) || (año % 400 == 0);
+            int diasEnMes = diasEnMes2(mes, esBisiesto);
+            return dia <= diasEnMes;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    private static int diasEnMes2(int mes, boolean esBisiesto) {
+        switch (mes) {
+            case 4: case 6: case 9: case 11:
+                return 30;
+            case 2:
+                return esBisiesto ? 29 : 28;
+            default:
+                return 31;
+        }
+    }
+    
+    public static String formatearFecha(String fecha) {
+        if (fecha == null || fecha.length() != 8) {
+            return "Formato de fecha incorrecto";
+        }
+
+        StringBuilder sb = new StringBuilder(fecha);
+        sb.insert(4, "-"); // Inserta "-" después del año
+        sb.insert(7, "-"); // Inserta "-" después del mes
+        return sb.toString();
+    }
 	
-	public void realizarConsignacion(Usuario propietario, Pieza piezaAConsignar, String fechaLimite, Galeria galeria, String exhibaVendaoSubasta, String fechaActual) throws PropietarioErroneoException, FechaInvalida {
+	public void realizarConsignacion(Usuario propietario, Pieza piezaAConsignar, String fechaLimite, Galeria galeria, String exhibaVendaoSubasta, String fechaActual) throws PropietarioErroneoException, FechaInvalidaException, ConsignacionExistenteException {
 		((Administrador )this.getAdministrador()).registrarPiezaPorConsignacion(propietario, piezaAConsignar, fechaLimite, this, exhibaVendaoSubasta,  fechaActual);
 
 	}
 
-	public void crearSubasta(ArrayList<Usuario> participantes, Usuario operador, HashMap<Pieza,HashMap<Usuario, 
+	public Subasta crearSubasta(String nombre,ArrayList<Usuario> participantes, Usuario operador, HashMap<Pieza,HashMap<Usuario, 
 			Integer>> registroSubasta, HashMap<Pieza, ArrayList<Integer>> piezasSubastadas) throws UsuarioInexistenteException {
 
+		Subasta nuevaSubasta = new Subasta(null, null, null, null, null);
 		if (  ((Administrador )this.getAdministrador()).verificarUsuariosSubasta(participantes, this) == true  ) {
 
-			Subasta nuevaSubasta = new Subasta(participantes, operador, registroSubasta, piezasSubastadas);
+			nuevaSubasta = new Subasta(nombre, participantes, operador, registroSubasta, piezasSubastadas);
 			this.subastas.add(nuevaSubasta);
 
 		}
+		return nuevaSubasta;
 	}
 
 	public void finalizarSubasta(Subasta subasta, String fecha)  {
 
 		subasta.finalizarSubasta(this, fecha);
 	}
+	
+	public Subasta obtenerSubastaPorNombre(String nombreSubasta) {
+		Subasta subasta = null;
+		for (Subasta subasta1 : this.getSubastas()) {
+			if ( subasta1.getNombre().compareTo(nombreSubasta) == 0 ) {
+				return subasta1;
+			}
+			
+		}
+		return subasta;
+	}
+
+
+
+	
 
 	
 	/**

@@ -12,17 +12,19 @@ import exceptions.*;
 import piezas.Pieza;
 
 public class Subasta {
+	private String nombre;
 	private ArrayList<Usuario> participantes;
 	private Usuario operador;
 	private HashMap<Pieza,HashMap<Usuario, Integer>> registroSubasta;
 	private HashMap<Pieza, ArrayList<Integer>> piezasSubastadas;
 	
 // El HashMap de piezas subastadas contiene como llaves las piezas subastadas y como valores Arrays los cuáles en 
-// la primera posición tienen el valor mínimo de la pieza y en segunda posición el valor inicial de la misma
+// la primera posición tienen el valor mínimo de la pieza y en segunda posición el valor inicial de la misma ---- valorInicial -> conocido 
 	
 	
-public Subasta(ArrayList<Usuario> participantes, Usuario operador, HashMap<Pieza,HashMap<Usuario, 
+public Subasta(String nombre, ArrayList<Usuario> participantes, Usuario operador, HashMap<Pieza,HashMap<Usuario, 
 		Integer>> registroSubasta, HashMap<Pieza, ArrayList<Integer>> piezasSubastadas) {
+		this.nombre = nombre;
 		this.participantes = participantes;
 		this.operador = operador;
 		this.registroSubasta = registroSubasta;
@@ -31,6 +33,10 @@ public Subasta(ArrayList<Usuario> participantes, Usuario operador, HashMap<Pieza
 
 public ArrayList<Usuario> getParticipantes() {
 	return participantes;
+}
+
+	public String getNombre() {
+	return nombre;
 }
 
 	public Usuario getOperador() {
@@ -90,7 +96,29 @@ public ArrayList<Usuario> getParticipantes() {
 				
 				Integer valorminimo = this.piezasSubastadas.get(pieza).get(0);
 				
-				if (ofertaMayor > valorminimo) {
+				if (ofertaMayor > valorminimo && pieza.isConsignacion() == true) {
+					
+					((Comprador)mejorPostor).añadirPieza(pieza, fecha);
+					
+					
+					int dineroActualizadoPropietarioAnterior = ((Comprador)pieza.getPropietario()).getDinero() + ofertaMayor;
+					((Comprador)pieza.getPropietario()).setDinero(dineroActualizadoPropietarioAnterior);
+					((Comprador)pieza.getPropietario()).setValorColeccionMenor(ofertaMayor);
+					((Comprador)pieza.getPropietario()).getPiezasActuales().remove(pieza);
+					
+					pieza.setDispsubasta(false);
+					pieza.setDispventa(false);
+					pieza.setPropietario(usuario);
+					pieza.setConsignacion(false);
+					pieza.setExhibida(false);
+					galeria.getPiezasActuales().remove(pieza);
+					int dineroActualizado = ((Comprador)mejorPostor).getDinero() - ofertaMayor;
+					((Comprador)mejorPostor).setValorColeccion(ofertaMayor);
+					((Comprador)mejorPostor).setDinero(dineroActualizado);
+				}
+				else if (ofertaMayor > valorminimo) {
+					
+					
 					((Comprador)mejorPostor).añadirPieza(pieza, fecha);
 					pieza.setDispsubasta(false);
 					pieza.setDispventa(false);
