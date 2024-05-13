@@ -75,7 +75,6 @@ public class ConsolaAdministrador extends Consola{
 				if (verificacion == 1) {
 					administrador = galeriaInicio.obtenerUsuarioPorLogin(usuario);
 					int eleccionDos;
-					int deseaConsultar;
 					boolean centinelaDos = true;
 					boolean nuevaPieza = true;
 					boolean crearSubasta = true;

@@ -16,8 +16,6 @@ import modelo.Galeria;
 import modelo.Subasta;
 import piezas.Pieza;
 import usuarios.Artista;
-import usuarios.Cajero;
-import usuarios.Comprador;
 import usuarios.Usuario;
 import usuarios.*;
 
@@ -81,7 +79,7 @@ public static void main(String[] args ) throws PropietarioErroneoException, Usua
 					}
 					
 					
-					//Aceptar pago
+					//Registrar oferta
 					else if (eleccionDos == 1) {
 						pago = true;
 						while(pago) {
@@ -309,4 +307,4 @@ public static void main(String[] args ) throws PropietarioErroneoException, Usua
 
 }
 
-}
+
