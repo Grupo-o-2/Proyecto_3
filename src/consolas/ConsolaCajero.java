@@ -18,6 +18,7 @@ import modelo.Subasta;
 import piezas.Pieza;
 import usuarios.Artista;
 import usuarios.Usuario;
+import usuarios.*;
 
 public class ConsolaCajero  extends Consola{
 	private static final String TIPO_CAJERO = "Cajero";
@@ -29,8 +30,8 @@ public class ConsolaCajero  extends Consola{
 		System.out.println("Opciones disponibles:\n\n");
 		System.out.println("0: Salir de la aplicación.\n");
 		System.out.println("1: Registrar un pago (Hacer una venta).\n");
-		System.out.println("7: Ver la historia de un artista.\n");
-		System.out.println("8: Ver la historia de una pieza.\n");
+		System.out.println("2: Ver la historia de un artista.\n");
+		System.out.println("3: Ver la historia de una pieza.\n");
 	}
 	
 	public ConsolaCajero() {}
@@ -90,9 +91,34 @@ public static void main(String[] args ) throws PropietarioErroneoException, Usua
 								}
 							}
 							
-							String nombreComprador = pedirCadenaAlUsuario("Escribe el nombre del comprado cuya solicitud deseas atender");
+							String nombreComprador = pedirCadenaAlUsuario("Escribe el nombre del comprador cuya solicitud deseas atender");
 							Usuario compradorElegido = galeriaInicio.obtenerUsuarioPorNombre(nombreComprador);
 							
+							System.out.println(" Las piezas disponibles para la venta son:"+"\n");
+							for (Pieza pieza: galeriaInicio.getPiezasActuales()) {
+								if (pieza.isDispventa() == true) {
+									System.out.println(" • "+pieza.getTitulo()+ "\n");
+								}
+							}
+							
+							
+							String tituloPieza = pedirCadenaAlUsuario("Escribe el nombre de la pieza que el comprador desea adquirir");
+							Pieza piezaElegida = galeriaInicio.obtenerPiezaGlobalesporTitulo(tituloPieza);
+							String fechaActual = pedirCadenaAlUsuario("Ingrese la fecha actual (Formato -> añomesdía (Ej: 20280529))");
+							String métodoPago = pedirCadenaAlUsuario("Ingrese su método de pago ( Transferencia Bancaria - Efectivo - Tarjeta de crédito)");
+							
+							if (galeriaInicio.getPiezasActuales().contains(piezaElegida) && piezaElegida.isDispventa() == true) {
+								
+								((Cajero)cajero).venderPieza(((Comprador)compradorElegido), piezaElegida, galeriaInicio,fechaActual );
+								
+								System.out.println("\n");
+								System.out.println("Esperando verificación de compra..."+"\n");
+								System.out.println("Se ha registrado el pago exitosamente."+"\n");
+							}
+							
+							else {
+								System.out.println("Esta pieza no existe o no está disponible para la venta"+"\n");
+							}
 							
 							
 							pago = false;
@@ -266,8 +292,3 @@ public static void main(String[] args ) throws PropietarioErroneoException, Usua
 }
 
 }
-=======
-public class ConsolaCajero {
-
-}
->>>>>>> refs/remotes/origin/main

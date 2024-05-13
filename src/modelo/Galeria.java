@@ -212,6 +212,9 @@ public class Galeria {
 			return 0;
 		
 	}
+	
+	
+	
 
 	public void agregarUsuario(Usuario usuario) {
 		this.usuarios.add(usuario);
