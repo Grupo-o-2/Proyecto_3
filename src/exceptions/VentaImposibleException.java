@@ -4,7 +4,7 @@ package exceptions;
 public class VentaImposibleException extends Exception{	
 	
 	public  VentaImposibleException(String pieza) {
-		super("La pieza" + pieza + " no se encuentra disponible para la venta. \n");	
+		super("La pieza " + pieza + " no se encuentra disponible para la venta. \n");	
 	}
 
 }

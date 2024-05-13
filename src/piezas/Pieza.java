@@ -44,6 +44,7 @@ abstract public class Pieza {
 		this.historialVentas = historialVentas;
 		this.exhibaVendaoSubasta = exhibaVendaoSubasta;
 		this.consignacion = consignacion; 
+		this.exhibida= exhibida;
 		this.dispsubasta = dispsubasta;
 		this.dispventa = dispventa;
 		this.fechaLimite = fechaLimite;
