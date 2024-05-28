@@ -142,7 +142,7 @@ public class Comprador extends Usuario{
 		else return false;
 	}
 	
-	
+	 
 	
 	public void consignarPieza(Pieza piezaAConsignar, String fechaLimite, Galeria galeria, String exhibaVendaoSubasta, String fechaActual ) throws PropietarioErroneoException, FechaInvalidaException, ConsignacionExistenteException {
 			galeria.realizarConsignacion(this, piezaAConsignar, fechaLimite, galeria, exhibaVendaoSubasta, fechaActual);	
