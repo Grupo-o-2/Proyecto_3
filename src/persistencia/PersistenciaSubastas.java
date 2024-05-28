@@ -21,10 +21,13 @@ public class PersistenciaSubastas {
 	}
 	
 	public void salvarSubastas(ArrayList<Subasta> subastas, JSONObject jObject, HashMap<Pieza, String> identificadorPieza )
-	{
+	{ 
 		if (subastas.size() != 0)
 		{
 			JSONArray jSubastas = new JSONArray();
+			JSONObject jsonobject = new JSONObject();
+			jsonobject.put("Vacio", "No");
+			jSubastas.put(jsonobject);
 			for (Subasta subasta: subastas)
 			{
 				JSONObject jSubasta = new JSONObject();
@@ -93,7 +96,6 @@ public class PersistenciaSubastas {
 					registroSubasta = "Vacio";
 				} 
 				jSubasta.put("Piezas Subastadas",piezasSubastadas);
-				jSubasta.put("Vacio", "No");
 				jSubastas.put(jSubasta);	
 			}
 			jObject.put("Subastas",jSubastas);
@@ -114,7 +116,7 @@ public class PersistenciaSubastas {
 		if(!jSubastas.getJSONObject(0).getString("Vacio").equals("Sí"))
 		{		
 			int numeroSubastas = jSubastas.length();
-			for (int i = 0 ; i < numeroSubastas ; i++)
+			for (int i = 1 ; i < numeroSubastas ; i++)
 			{
 				JSONObject subasta = jSubastas.getJSONObject( i );
 				String loginOperador = subasta.getString("Operador");

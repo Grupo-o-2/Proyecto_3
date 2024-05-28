@@ -133,7 +133,7 @@ public class ConsolaAdministrador extends Consola{
 									String formato = pedirCadenaAlUsuario("Ingrese el tipo de formato en que se encuentra el vídeo (Ej: mp4)");
 									
 									
-									galeriaInicio.crearVideo(nombrePieza, valor, fechaCreacion, lugarCreacion, ((Comprador)galeriaInicio.obtenerUsuarioPorLogin("fake")), autores , dueños, ventas, "123", false, true, true, true, null, alto, ancho, duración, formato);
+									galeriaInicio.crearVideo(nombrePieza, valor, fechaCreacion, lugarCreacion, ((Comprador)galeriaInicio.obtenerUsuarioPorLogin("fake")), autores , dueños, ventas, "123", false, true, true, true, "0", alto, ancho, duración, formato);
 									Video videoN = (Video) galeriaInicio.obtenerPiezaGlobalesporTitulo(nombrePieza);
 									galeriaInicio.añadirPieza(videoN);
 									

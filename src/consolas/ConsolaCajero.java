@@ -33,7 +33,7 @@ public class ConsolaCajero  extends Consola{
 		System.out.println("2: Ver la historia de un artista.\n");
 		System.out.println("3: Ver la historia de una pieza.\n");
 	}
-	
+	 
 	public ConsolaCajero() {}
 
 public static void main(String[] args ) throws PropietarioErroneoException, UsuarioInexistenteException, DineroInsuficienteException, VentaImposibleException, MismoCompradorException, ValorMaximoExcedidoException, FechaInvalidaException, ConsignacionExistenteException, DineroOfrecidoInsuficienteException {

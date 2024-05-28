@@ -65,7 +65,7 @@ public class PersistenciaGalerias {
 		}
 		ArrayList<Pieza> nPiezasActuales = new ArrayList<Pieza>();
 		if (! jGaleria.getString("Piezas Actuales").equals("Vacio"))
-		{
+		{ 
 			for(String identificador: jGaleria.getString("Piezas Actuales").split(","))
 			{
 				nPiezasActuales.add(identificacionPieza.get(identificador));

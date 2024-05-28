@@ -154,7 +154,9 @@ public static void main(String[] args ) throws PropietarioErroneoException, Usua
 						
 						if (piezasEnGaleria.isEmpty() == true) {
 							System.out.println("La galería no tiene piezas en venta. \n");
-							
+							compra = false;
+							mostrarMenu();
+							eleccionDos= (int) pedirNumeroAlUsuario("Elección");
 							}
 						
 						else {

@@ -123,7 +123,7 @@
       "Password": "surrealism"
     }
   ],
-  "Subastas": [{
+  "Subastas": [{"Vacio": "No"},{
     "Operador": "loginneo",
     "Nombre": "Subasta VIP",
     "Registro Subasta": "5'loginlucy,2000;loginalice,1700;loginjohn,1800;/6'Vacio/9'loginlucy,7500;loginalice,7800;loginjohn,7600;/",
