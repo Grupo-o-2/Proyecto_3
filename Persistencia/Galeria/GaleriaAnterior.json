@@ -131,20 +131,6 @@
       "Registro Subasta": "5'loginlucy,2000;loginalice,1700;loginjohn,1800;/6'Vacio/9'loginlucy,7500;loginalice,7800;loginjohn,7600;/",
       "Piezas Subastadas": "5;1600,1500,'6;8900,8700,'9;7500,7000,'",
       "Participantes": "loginalice,loginlucy,loginjohn,"
-    },
-    {
-      "Operador": "loginneo",
-      "Nombre": "Ayuda Dios",
-      "Registro Subasta": "5'Vacio/2'loginalice,820;/6'Vacio/8'Vacio/7'Vacio/9'Vacio/",
-      "Piezas Subastadas": "5;1,1,'2;1,1,'6;1,1,'8;1,1,'7;1,1,'9;1,1,'",
-      "Participantes": "loginalice,loginlucy,loginjohn,"
-    },
-    {
-      "Operador": "loginneo",
-      "Nombre": "Alice",
-      "Registro Subasta": "5'loginalice,2;/",
-      "Piezas Subastadas": "5;1,1,'",
-      "Participantes": "loginalice,"
     }
   ],
   "Piezas": [

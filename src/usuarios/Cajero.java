@@ -1,6 +1,7 @@
 package usuarios;
 import java.util.ArrayList;
-
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*; 
 import fabrica.*;
 import piezas.*;
@@ -25,7 +26,13 @@ public class Cajero extends Empleado {
 	public void venderPieza (Comprador comprador, Pieza pieza, Galeria galeria, String fecha) throws UsuarioInexistenteException, DineroInsuficienteException, VentaImposibleException, MismoCompradorException, ValorMaximoExcedidoException, FechaInvalidaException {
 		
 		((Administrador )galeria.getAdministrador()).verificacionDeCompra(pieza, comprador, galeria, fecha);
+		}
+	
+public void venderPiezaTarjeta (Comprador comprador, Pieza pieza, Galeria galeria, String fecha, String nombrePasarela, String numeroTarjeta) throws UsuarioInexistenteException, DineroInsuficienteException, VentaImposibleException, MismoCompradorException, ValorMaximoExcedidoException, FechaInvalidaException, IOException,ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+		
+		((Administrador )galeria.getAdministrador()).verificacionDeCompraTarjeta(pieza, comprador, galeria, fecha, nombrePasarela, numeroTarjeta);
 			
 		}
 	}
 
+	

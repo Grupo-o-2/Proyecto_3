@@ -4,7 +4,7 @@ package exceptions;
 public class LoginInexistenteException extends Exception{	
 	
 	public  LoginInexistenteException(String login) {
-		super("El login" + login + " no está registrado. \n");	
+		super("El login " + login + " no está registrado. \n");	
 	}
 
 }

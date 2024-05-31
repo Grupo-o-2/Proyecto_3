@@ -1,4 +1,6 @@
 package usuarios;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -82,7 +84,16 @@ public class Administrador extends Empleado{
  				nuevaVenta.venderPieza(comprador, pieza, galeria, fecha);
  			}}}
 	
- 
+ 	public void verificacionDeCompraTarjeta(Pieza pieza, Usuario comprador, Galeria galeria, String fecha, String nombrePasarela, String numeroTarjeta) throws UsuarioInexistenteException, DineroInsuficienteException, VentaImposibleException, MismoCompradorException, ValorMaximoExcedidoException, FechaInvalidaException, IOException,ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+ 	 	
+ 		VentaPiezas nuevaVenta = new VentaPiezas(comprador, pieza);
+ 		if ((nuevaVenta.verificarEstadoDeVenta(pieza, galeria)) == true ){
+ 			
+ 			if (galeria.verificarUsuario(comprador) == true) {
+ 				nuevaVenta.venderPiezaTarjeta(comprador, pieza, galeria, fecha, nombrePasarela, numeroTarjeta);
+ 			}
+ 		}
+ 	}
  	
  	public void registrarPiezaPorConsignacion(Usuario propietario, Pieza piezaAConsignar, String fechaLimite, Galeria galeria, String exhibaVendaoSubasta, String fechaActual) throws PropietarioErroneoException, FechaInvalidaException, ConsignacionExistenteException {
  		

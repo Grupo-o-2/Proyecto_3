@@ -1,7 +1,8 @@
 package usuarios;
 
 import java.util.ArrayList;
-
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*; 
 import fabrica.*;
 import piezas.*;
@@ -11,7 +12,6 @@ import exceptions.*;
 public class Comprador extends Usuario{
 	
 	private int dinero;
-	private String telefono;
 	private int valorMaximoCompras;
 	private int valorColeccion;
 	private HashMap<Pieza, String> historialPiezas; //Pieza con fecha
@@ -22,7 +22,6 @@ public class Comprador extends Usuario{
 			HashMap<Pieza, String> historialPiezas, ArrayList<Pieza> piezasActuales, int dinero, String telefono) {
 		super(login, password, nombre, telefono);
 		this.dinero = dinero;
-		this.telefono = telefono;
 		this.valorMaximoCompras = valorMaximoCompras;
 		this.historialPiezas = historialPiezas;
 		this.piezasActuales = piezasActuales;	}
@@ -61,15 +60,6 @@ public class Comprador extends Usuario{
 	
 	public void setDinero(int dinero) {
 		this.dinero = dinero;
-	}
-	
-	
-	public String getTelefono() {
-		return telefono;
-	}
-
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
 	}
 
 	public int getValorColeccion() {
@@ -150,6 +140,10 @@ public class Comprador extends Usuario{
 	
 	public void comprarPieza(Pieza piezaAcomprar, Galeria galeria, String fecha) throws UsuarioInexistenteException, DineroInsuficienteException, VentaImposibleException, MismoCompradorException, ValorMaximoExcedidoException, FechaInvalidaException {
 		((Cajero)galeria.getUnCajero()).venderPieza(this, piezaAcomprar, galeria, fecha);
+	}
+	
+	public void comprarPiezaTarjeta(Pieza piezaAcomprar, Galeria galeria, String fecha, String nombrePasarela, String numeroTarjeta) throws UsuarioInexistenteException, DineroInsuficienteException, VentaImposibleException, MismoCompradorException, ValorMaximoExcedidoException, FechaInvalidaException, IOException,ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+		((Cajero)galeria.getUnCajero()).venderPiezaTarjeta(this, piezaAcomprar, galeria, fecha, nombrePasarela, numeroTarjeta);
 	}
 	
 	public void realizarOfertaEnSubasta(Pieza piezaSubastada, int valorOfertado, Subasta subasta ) throws DineroOfrecidoInsuficienteException, DineroInsuficienteException {

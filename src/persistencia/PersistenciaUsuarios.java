@@ -32,18 +32,6 @@ public class PersistenciaUsuarios {
 
 	}
 
-	public void salvarUsuariosCreados (String archivo, ArrayList<Usuario> compradores, HashMap<Pieza, String> identificadorPieza) throws IOException
-	{
-		JSONObject jobject = new JSONObject( );
-		salvarUsuarios(compradores, jobject, identificadorPieza);
-		File carpeta = new File("C:\\Users\\naran\\Desktop\\workspace_eclipse\\Proyecto-1\\Entrega 2\\ProyectoGaleria\\Persistencia\\Usuarios");
-		File nArchivo = new File(carpeta, archivo);
-		PrintWriter pw = new PrintWriter( new FileWriter(nArchivo) );
-		jobject.write( pw, 2, 0 );
-		pw.close( );
-	}
-
-
 	public void salvarUsuarios(ArrayList<Usuario> usuarios, JSONObject jobject, HashMap<Pieza, String> identificadorPieza) 
 	{
 		JSONArray jUsuarios = new JSONArray( );

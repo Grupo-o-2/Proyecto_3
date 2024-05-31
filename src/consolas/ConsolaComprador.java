@@ -176,15 +176,58 @@ public static void main(String[] args ) throws PropietarioErroneoException, Usua
 						Pieza piezaAComprar = galeriaInicio.obtenerPiezaporTitulo(tituloPieza);
 						
 						if(piezasDisponibles.contains(piezaAComprar)) {
-						String fechaActual = pedirCadenaAlUsuario("Ingrese la fecha actual (Formato: año-mes-dia -> 2024-05-06)");
-							((Comprador)comprador).comprarPieza(piezaAComprar, galeriaInicio, fechaActual);
 							System.out.println("\n");
-							System.out.println("Esperando verificación de compra..."+"\n");
-							System.out.println("Has comprado esta pieza exitosamente."+"\n");
-							compra = false;
-							mostrarMenu();
-							eleccionDos= (int) pedirNumeroAlUsuario("Elección");
-								
+							System.out.println("1. Pagar con tarjeta"+"\n");
+							System.out.println("2. Pagar con otro medio de pago");
+							int eleccion3 = (int) pedirNumeroAlUsuario("Elección");
+							if (eleccion3 == 1)
+							{
+								String pasarela = pedirCadenaAlUsuario("Ingrese el nombre de la pasarela que quiere utilizar.");
+								String numeroTarjeta = pedirCadenaAlUsuario("Ingrese el numero de la tarjeta.");
+								String fechaActual = pedirCadenaAlUsuario("Ingrese la fecha actual (Formato: año-mes-dia -> 2024-05-06)");
+								try {
+									((Comprador)comprador).comprarPiezaTarjeta(piezaAComprar, galeriaInicio, fechaActual, pasarela, numeroTarjeta);
+									System.out.println("\n");
+									System.out.println("Esperando verificación de compra..."+"\n");
+									System.out.println("Has comprado esta pieza exitosamente."+"\n");
+									compra = false;
+									mostrarMenu();
+									eleccionDos= (int) pedirNumeroAlUsuario("Elección");
+								} catch(IOException e) {
+									System.out.println("Hubo un error al tratar de registrar el pago a través de la pasarela.");
+									compra = false;
+									mostrarMenu();
+									eleccionDos= (int) pedirNumeroAlUsuario("Elección");
+								} catch(ClassNotFoundException e) {
+									System.out.println("La pasarela " + pasarela + " no está registrada.");
+									compra = false;
+									mostrarMenu();
+									eleccionDos= (int) pedirNumeroAlUsuario("Elección");
+								} catch(Exception e) {
+									System.out.println(e.getMessage());
+									compra = false;
+									mostrarMenu();
+									eleccionDos= (int) pedirNumeroAlUsuario("Elección");
+								}
+							}
+							else if (eleccion3 == 2)
+							{
+								String fechaActual = pedirCadenaAlUsuario("Ingrese la fecha actual (Formato: año-mes-dia -> 2024-05-06)");
+								((Comprador)comprador).comprarPieza(piezaAComprar, galeriaInicio, fechaActual);
+								System.out.println("\n");
+								System.out.println("Esperando verificación de compra..."+"\n");
+								System.out.println("Has comprado esta pieza exitosamente."+"\n");
+								compra = false;
+								mostrarMenu();
+								eleccionDos= (int) pedirNumeroAlUsuario("Elección");
+							}
+							else {
+								System.out.println("Opción no disponible.");
+								System.out.println("\n");
+								System.out.println("1. Pagar con tarjeta"+"\n");
+								System.out.println("2. Pagar con otro medio de pago");
+								eleccion3 = (int) pedirNumeroAlUsuario("Elección");
+							}
 						}
 						
 						else if (tituloPieza.compareToIgnoreCase("Ninguna")== 0) {
