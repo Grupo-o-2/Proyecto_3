@@ -48,6 +48,20 @@ public class PersistenciaGalerias {
 			piezasActualesString = "Vacio";
 		}
 		jPiezas.put("Piezas Actuales", piezasActualesString);
+		String stringfechasCompras = "";
+		HashMap<String, Integer> fechasCompras = galeria.getFechasCompras();
+		if (! fechasCompras.keySet().isEmpty())
+		{
+			for (String fecha: galeria.getFechasCompras().keySet())
+			{
+				stringfechasCompras = stringfechasCompras + fecha + "," + fechasCompras.get(fecha) + ";";
+			}
+		}
+		else
+		{
+			stringfechasCompras= "Vacío";
+		}
+		jPiezas.put( "Compras por fecha", stringfechasCompras);
 		jObject.put("Galeria", jPiezas);
 	}
 
@@ -55,6 +69,7 @@ public class PersistenciaGalerias {
 	{
 		ArrayList<Pieza> nHistorialPiezas = new ArrayList<Pieza>();
 		ArrayList<Pieza> nPiezasAntiguas = new ArrayList<Pieza>();
+		HashMap<String, Integer> nFechasCompras = new HashMap<String, Integer>();
 		if (! jGaleria.getString("Piezas Antiguas").equals("Vacio"))
 		{
 			for(String identificador: jGaleria.getString("Piezas Antiguas").split(","))
@@ -71,6 +86,13 @@ public class PersistenciaGalerias {
 				nPiezasActuales.add(identificacionPieza.get(identificador));
 				nHistorialPiezas.add(identificacionPieza.get(identificador));
 			}
+		}
+		
+		String FechasCompras = jGaleria.getString("Compras por fecha");
+		if (! FechasCompras.equals("Vacío"))
+		{
+			for (String fecha: FechasCompras.split(";"))
+			nFechasCompras.put(fecha.split(",")[0],Integer.parseInt(fecha.split(",")[1]));
 		}
 		galeria.setHistorialPiezas(nHistorialPiezas);
 		galeria.setPiezasActuales(nPiezasActuales);

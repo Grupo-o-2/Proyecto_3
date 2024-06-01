@@ -1,20 +1,20 @@
 {
   "Galeria": {
-    "Piezas Actuales": "5,6,7,8,9,2,",
+    "Piezas Actuales": "5,6,8,9,2,",
     "Piezas Antiguas": "0,1,2,4,3,",
-    "Compras por fecha": "2020-10-08,1;2021-02-14,1;2017-06-24,1;2023-12-12,1;2018-05-13,1;2014-05-15,1;2010-01-29,1;2024-01-05,1;2024-03-19,1;2022-07-07,1;2021-08-14,1;2015-05-15,1;2012-09-25,1;"
+    "Compras por fecha": "2024-05-06,1;"
   },
   "Usuarios": [
     {
       "Nombre": "Alice",
-      "Piezas Actuales": "0,1,2,",
+      "Piezas Actuales": "0,1,2,7,",
       "Historial Piezas": "8,20180704;",
       "Telefono": "1234567890",
       "Login": "loginalice",
-      "Dinero": 1000000000,
+      "Dinero": 999999910,
       "Tipo ": "Comprador",
       "Valor Maximo Compras": 2000000,
-      "Valor Coleccion": 2003,
+      "Valor Coleccion": 2093,
       "Password": "hola123"
     },
     {
@@ -287,24 +287,24 @@
       "Fecha Precio": "Vacio"
     },
     {
-      "Proprietario": "fake",
+      "Proprietario": "loginalice",
       "Autores": "loginvangogh,",
       "LugarCreacion": "México",
-      "Dispventa": true,
+      "Dispventa": false,
       "Fecha Limite": "0",
       "Consignacion": false,
       "Titulo": "Reflejos urbanos",
       "Valor": "90",
       "Exhiba venda o subasta": "123",
-      "Historial Dueños": "loginlucy,loginjohn,",
+      "Historial Dueños": "loginlucy,loginjohn,loginalice,",
       "Exhibida": false,
       "Tipo": "Impresion",
       "fechaCreacion": "20011230",
       "Alto": "85.0",
       "Ancho": "35.0",
-      "Dispsubasta": true,
+      "Dispsubasta": false,
       "Identificador": "7",
-      "Fecha Precio": "2014-05-15,74;2015-05-15,84;"
+      "Fecha Precio": "2014-05-15,74;2024-05-06,90;2015-05-15,84;"
     },
     {
       "Proprietario": "fake",
