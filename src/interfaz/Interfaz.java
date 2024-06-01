@@ -9,6 +9,8 @@ import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 
 public class Interfaz extends JFrame {
 
@@ -68,5 +70,13 @@ public class Interfaz extends JFrame {
 		JCheckBox chckbxNewCheckBox = new JCheckBox("New check box");
 		chckbxNewCheckBox.setBounds(75, 435, 97, 23);
 		panel.add(chckbxNewCheckBox);
+		
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("New radio button");
+		rdbtnNewRadioButton.setBounds(99, 552, 109, 23);
+		panel.add(rdbtnNewRadioButton);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(433, 194, 233, 256);
+		contentPane.add(scrollPane);
 	}
 }
