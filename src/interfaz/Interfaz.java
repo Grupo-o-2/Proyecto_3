@@ -78,5 +78,10 @@ public class Interfaz extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(433, 194, 233, 256);
 		contentPane.add(scrollPane);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(255, 0, 255));
+		panel_1.setBounds(433, 517, 484, 122);
+		contentPane.add(panel_1);
 	}
 }
