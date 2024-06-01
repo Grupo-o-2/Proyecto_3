@@ -7,11 +7,14 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JButton;
+import javax.swing.JTextField;
+import javax.swing.JCheckBox;
 
 public class Interfaz extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -50,8 +53,20 @@ public class Interfaz extends JFrame {
 		panel.setLayout(null);
 		
 		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(154, 805, 89, 23);
+		btnNewButton.setBounds(134, 640, 89, 23);
 		panel.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("New button");
+		btnNewButton_1.setBounds(111, 329, 158, 66);
+		panel.add(btnNewButton_1);
+		
+		textField = new JTextField();
+		textField.setBounds(137, 508, 86, 20);
+		panel.add(textField);
+		textField.setColumns(10);
+		
+		JCheckBox chckbxNewCheckBox = new JCheckBox("New check box");
+		chckbxNewCheckBox.setBounds(75, 435, 97, 23);
+		panel.add(chckbxNewCheckBox);
 	}
-
 }
