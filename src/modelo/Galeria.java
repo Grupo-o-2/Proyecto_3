@@ -14,6 +14,7 @@ public class Galeria {
 	private ArrayList<Pieza> piezasActuales;
 	private ArrayList<Pieza> piezasAntiguas;
 	private ArrayList<Usuario> usuarios;
+	private HashMap<String, Integer> fechasCompras =  new HashMap<String, Integer>();
 	private Fabrica fabrica = new Fabrica();
 	private static final String TIPO_ARTISTA = "Artista";
 	private static final String TIPO_COMPRADOR = "Comprador";
@@ -72,6 +73,14 @@ public class Galeria {
 
 	public Fabrica getFabrica() {
 		return this.fabrica;
+	}
+	
+	public HashMap<String, Integer> getFechasCompras(){
+		return this.fechasCompras;
+	}
+	
+	public void setFechasCompras(HashMap<String, Integer> fechasCompras) {
+		this.fechasCompras = fechasCompras;
 	}
 
 	public ArrayList<Pieza> obtenerPiezasEnBodega (){

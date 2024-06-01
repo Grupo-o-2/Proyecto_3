@@ -580,7 +580,7 @@ public static void main(String[] args ) throws PropietarioErroneoException, Usua
 		}
 		else if(eleccion == 0)
 		{
-			galeriaInicio.salvarGaleria("Galeria.json");
+			galeriaInicio.salvarGaleria("PruebaProyecto3.json");
 			System.out.println("Gracias por usar el programa. \n");
 			centinela=false;
 		}

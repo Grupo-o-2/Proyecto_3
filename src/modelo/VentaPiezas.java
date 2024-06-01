@@ -74,6 +74,13 @@ public class VentaPiezas {
 				((Comprador)comprador).setDinero(dineroActualizado);
 				
 				
+				HashMap<String, Integer> fechasCompras = galeria.getFechasCompras();
+				if (fechasCompras.containsKey(fecha)) {
+					int comprasAntiguas = fechasCompras.get(fecha);
+					fechasCompras.put(fecha, comprasAntiguas +1);
+				}else {
+					fechasCompras.put(fecha, 1);
+				}
 				
 			}
 			else  {
@@ -90,6 +97,14 @@ public class VentaPiezas {
 				int valorPiezaAVender = piezaAVender.getValor();
 				int dineroActualizado = ((Comprador)comprador).getDinero() - valorPiezaAVender;
 				((Comprador)comprador).setDinero(dineroActualizado);
+				
+				HashMap<String, Integer> fechasCompras = galeria.getFechasCompras();
+				if (fechasCompras.containsKey(fecha)) {
+					int comprasAntiguas = fechasCompras.get(fecha);
+					fechasCompras.put(fecha, comprasAntiguas +1);
+				}else {
+					fechasCompras.put(fecha, 1);
+				}
 				
 				}
 			
@@ -146,6 +161,13 @@ public class VentaPiezas {
 			((Comprador)comprador).setDinero(dineroActualizado);
 			
 			
+			HashMap<String, Integer> fechasCompras = galeria.getFechasCompras();
+			if (fechasCompras.containsKey(fecha)) {
+				int comprasAntiguas = fechasCompras.get(fecha);
+				fechasCompras.put(fecha, comprasAntiguas +1);
+			}else {
+				fechasCompras.put(fecha, 1);
+			}
 			
 		}
 		else  {
@@ -163,6 +185,15 @@ public class VentaPiezas {
 			int valorPiezaAVender = piezaAVender.getValor();
 			int dineroActualizado = ((Comprador)comprador).getDinero() - valorPiezaAVender;
 			((Comprador)comprador).setDinero(dineroActualizado);
+			
+			HashMap<String, Integer> fechasCompras = galeria.getFechasCompras();
+			if (fechasCompras.containsKey(fecha)) {
+				int comprasAntiguas = fechasCompras.get(fecha);
+				fechasCompras.put(fecha, comprasAntiguas +1);
+			}else {
+				fechasCompras.put(fecha, 1);
+			}
+			
 			
 			}
 	}
