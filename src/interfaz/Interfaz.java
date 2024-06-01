@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 public class Interfaz extends JFrame {
 
@@ -74,6 +75,10 @@ public class Interfaz extends JFrame {
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("New radio button");
 		rdbtnNewRadioButton.setBounds(179, 373, 109, 23);
 		panel.add(rdbtnNewRadioButton);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(98, 372, 5, 22);
+		panel.add(textArea);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(402, 61, 233, 256);
