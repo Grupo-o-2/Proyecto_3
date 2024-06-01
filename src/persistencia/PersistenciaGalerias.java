@@ -97,6 +97,7 @@ public class PersistenciaGalerias {
 		galeria.setHistorialPiezas(nHistorialPiezas);
 		galeria.setPiezasActuales(nPiezasActuales);
 		galeria.setPiezasAntiguas(nPiezasAntiguas);
+		galeria.setFechasCompras(nFechasCompras);
 		}
 }
 
