@@ -155,7 +155,7 @@ public class SubastaTest {
 			galeria.crearSubasta("Subasta VIP",participantes1, operador, ofertas1, subasta1);
 			
 			Subasta subasta = galeria.obtenerSubastaPorNombre("Subasta VIP");
-			alice.realizarOfertaEnSubasta(escultura2, 8000, subasta);
+			alice.realizarOfertaEnSubasta(escultura2, 8000, subasta, galeria);
 			assertEquals(3, subasta.getRegistroSubasta().size(), "El historial de registros de ofertas no se actualiza de forma correcta.");
 			assertTrue(subasta.getRegistroSubasta().keySet().contains(escultura2), "El historial de registros de ofertas no actualiza las piezas ofertas de forma correcta.");
 			assertTrue(subasta.getRegistroSubasta().get(escultura2).keySet().contains(alice), "El historial de registros de ofertas no actualiza los participantes que ofertan de forma correcta.");
@@ -213,7 +213,7 @@ public class SubastaTest {
 			galeria.crearSubasta("Subasta VIP",participantes1, operador, ofertas1, subasta1);
 			
 			Subasta subasta = galeria.obtenerSubastaPorNombre("Subasta VIP");
-			alice.realizarOfertaEnSubasta(escultura2, 0, subasta);
+			alice.realizarOfertaEnSubasta(escultura2, 0, subasta, galeria);
     	}); 
     	assertEquals("El dinero ofrecido por la pieza es menor al valor inicial de la subasta. \n", exception.getMessage(), "La excepción tiene un mensaje erróneo.");
 	}
@@ -264,7 +264,7 @@ public class SubastaTest {
 			galeria.crearSubasta("Subasta VIP",participantes1, operador, ofertas1, subasta1);
 			
 			Subasta subasta = galeria.obtenerSubastaPorNombre("Subasta VIP");
-			john.realizarOfertaEnSubasta(escultura2, 80001, subasta);
+			john.realizarOfertaEnSubasta(escultura2, 80001, subasta, galeria);
     	}); 
     	assertEquals("El usuario no cuenta con el dinero suficiente para realizar dicha oferta.\n", exception.getMessage(), "La excepción tiene un mensaje erróneo.");
 	}

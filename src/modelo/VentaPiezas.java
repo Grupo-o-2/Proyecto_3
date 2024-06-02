@@ -70,6 +70,7 @@ public class VentaPiezas {
 				piezaAVender.getHistorialDueños().add(comprador);
 				
 				
+				
 				int dineroActualizado = ((Comprador)comprador).getDinero() - piezaAVender.getValor();
 				((Comprador)comprador).setDinero(dineroActualizado);
 				
@@ -156,7 +157,7 @@ public class VentaPiezas {
 			piezaAVender.getHistorialVentas().put(fecha, piezaAVender.getValor());
 			piezaAVender.getHistorialDueños().add(comprador);
 			
-			
+			galeria.añadirCompra(piezaAVender.getTitulo(), comprador.getNombre(), fecha, nombrePasarela, numeroTarjeta);
 			int dineroActualizado = ((Comprador)comprador).getDinero() - piezaAVender.getValor();
 			((Comprador)comprador).setDinero(dineroActualizado);
 			
@@ -181,6 +182,7 @@ public class VentaPiezas {
 			piezaAVender.setPropietario(comprador);
 			piezaAVender.getHistorialVentas().put(fecha, piezaAVender.getValor());
 			piezaAVender.getHistorialDueños().add(comprador);
+			galeria.añadirCompra(piezaAVender.getTitulo(), comprador.getNombre(), fecha, nombrePasarela, numeroTarjeta);
 			
 			int valorPiezaAVender = piezaAVender.getValor();
 			int dineroActualizado = ((Comprador)comprador).getDinero() - valorPiezaAVender;

@@ -20,4 +20,51 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>sf.eclipse.javacc.core.javaccnature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>Img/avatar.png</name>
+			<type>1</type>
+			<location>C:/Users/SISTEMAS/Downloads/avatar.png</location>
+		</link>
+		<link>
+			<name>Img/boton.png</name>
+			<type>1</type>
+			<location>C:/Users/SISTEMAS/Downloads/boton.png</location>
+		</link>
+		<link>
+			<name>Img/cerrar.png</name>
+			<type>1</type>
+			<location>C:/Users/SISTEMAS/Downloads/cerrar.png</location>
+		</link>
+		<link>
+			<name>Img/default.jpeg</name>
+			<type>1</type>
+			<location>C:/Users/SISTEMAS/git/Proyecto-2/Img/default.jpeg</location>
+		</link>
+		<link>
+			<name>Img/grafico-de-barras.png</name>
+			<type>1</type>
+			<location>C:/Users/SISTEMAS/Downloads/grafico-de-barras.png</location>
+		</link>
+		<link>
+			<name>Img/historia.png</name>
+			<type>1</type>
+			<location>C:/Users/SISTEMAS/git/Proyecto-2/Img/historia.png</location>
+		</link>
+		<link>
+			<name>Img/obra-de-arte.png</name>
+			<type>1</type>
+			<location>C:/Users/SISTEMAS/git/Proyecto-2/Img/obra-de-arte.png</location>
+		</link>
+		<link>
+			<name>Img/subasta.png</name>
+			<type>1</type>
+			<location>C:/Users/SISTEMAS/git/Proyecto-2/Img/subasta.png</location>
+		</link>
+		<link>
+			<name>Img/ventas.png</name>
+			<type>1</type>
+			<location>C:/Users/SISTEMAS/Downloads/grafico-de-barras (1).png</location>
+		</link>
+	</linkedResources>
 </projectDescription>

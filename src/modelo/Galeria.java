@@ -15,6 +15,8 @@ public class Galeria {
 	private ArrayList<Pieza> piezasAntiguas;
 	private ArrayList<Usuario> usuarios;
 	private HashMap<String, Integer> fechasCompras =  new HashMap<String, Integer>();
+	private ArrayList<ArrayList<String>> compras;
+	private ArrayList<ArrayList<String>> ofertas;
 	private Fabrica fabrica = new Fabrica();
 	private static final String TIPO_ARTISTA = "Artista";
 	private static final String TIPO_COMPRADOR = "Comprador";
@@ -117,6 +119,28 @@ public class Galeria {
 		this.historialPiezas.add(pieza);
 	}
 	
+	public void añadirCompra(String titulo, String nombreUsuario, String pago, String fecha, String numeroCuenta) {
+		ArrayList detalles = new ArrayList();
+		detalles.add(0, titulo); //El nombre de la pieza está en la pos 0
+		detalles.add(1, nombreUsuario); //El nombre del usuario está en la pos 1
+		detalles.add(2, fecha); //La fecha de compra está en la pos 2
+		detalles.add(3, pago); //El método de pago está en la pos 3
+		detalles.add(4, numeroCuenta); //El número de cuenta está en la pos 4
+		
+		compras.add(detalles);
+	}
+	
+	public void añadirOferta(String nombreSubasta, String nombreUsuario, String valorOferta, String nombrePieza) {
+		ArrayList detalles = new ArrayList();
+		detalles.add(0, nombrePieza); //El nombre de la pieza está en la pos 0
+		detalles.add(1, nombreUsuario); //El nombre del usuario está en la pos 1
+		detalles.add(2, valorOferta); //El valor de la oferta está en la pos 2
+		detalles.add(3, nombreSubasta); //La fecha de compra está en la pos 3
+		
+		ofertas.add(detalles);
+		
+		
+	}
 	public boolean verificarUsuario(Usuario usuarioAVerificar) throws UsuarioInexistenteException {
 
 		if ((this.usuarios.contains(usuarioAVerificar)) == false ) {
@@ -150,6 +174,16 @@ public class Galeria {
 			}
 		}
 		return usuario1;
+	}
+	
+	public String obtenerTipoPorLogin(String login) {
+		String  tipo = null;
+		for (Usuario usuario:this.usuarios) {
+			if (usuario.getLogin().compareTo(login) == 0) {
+				tipo = usuario.getTipo();
+			}
+		}
+		return tipo;
 	}
 	
 	public Usuario obtenerUsuarioPorNombre(String nombre) {

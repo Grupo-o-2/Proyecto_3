@@ -122,7 +122,7 @@ public static void main(String[] args ) throws PropietarioErroneoException, Usua
 								
 								if (subastaElegida.getPiezasSubastadas().keySet().contains(piezaElegida)) {
 									
-									((Operador)operador).registrarOferta(valorOferta, piezaElegida, compradorElegido, subastaElegida);
+									((Operador)operador).registrarOferta(valorOferta, piezaElegida, compradorElegido, subastaElegida, galeriaInicio);
 									
 									System.out.println("\n");
 								

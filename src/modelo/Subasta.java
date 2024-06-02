@@ -69,10 +69,11 @@ public ArrayList<Usuario> getParticipantes() {
 			}
 	}
 
-	public void registrarOferta (Usuario ofertador, int valorOfertado, Pieza piezaSubastada ) throws DineroOfrecidoInsuficienteException, DineroInsuficienteException {
+	public void registrarOferta (Usuario ofertador, int valorOfertado, Pieza piezaSubastada, Galeria galeria ) throws DineroOfrecidoInsuficienteException, DineroInsuficienteException {
 		
 		if  ( (this.revisarOferta(piezaSubastada, valorOfertado, ofertador)) == true ){
 			this.registroSubasta.get(piezaSubastada).put(ofertador, ((Integer)valorOfertado));
+			galeria.añadirOferta(this.getNombre(), ofertador.getNombre(), piezaSubastada.getTitulo(), Integer.toString(valorOfertado));
 		}
 	}
 	

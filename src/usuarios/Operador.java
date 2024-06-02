@@ -77,9 +77,9 @@ public class Operador extends Empleado{
 			
 	}
 	
-	public void registrarOferta(int valorofrecido, Pieza pieza, Usuario usuario, Subasta subasta) throws DineroOfrecidoInsuficienteException, DineroInsuficienteException {
+	public void registrarOferta(int valorofrecido, Pieza pieza, Usuario usuario, Subasta subasta, Galeria galeria) throws DineroOfrecidoInsuficienteException, DineroInsuficienteException {
 		
-		subasta.registrarOferta(usuario, valorofrecido, pieza);
+		subasta.registrarOferta(usuario, valorofrecido, pieza, galeria);
 		
 	}
 	

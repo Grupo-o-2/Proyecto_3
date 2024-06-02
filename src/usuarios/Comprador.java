@@ -146,7 +146,7 @@ public class Comprador extends Usuario{
 		((Cajero)galeria.getUnCajero()).venderPiezaTarjeta(this, piezaAcomprar, galeria, fecha, nombrePasarela, numeroTarjeta);
 	}
 	
-	public void realizarOfertaEnSubasta(Pieza piezaSubastada, int valorOfertado, Subasta subasta ) throws DineroOfrecidoInsuficienteException, DineroInsuficienteException {
-		( (Operador )subasta.getOperador() ).registrarOferta(valorOfertado, piezaSubastada, this, subasta);
+	public void realizarOfertaEnSubasta(Pieza piezaSubastada, int valorOfertado, Subasta subasta, Galeria galeria ) throws DineroOfrecidoInsuficienteException, DineroInsuficienteException {
+		( (Operador )subasta.getOperador() ).registrarOferta(valorOfertado, piezaSubastada, this, subasta, galeria);
 	}
 }

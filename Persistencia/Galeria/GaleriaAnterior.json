@@ -20,7 +20,7 @@
     {
       "Nombre": "Lucy",
       "Piezas Actuales": "3,",
-      "Historial Piezas": "5,20150315;0,20180201;1,19921008;7,20011230;",
+      "Historial Piezas": "1,19921008;5,20150315;7,20011230;0,20180201;",
       "Telefono": "567890123",
       "Login": "loginlucy",
       "Dinero": 200000,
@@ -32,7 +32,7 @@
     {
       "Nombre": "John",
       "Piezas Actuales": "4,",
-      "Historial Piezas": "3,20000319;1,19921008;7,20011230;",
+      "Historial Piezas": "1,19921008;7,20011230;3,20000319;",
       "Telefono": "234567890",
       "Login": "loginjohn",
       "Dinero": 80000,
@@ -129,7 +129,7 @@
     {
       "Operador": "loginneo",
       "Nombre": "Subasta VIP",
-      "Registro Subasta": "5'loginlucy,2000;loginalice,1700;loginjohn,1800;/6'Vacio/9'loginlucy,7500;loginalice,7800;loginjohn,7600;/",
+      "Registro Subasta": "5'loginalice,1700;loginlucy,2000;loginjohn,1800;/6'Vacio/9'loginalice,7800;loginlucy,7500;loginjohn,7600;/",
       "Piezas Subastadas": "5;1600,1500,'6;8900,8700,'9;7500,7000,'",
       "Participantes": "loginalice,loginlucy,loginjohn,"
     }

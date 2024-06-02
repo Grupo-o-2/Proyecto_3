@@ -397,7 +397,7 @@ public static void main(String[] args ) throws PropietarioErroneoException, Usua
 							Pieza piezaEscogida = galeriaInicio.obtenerPiezaGlobalesporTitulo(nombrePieza);
 							int valorOferta =  (int) pedirNumeroAlUsuario("Escriba el valor de su oferta");
 							
-							((Comprador)comprador).realizarOfertaEnSubasta(piezaEscogida, valorOferta, subastaEscogida);
+							((Comprador)comprador).realizarOfertaEnSubasta(piezaEscogida, valorOferta, subastaEscogida, galeriaInicio);
 							
 							System.out.println(" Esperando el registro de la oferta por parte del operador...\n");
 							System.out.println(" La oferta se ha realizado exitosamente.\n");
