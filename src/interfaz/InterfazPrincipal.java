@@ -40,6 +40,11 @@ import javax.swing.ImageIcon;
 public class InterfazPrincipal extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
+	private static final String TIPO_ADMINISTRADOR = "Administrador";
+	private static final String TIPO_CAJERO = "Cajero";
+	private static final String TIPO_COMPRADOR = "Comprador";
+	private static final String TIPO_OPERADOR = "Operador";
+	private static final String TIPO_EMPLEADO = "Empleado";
 
 	/**
 	 * Launch the application.
@@ -204,10 +209,41 @@ public class InterfazPrincipal extends JFrame implements ActionListener {
         int accion = galeriaInicio.verificacionSesion(login, contraseña_1, tipo);
         
 		if (accion == 1){
-			PanelInicialAdministrador ventanaAdmin = new PanelInicialAdministrador();
+			if(tipo == TIPO_ADMINISTRADOR) {
+				
+				PanelInicialAdministrador ventanaAdmin = new PanelInicialAdministrador();
+				
+				ventanaAdmin.setVisible(true);
+				this.dispose();
+			}
 			
-			ventanaAdmin.setVisible(true);
-			this.dispose();
+			else if(tipo == TIPO_COMPRADOR) {
+				
+				PanelInicialComprador ventanaComprador = new PanelInicialComprador();
+				ventanaComprador.setVisible(true);
+				this.dispose();
+			}
+			
+			else if(tipo == TIPO_OPERADOR) {
+				
+				PanelInicialOperador ventanaOperador = new PanelInicialOperador();
+				ventanaOperador.setVisible(true);
+				this.dispose();
+			}
+			
+			else if(tipo == TIPO_CAJERO) {
+				
+				PanelInicialCajero ventanaCajero = new PanelInicialCajero();
+				ventanaCajero.setVisible(true);
+				this.dispose();
+			}
+			
+			else if(tipo == TIPO_EMPLEADO) {
+				
+				PanelInicialEmpleado ventanaEmpleado = new PanelInicialEmpleado();
+				ventanaEmpleado.setVisible(true);
+				this.dispose();
+			}
 			
 		}
 		

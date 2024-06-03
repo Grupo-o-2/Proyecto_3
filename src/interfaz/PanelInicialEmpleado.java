@@ -2,13 +2,14 @@ package interfaz;
 
 import java.awt.EventQueue;
 
-import javax.swing.JInternalFrame;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
-import java.awt.BorderLayout;
+import javax.swing.border.EmptyBorder;
 
-public class PanelPrincipalOperador extends JInternalFrame {
+public class PanelInicialEmpleado extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
 
 	/**
 	 * Launch the application.
@@ -17,7 +18,7 @@ public class PanelPrincipalOperador extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PanelPrincipalOperador frame = new PanelPrincipalOperador();
+					PanelInicialEmpleado frame = new PanelInicialEmpleado();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -29,12 +30,13 @@ public class PanelPrincipalOperador extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PanelPrincipalOperador() {
+	public PanelInicialEmpleado() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
-		
-		JPanel panel = new JPanel();
-		getContentPane().add(panel, BorderLayout.NORTH);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
+		setContentPane(contentPane);
 	}
 
 }

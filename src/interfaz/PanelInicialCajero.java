@@ -4,7 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
 
-public class PanelPrincipalCajero extends JInternalFrame {
+public class PanelInicialCajero extends JInternalFrame {
 
 	private static final long serialVersionUID = 1L;
 
@@ -15,7 +15,7 @@ public class PanelPrincipalCajero extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PanelPrincipalCajero frame = new PanelPrincipalCajero();
+					PanelInicialCajero frame = new PanelInicialCajero();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -27,7 +27,7 @@ public class PanelPrincipalCajero extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PanelPrincipalCajero() {
+	public PanelInicialCajero() {
 		setBounds(100, 100, 450, 300);
 
 	}

@@ -2,6 +2,7 @@ package interfaz;
 
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,14 +23,13 @@ import modelo.Subasta;
 import piezas.Pieza;
 import usuarios.Usuario;
 
-public class PanelPiezasAdministrador extends JFrame implements ActionListener{
+public class VerTodasPiezas extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private String BOTON_REGRESAR = "B1";
-	Fabrica fabricaInicio= new Fabrica();		
-	Galeria galeriaInicio = fabricaInicio.crearGaleria("Galeria de Prueba", new ArrayList<Subasta>(), new ArrayList<Pieza>(),
-			new ArrayList<Pieza>(), new ArrayList<Pieza>(), new ArrayList<Usuario>());
+	private static Galeria galeriaInicio;
+
 	/**
 	 * Launch the application.
 	 */
@@ -37,7 +37,7 @@ public class PanelPiezasAdministrador extends JFrame implements ActionListener{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PanelPiezasAdministrador frame = new PanelPiezasAdministrador();
+					VerTodasPiezas frame = new VerTodasPiezas(galeriaInicio);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,10 +49,14 @@ public class PanelPiezasAdministrador extends JFrame implements ActionListener{
 	/**
 	 * Create the frame.
 	 */
-	public PanelPiezasAdministrador() {
-		
-		galeriaInicio.cargarGaleria("Galeria.json");
-		galeriaInicio.salvarGaleria("GaleriaAnterior.json");
+	public VerTodasPiezas(Galeria mod) {
+		//Fabrica fabricaInicio= new Fabrica();		
+		//Galeria galeriaInicio = fabricaInicio.crearGaleria("Galeria de Prueba", new ArrayList<Subasta>(), new ArrayList<Pieza>(),
+			
+		//new ArrayList<Pieza>(), new ArrayList<Pieza>(), new ArrayList<Usuario>());
+		//galeriaInicio.cargarGaleria("Galeria.json");
+		//galeriaInicio.salvarGaleria("GaleriaAnterior.json");
+		galeriaInicio = mod;
 		
 		setResizable(false);
 		setTitle("Administrador");
@@ -155,7 +159,7 @@ public class PanelPiezasAdministrador extends JFrame implements ActionListener{
 		panel_1.add(btnVerTodas);
 		
 		
-		//Info
+		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(new Color(253, 255, 252));
 		panel_2.setBounds(251, 0, 733, 43);
@@ -173,45 +177,48 @@ public class PanelPiezasAdministrador extends JFrame implements ActionListener{
 		panel.add(panel_3);
 		panel_3.setLayout(null);
 		
-		JLabel lblManejoDePiezas = new JLabel("Manejo de piezas");
-		lblManejoDePiezas.setBounds(63, 48, 175, 25);
-		lblManejoDePiezas.setForeground(new Color(30, 163, 177));
-		lblManejoDePiezas.setFont(new Font("Tahoma", Font.BOLD, 20));
-		panel_3.add(lblManejoDePiezas);
+		JLabel lblPiezasExhibidas = new JLabel("Piezas actuales de la galería");
+		lblPiezasExhibidas.setBounds(63, 48, 492, 25);
+		lblPiezasExhibidas.setForeground(new Color(30, 163, 177));
+		lblPiezasExhibidas.setFont(new Font("Tahoma", Font.BOLD, 20));
+		panel_3.add(lblPiezasExhibidas);
 		
-		JLabel lblNewLabel_1 = new JLabel("Bienvenido al manejo de piezas. Aquí puedes realizar las siguientes funciones:");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_1.setBounds(63, 104, 633, 25);
-		panel_3.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("• Registrar en el sistema una nueva pieza.");
-		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_1_1.setBounds(63, 142, 633, 25);
-		panel_3.add(lblNewLabel_1_1);
 		
-		JLabel lblNewLabel_1_1_1 = new JLabel("• Revisar y si es necesario devolver una pieza.");
-		lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_1_1_1.setBounds(63, 163, 633, 25);
-		panel_3.add(lblNewLabel_1_1_1);
 		
-		JLabel lblNewLabel_1_1_2 = new JLabel("• Ver las piezas que se encuentran en bodega.");
-		lblNewLabel_1_1_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_1_1_2.setBounds(63, 184, 633, 25);
-		panel_3.add(lblNewLabel_1_1_2);
+		ArrayList<Pieza> todas = new ArrayList<Pieza>();
+		for (Pieza pieza: galeriaInicio.getPiezasActuales()) {
+			
+			todas.add(pieza);
+			
+		}
 		
-		JLabel lblNewLabel_1_1_2_1 = new JLabel("• Ver las piezas que se encuentran en exhibición.");
-		lblNewLabel_1_1_2_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_1_1_2_1.setBounds(63, 205, 633, 25);
-		panel_3.add(lblNewLabel_1_1_2_1);
 		
-		JLabel lblNewLabel_1_1_2_1_1 = new JLabel("• Ver todas las piezas actuales de la galería.");
-		lblNewLabel_1_1_2_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_1_1_2_1_1.setBounds(63, 226, 633, 25);
-		panel_3.add(lblNewLabel_1_1_2_1_1);
+		if(todas.isEmpty() == true) {
+			JLabel lblNoPiezas = new JLabel("No hay piezas en la galería en este momento.");
+			lblNoPiezas.setFont(new Font("Tahoma", Font.PLAIN, 17));
+			lblNoPiezas.setBounds(63, 97, 357, 25);
+			panel_3.add(lblNoPiezas);
+			
+			
+		} 
+		
+		else {
+
+			JPanel panel_4 = new JPanel();
+			panel_4.setBounds(0, 103, 733, 416);
+			panel_4.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 15));	
+			for (Pieza pieza: todas) {
+				Panelpieza nueva = new Panelpieza(pieza);
+				panel_4.add(nueva);
+				panel_4.setVisible(true);
+			}
+			panel_3.add(panel_4);
+		}
 	}
 	
 	public void regresar() {
-		PanelInicialAdministrador ventanaInicial = new PanelInicialAdministrador();
+		PanelPiezasAdministrador ventanaInicial = new PanelPiezasAdministrador();
 		
 		ventanaInicial.setVisible(true);
 		this.dispose();
@@ -224,19 +231,7 @@ public class PanelPiezasAdministrador extends JFrame implements ActionListener{
 		this.dispose();
 	}
 	
-	public void irExhibidas() {
-		VerPiezasExhibidas ventanaExhibidas = new VerPiezasExhibidas();
-		
-		ventanaExhibidas.setVisible(true);
-		this.dispose();
-	}
-	
-	public void irTodas() {
-		VerTodasPiezas ventanaTodas = new VerTodasPiezas(galeriaInicio);
-		
-		ventanaTodas.setVisible(true);
-		this.dispose();
-	}
+
 	
 	public void irConsignacion() {
 		ConsignacionPiezasAdmin ventanaConsignacion = new ConsignacionPiezasAdmin();
@@ -249,6 +244,13 @@ public class PanelPiezasAdministrador extends JFrame implements ActionListener{
 		VerPiezasBodega ventanaBodega = new VerPiezasBodega();
 		
 		ventanaBodega.setVisible(true);
+		this.dispose();
+	}
+	
+	public void irExhibidas() {
+		VerPiezasExhibidas ventanaExhibidas = new VerPiezasExhibidas();
+		
+		ventanaExhibidas.setVisible(true);
 		this.dispose();
 	}
 
@@ -266,20 +268,18 @@ public class PanelPiezasAdministrador extends JFrame implements ActionListener{
         	irRegistrarPiezas();
         }
         
-        else if("Ir-todas".equals(comando)) {
-        	irTodas();
-        }
         
-        else if("Ir-exhibidas".equals(comando)) {
-        	irExhibidas();
+        else if("Ir-bodega".equals(comando)) {
+        	irBodega();
         }
         
         else if("Ir-consignacion".equals(comando)) {
         	irConsignacion();
         }
         
-        else if("Ir-bodega".equals(comando)) {
-        	irBodega();
+        
+        else if("Ir-exhibidas".equals(comando)) {
+        	irExhibidas();
         }
 		
 	}

@@ -253,6 +253,12 @@ public class Galeria {
         }
     }
 	
+	public static boolean esNumero(String str) {
+        // Utilizamos una expresión regular para verificar si el String contiene solo dígitos
+        return str.matches("\\d+");
+    }
+	
+	
 	//Si retorna 0, pertenece a los usuarios y es el tipo adecuado, si retorna 1 no pertenece a los usuarios, si retorna 2 no es el tipo adecuado.
 	public int verificacionSesion (String login, String contraseña, String tipo) {
 		HashMap<String, String>  logins = obtenerLoginContraseña();
