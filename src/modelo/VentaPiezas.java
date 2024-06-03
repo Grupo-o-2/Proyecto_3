@@ -74,6 +74,8 @@ public class VentaPiezas {
 				int dineroActualizado = ((Comprador)comprador).getDinero() - piezaAVender.getValor();
 				((Comprador)comprador).setDinero(dineroActualizado);
 				
+				galeria.añadirCompra(piezaAVender.getTitulo(), comprador.getNombre(), fecha, "otro", "otro");
+				
 				
 				HashMap<String, Integer> fechasCompras = galeria.getFechasCompras();
 				if (fechasCompras.containsKey(fecha)) {
@@ -85,6 +87,7 @@ public class VentaPiezas {
 				
 			}
 			else  {
+				galeria.añadirCompra(piezaAVender.getTitulo(), comprador.getNombre(), fecha, "otro", "otro");
 				((Comprador)comprador).añadirPieza(piezaAVender, fecha);;
 				galeria.getPiezasActuales().remove(piezaAVender);
 				piezaAVender.setConsignacion(false);

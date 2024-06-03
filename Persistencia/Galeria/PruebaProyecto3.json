@@ -1,8 +1,10 @@
 {
   "Galeria": {
     "Piezas Actuales": "5,6,8,9,2,",
+    "Compras": "Vacio",
     "Piezas Antiguas": "0,1,2,4,3,",
-    "Compras por fecha": "2020-10-08,2;2021-02-14,1;2017-06-24,1;2023-12-12,1;2018-05-13,1;2014-05-15,1;2010-01-29,1;2024-01-05,1;2024-03-19,1;2022-07-07,1;2021-08-14,1;2015-05-15,1;2012-09-25,1;"
+    "Compras por fecha": "2020-10-08,1;2021-02-14,1;2017-06-24,1;2023-12-12,1;2018-05-13,1;2014-05-15,1;2010-01-29,1;2024-01-05,1;2024-03-19,1;2022-07-07,1;2021-08-14,1;2015-05-15,1;2012-09-25,1;",
+    "Ofertas": "Vacio"
   },
   "Usuarios": [
     {
@@ -43,14 +45,14 @@
     },
     {
       "Nombre": "fake",
-      "Piezas Actuales": "5,6,7,8,9,",
+      "Piezas Actuales": "5,6,8,9,",
       "Historial Piezas": "Vacío",
       "Telefono": "fake",
       "Login": "fake",
       "Dinero": 80000,
       "Tipo ": "Comprador",
       "Valor Maximo Compras": 1800000,
-      "Valor Coleccion": 7745,
+      "Valor Coleccion": 7655,
       "Password": "fake"
     },
     {

@@ -93,7 +93,7 @@ public class PersistenciaSubastas {
 				}
 				else
 				{
-					registroSubasta = "Vacio";
+					piezasSubastadas = "Vacio";
 				} 
 				jSubasta.put("Piezas Subastadas",piezasSubastadas);
 				jSubastas.put(jSubasta);	
@@ -156,17 +156,6 @@ public class PersistenciaSubastas {
 							}
 						}
 						nRegistroSubasta.put(identificacionPieza.get(pieza.split("'")[0]), oferta);
-					}
-				}
-				else
-				{
-					if(! subasta.getString("Piezas Subastadas").equals("Vacio"))
-					{
-						for (String identificadorPieza: subasta.getString("Piezas Subastadas").split("'"))
-						{
-							HashMap<Usuario, Integer> nHistorialPieza = new HashMap<Usuario, Integer>();
-							nRegistroSubasta.put(identificacionPieza.get(identificadorPieza.split(";")[0]), nHistorialPieza);
-						}
 					}
 				}
 				HashMap<Pieza,ArrayList<Integer>> nPiezasSubastadas = new HashMap<Pieza,ArrayList<Integer>>();

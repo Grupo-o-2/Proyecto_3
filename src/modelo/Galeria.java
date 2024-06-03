@@ -14,9 +14,9 @@ public class Galeria {
 	private ArrayList<Pieza> piezasActuales;
 	private ArrayList<Pieza> piezasAntiguas;
 	private ArrayList<Usuario> usuarios;
-	private HashMap<String, Integer> fechasCompras =  new HashMap<String, Integer>();
-	private ArrayList<ArrayList<String>> compras;
-	private ArrayList<ArrayList<String>> ofertas;
+	private HashMap<String, Integer> fechasCompras = new HashMap<String, Integer>();
+	private ArrayList<ArrayList<String>> compras = new ArrayList<ArrayList<String>>();
+	private ArrayList<ArrayList<String>> ofertas = new ArrayList<ArrayList<String>>();
 	private Fabrica fabrica = new Fabrica();
 	private static final String TIPO_ARTISTA = "Artista";
 	private static final String TIPO_COMPRADOR = "Comprador";
@@ -120,7 +120,7 @@ public class Galeria {
 	}
 	
 	public void añadirCompra(String titulo, String nombreUsuario, String pago, String fecha, String numeroCuenta) {
-		ArrayList detalles = new ArrayList();
+		ArrayList<String> detalles = new ArrayList<String>();
 		detalles.add(0, titulo); //El nombre de la pieza está en la pos 0
 		detalles.add(1, nombreUsuario); //El nombre del usuario está en la pos 1
 		detalles.add(2, fecha); //La fecha de compra está en la pos 2
@@ -131,7 +131,7 @@ public class Galeria {
 	}
 	
 	public void añadirOferta(String nombreSubasta, String nombreUsuario, String valorOferta, String nombrePieza) {
-		ArrayList detalles = new ArrayList();
+		ArrayList<String> detalles = new ArrayList<String>();
 		detalles.add(0, nombrePieza); //El nombre de la pieza está en la pos 0
 		detalles.add(1, nombreUsuario); //El nombre del usuario está en la pos 1
 		detalles.add(2, valorOferta); //El valor de la oferta está en la pos 2
@@ -141,6 +141,30 @@ public class Galeria {
 		
 		
 	}
+	public ArrayList<ArrayList<String>> getCompras() {
+		return compras;
+	}
+
+
+
+	public void setCompras(ArrayList<ArrayList<String>> compras) {
+		this.compras = compras;
+	}
+
+
+
+	public ArrayList<ArrayList<String>> getOfertas() {
+		return ofertas;
+	}
+
+
+
+	public void setOfertas(ArrayList<ArrayList<String>> ofertas) {
+		this.ofertas = ofertas;
+	}
+
+
+
 	public boolean verificarUsuario(Usuario usuarioAVerificar) throws UsuarioInexistenteException {
 
 		if ((this.usuarios.contains(usuarioAVerificar)) == false ) {
