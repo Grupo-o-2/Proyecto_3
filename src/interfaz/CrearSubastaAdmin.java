@@ -2,19 +2,25 @@ package interfaz;
 
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 import fabrica.Fabrica;
 import modelo.Galeria;
@@ -22,7 +28,9 @@ import modelo.Subasta;
 import piezas.Pieza;
 import usuarios.Usuario;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.JList;
+import java.awt.GridLayout;
 
 public class CrearSubastaAdmin extends JFrame implements ActionListener{
 
@@ -33,6 +41,8 @@ public class CrearSubastaAdmin extends JFrame implements ActionListener{
 	Galeria galeriaInicio = fabricaInicio.crearGaleria("Galeria de Prueba", new ArrayList<Subasta>(), new ArrayList<Pieza>(),
 			new ArrayList<Pieza>(), new ArrayList<Pieza>(), new ArrayList<Usuario>());
 	private JTextField textField;
+	private JList listParticipantes;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -172,26 +182,72 @@ public class CrearSubastaAdmin extends JFrame implements ActionListener{
 		textField = new JTextField();
 		textField.setToolTipText("Nombre de la subasta");
 		textField.setBounds(136, 85, 205, 19);
+		textField.setBorder(new LineBorder(new Color(30, 163, 177), 2, true));
 		panel_3.add(textField);
 		textField.setColumns(10);
+
 		
-		JList list = new JList();
-		list.setToolTipText("Eliga los participantes de la subasta ( Si desea elegir más de uno use: Ctrl + click )");
-		list.setBounds(137, 125, 204, 69);
-		panel_3.add(list);
+		DefaultListModel<String> listModel = new DefaultListModel<>();
+        for (Usuario participante1 : galeriaInicio.obtenerCompradores()) {
+        	if ( !(participante1.getNombre().equals("fake") )){
+        		listModel.addElement(participante1.getNombre());
+        	}
+        }
+
+        listParticipantes = new JList<>(listModel);
+        listParticipantes.setBorder(new LineBorder(new Color(30, 163, 177), 2, true));
+        listParticipantes.setFont(new Font("Tahoma", Font.PLAIN, 10));
+        listParticipantes.setToolTipText("Eliga los participantes de la subasta ( Si desea elegir varios use: Ctrl + click )");
+
+      
+        listParticipantes.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+        // Envuelve el JList en un JScrollPane
+        JScrollPane scrollPane = new JScrollPane(listParticipantes);
+        scrollPane.setBounds(137, 125, 204, 69); // Ajusta el tamaño y la posición del JScrollPane
+
+        // Añade el JScrollPane al panel
+        panel_3.add(scrollPane);
+        
 		
 		JLabel lblPiezas = new JLabel("Piezas:");
 		lblPiezas.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblPiezas.setBounds(37, 226, 115, 17);
 		panel_3.add(lblPiezas);
 		
+		
+
+		JPanel panel_5 = new JPanel();
+		panel_5.setBorder(new LineBorder(new Color(30, 163, 177), 2));
+		
+		for(Pieza pieza1 : galeriaInicio.getPiezasActuales()) {
+		 JRadioButton btnPieza = new JRadioButton(pieza1.getTitulo()); 
+			 
+			 panel_5.add(btnPieza);
+			 
+		 } 
+		
+		JScrollPane scrollPane2 = new JScrollPane(panel_5);
+		panel_5.setLayout(new GridLayout(0, 1, 0, 0));
+		scrollPane2.setBounds(142, 233, 199, 146);
+		panel_3.add(scrollPane2);
+		 
+		 
+		
 		JButton btnCrearSubasta = new JButton("Crear subasta");
 		btnCrearSubasta.setForeground(new Color(253, 255, 252));
 		btnCrearSubasta.setBackground(new Color(30, 163, 177));
+			
 		btnCrearSubasta.setActionCommand("Crear");
+		btnCrearSubasta.addActionListener(this);
 		btnCrearSubasta.setBounds(328, 486, 125, 23);
 		panel_3.add(btnCrearSubasta);
+		
+		
+		
 	}
+	
+	
 	
 	public void regresar() {
 		PanelInicialAdministrador ventanaInicial = new PanelInicialAdministrador();
