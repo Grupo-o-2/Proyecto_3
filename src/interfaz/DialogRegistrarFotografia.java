@@ -21,6 +21,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.LineBorder;
 
 import modelo.Galeria;
+import piezas.Escultura;
+import piezas.Fotografia;
 import usuarios.Artista;
 import usuarios.Comprador;
 import usuarios.Usuario;
@@ -189,6 +191,8 @@ public class DialogRegistrarFotografia extends JDialog implements ActionListener
 		
 		registros.galeriaInicio.crearFotografia(titulo, valor, fechaCreacion, 
 				lugarCreacion, dueño, autores, dueños, ventas, "123", false, true, true, true, "0", alto, ancho, formato, true);
+		Fotografia fotografiaN = (Fotografia) registros.galeriaInicio.obtenerPiezaGlobalesporTitulo(titulo);
+		registros.galeriaInicio.añadirPieza(fotografiaN);
 		registros.galeriaInicio.salvarGaleria("GaleriaAnterior.json");
 		
 		

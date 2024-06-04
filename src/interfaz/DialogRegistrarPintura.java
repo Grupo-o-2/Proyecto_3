@@ -21,6 +21,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.LineBorder;
 
 import modelo.Galeria;
+import piezas.Impresion;
+import piezas.Pintura;
 import usuarios.Artista;
 import usuarios.Comprador;
 import usuarios.Usuario;
@@ -178,6 +180,8 @@ public class DialogRegistrarPintura extends JDialog implements ActionListener{
 		
 		registros.galeriaInicio.crearPintura(titulo, valor, fechaCreacion, 
 				lugarCreacion, dueño, autores, dueños, ventas, "123", false, true, true, true, "0", alto, ancho);
+		Pintura pinturaN = (Pintura) registros.galeriaInicio.obtenerPiezaGlobalesporTitulo(titulo);
+		registros.galeriaInicio.añadirPieza(pinturaN);
 		registros.galeriaInicio.salvarGaleria("GaleriaAnterior.json");
 		
 		

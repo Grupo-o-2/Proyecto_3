@@ -20,9 +20,13 @@ import fabrica.Fabrica;
 import modelo.Galeria;
 import modelo.Subasta;
 import piezas.Pieza;
+import usuarios.Administrador;
 import usuarios.Usuario;
+import javax.swing.JTextField;
+import javax.swing.JList;
+import javax.swing.JComboBox;
 
-public class PanelSubastasAdministrador extends JFrame implements ActionListener{
+public class FinalizarSubastasAdmin extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -30,6 +34,12 @@ public class PanelSubastasAdministrador extends JFrame implements ActionListener
 	Fabrica fabricaInicio= new Fabrica();		
 	Galeria galeriaInicio = fabricaInicio.crearGaleria("Galeria de Prueba", new ArrayList<Subasta>(), new ArrayList<Pieza>(),
 			new ArrayList<Pieza>(), new ArrayList<Pieza>(), new ArrayList<Usuario>());
+	private JComboBox<String> comboBoxSubasta;
+	private JPanel panel;
+	private JPanel panel_3;
+	private JLabel lblInfo;
+	private JButton btnFinSubasta;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -37,7 +47,7 @@ public class PanelSubastasAdministrador extends JFrame implements ActionListener
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PanelSubastasAdministrador frame = new PanelSubastasAdministrador();
+					FinalizarSubastasAdmin frame = new FinalizarSubastasAdmin();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,7 +59,7 @@ public class PanelSubastasAdministrador extends JFrame implements ActionListener
 	/**
 	 * Create the frame.
 	 */
-	public PanelSubastasAdministrador() {
+	public FinalizarSubastasAdmin() {
 		
 		galeriaInicio.cargarGaleria("Galeria.json");
 		galeriaInicio.salvarGaleria("GaleriaAnterior.json");
@@ -64,7 +74,7 @@ public class PanelSubastasAdministrador extends JFrame implements ActionListener
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		panel.setBounds(0, 0, 984, 561);
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -75,13 +85,14 @@ public class PanelSubastasAdministrador extends JFrame implements ActionListener
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JButton cerrarSesion = new JButton("Regresar");
-		cerrarSesion.setBackground(new Color(253, 255, 252));
-		cerrarSesion.setBounds(64, 527, 125, 23);
-		panel_1.add(cerrarSesion);
+		JButton btnRegresar = new JButton("Regresar");
+		btnRegresar.setForeground(new Color(30, 163, 177));
+		btnRegresar.setBackground(new Color(253, 255, 252));
+		btnRegresar.setBounds(64, 527, 125, 23);
+		panel_1.add(btnRegresar);
 		
-		cerrarSesion.setActionCommand(BOTON_REGRESAR);
-		cerrarSesion.addActionListener(this);
+		btnRegresar.setActionCommand(BOTON_REGRESAR);
+		btnRegresar.addActionListener(this);
 		
 		JLabel lblNewLabel = new JLabel("Mosaicos");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -126,8 +137,6 @@ public class PanelSubastasAdministrador extends JFrame implements ActionListener
 		btnFin.setBorder(null);
 		btnFin.setBackground(new Color(30, 163, 177));
 		btnFin.setBounds(22, 152, 211, 32);
-		btnFin.setActionCommand("Fin-subasta");
-		btnFin.addActionListener(this);
 		panel_1.add(btnFin);
 		
 		
@@ -144,37 +153,72 @@ public class PanelSubastasAdministrador extends JFrame implements ActionListener
 		lblAdministradorPrincipal.setBounds(10, 11, 294, 23);
 		panel_2.add(lblAdministradorPrincipal);
 		
-		JPanel panel_3 = new JPanel();
+		
+		panel_3 = new JPanel();
 		panel_3.setBounds(251, 42, 733, 519);
 		panel.add(panel_3);
 		panel_3.setLayout(null);
 		
-		JLabel lblManejoDeSubastas = new JLabel("Manejo de subastas");
-		lblManejoDeSubastas.setBounds(63, 48, 284, 25);
-		lblManejoDeSubastas.setForeground(new Color(30, 163, 177));
-		lblManejoDeSubastas.setFont(new Font("Tahoma", Font.BOLD, 20));
-		panel_3.add(lblManejoDeSubastas);
+		JLabel lblFinSubastas = new JLabel("Finalizar una subasta");
+		lblFinSubastas.setBounds(37, 28, 284, 25);
+		lblFinSubastas.setForeground(new Color(30, 163, 177));
+		lblFinSubastas.setFont(new Font("Tahoma", Font.BOLD, 20));
+		panel_3.add(lblFinSubastas);
 		
-		JLabel lblNewLabel_1 = new JLabel("Bienvenido al manejo de subastas. Aquí puedes realizar las siguientes funciones:");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_1.setBounds(63, 104, 633, 25);
-		panel_3.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("• Crear una nueva subasta.");
-		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_1_1.setBounds(63, 142, 633, 25);
-		panel_3.add(lblNewLabel_1_1);
+			
+		reiniciar();
+			
 		
-		JLabel lblNewLabel_1_1_1 = new JLabel("• Mostrar las subastas actuales de la galería.");
-		lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_1_1_1.setBounds(63, 163, 633, 25);
-		panel_3.add(lblNewLabel_1_1_1);
 		
-		JLabel lblNewLabel_1_1_2 = new JLabel("• Finalizar una subasta.");
-		lblNewLabel_1_1_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_1_1_2.setBounds(63, 184, 633, 25);
-		panel_3.add(lblNewLabel_1_1_2);
+	
 	}
+	
+	public void reiniciar() {
+		
+		if (galeriaInicio.getSubastas().isEmpty()) {
+			JLabel lblNoSubastas = new JLabel("No hay subastas en la galería actualmente.");
+			lblNoSubastas.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			lblNoSubastas.setBounds(40, 85, 392, 25);
+			panel_3.add(lblNoSubastas);
+			lblNoSubastas.setVisible(true);
+		}
+		
+		else {
+			
+			
+			
+			lblInfo = new JLabel("Las subastas actuales son:");
+			lblInfo.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			lblInfo.setBounds(37, 84, 321, 25);
+			panel_3.add(lblInfo);
+			
+			btnFinSubasta = new JButton("Finalizar subasta");
+			btnFinSubasta.setForeground(new Color(253, 255, 252));
+			btnFinSubasta.setBackground(new Color(30, 163, 177));
+			btnFinSubasta.setActionCommand("Fin");
+			btnFinSubasta.addActionListener(this);
+			btnFinSubasta.setBounds(37, 146, 186, 23);
+			panel_3.add(btnFinSubasta);
+			
+			comboBoxSubasta = new JComboBox<String>();
+			comboBoxSubasta.setBounds(282, 88, 195, 21);
+			
+			for (Subasta subasta :galeriaInicio.getSubastas()) {
+				String nombre = subasta.getNombre();
+				comboBoxSubasta.addItem(nombre);
+			}
+			
+			panel_3.add(comboBoxSubasta);
+			lblInfo.setVisible(true);
+			btnFinSubasta.setVisible(true);
+			comboBoxSubasta.setVisible(true);
+		}
+		
+		
+	}
+	
+	
 	
 	public void regresar() {
 		PanelInicialAdministrador ventanaInicial = new PanelInicialAdministrador();
@@ -198,12 +242,23 @@ public class PanelSubastasAdministrador extends JFrame implements ActionListener
 		this.dispose();
 	}
 	
-	public void irFinSubastas() {
-		FinalizarSubastasAdmin ventanaFin = new FinalizarSubastasAdmin();
+	public void finalizarSubasta() {
 		
-		ventanaFin.setVisible(true);
-		this.dispose();
+		String seleccionada = (String)comboBoxSubasta.getSelectedItem();
+		Subasta subasta = galeriaInicio.obtenerSubastaPorNombre(seleccionada);
+		subasta.finalizarSubasta(galeriaInicio, seleccionada);
+		galeriaInicio.salvarGaleria("Galeria.json");
+	
+		DialogsAdvertencias subastaDialog = new DialogsAdvertencias();
+		subastaDialog.cambiarAdvertencia("Subasta finalizada", "La subasta" +subasta.getNombre()+" ha sido finalizada.");
+		subastaDialog.setVisible(true);
+		lblInfo.setVisible(false);
+		btnFinSubasta.setVisible(false);
+		comboBoxSubasta.setVisible(false);
+		reiniciar();
 	}
+	
+	
 	
 	
 	@Override
@@ -213,6 +268,10 @@ public class PanelSubastasAdministrador extends JFrame implements ActionListener
         
         if (BOTON_REGRESAR.equals(comando)) {
         	regresar();
+        }
+        
+        else if(("Fin").equals(comando)){
+        	finalizarSubasta();
         }
         
         
@@ -225,9 +284,7 @@ public class PanelSubastasAdministrador extends JFrame implements ActionListener
         	irMostrarSubastas();
         }
         
-        else if("Fin-subasta".equals(comando)) {
-        	irFinSubastas();
-        }
+       
       
 		
 	}

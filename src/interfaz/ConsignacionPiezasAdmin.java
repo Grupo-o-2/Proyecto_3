@@ -20,11 +20,13 @@ import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import exceptions.FechaInvalidaException;
 import fabrica.Fabrica;
 import modelo.Galeria;
 import modelo.Subasta;
 import piezas.Pieza;
 import usuarios.Usuario;
+import usuarios.*;
 import javax.swing.JTextField;
 
 public class ConsignacionPiezasAdmin extends JFrame implements ActionListener, MouseListener{
@@ -32,10 +34,16 @@ public class ConsignacionPiezasAdmin extends JFrame implements ActionListener, M
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private String BOTON_REGRESAR = "B1";
-	Fabrica fabricaInicio= new Fabrica();		
+	Fabrica fabricaInicio= new Fabrica();	
+	private JPanel panel_3;
+	private JPanel panel_4;
 	Galeria galeriaInicio = fabricaInicio.crearGaleria("Galeria de Prueba", new ArrayList<Subasta>(), new ArrayList<Pieza>(),
 			new ArrayList<Pieza>(), new ArrayList<Pieza>(), new ArrayList<Usuario>());
-	private JTextField textField;
+	private JTextField txtformatoAomesda;
+	private JLabel lblConsignacion;
+	private JLabel lblSelecciona;
+	private Pieza piezaEscogida;
+	private JPanel panel_5;
 
 	/**
 	 * Launch the application.
@@ -145,6 +153,8 @@ public class ConsignacionPiezasAdmin extends JFrame implements ActionListener, M
 		btnVerExhibidas.setBorder(null);
 		btnVerExhibidas.setBackground(new Color(30, 163, 177));
 		btnVerExhibidas.setBounds(22, 195, 211, 32);
+		btnVerExhibidas.setActionCommand("Ir-exhibidas");
+		btnVerExhibidas.addActionListener(this);
 		panel_1.add(btnVerExhibidas);
 		
 		JButton btnVerTodas = new JButton(new ImageIcon("./Img/boton.png"));
@@ -173,7 +183,7 @@ public class ConsignacionPiezasAdmin extends JFrame implements ActionListener, M
 		lblAdministradorPrincipal.setBounds(10, 11, 294, 23);
 		panel_2.add(lblAdministradorPrincipal);
 		
-		JPanel panel_3 = new JPanel();
+		panel_3 = new JPanel();
 		panel_3.setBounds(251, 42, 733, 519);
 		panel.add(panel_3);
 		panel_3.setLayout(null);
@@ -184,8 +194,18 @@ public class ConsignacionPiezasAdmin extends JFrame implements ActionListener, M
 		lblPiezasExhibidas.setFont(new Font("Tahoma", Font.BOLD, 20));
 		panel_3.add(lblPiezasExhibidas);
 		
-		JPanel panel_5 = new JPanel();
-		panel_5.setBounds(0, 87, 733, 432);
+		reiniciar();
+		
+		
+		
+	}
+	
+	public void escogido(Pieza pieza) {
+		panel_4.setVisible(false);
+		lblConsignacion.setVisible(false);
+		lblSelecciona.setVisible(false);
+		panel_5 = new JPanel();
+		panel_5.setBounds(3, 87, 730, 432);
 		panel_3.add(panel_5);
 		panel_5.setLayout(null);
 		
@@ -194,7 +214,7 @@ public class ConsignacionPiezasAdmin extends JFrame implements ActionListener, M
 		lblpiezaEs.setBounds(27, 58, 143, 24);
 		panel_5.add(lblpiezaEs);
 		
-		JLabel lblNombrePiezaElegida = new JLabel("Selene");
+		JLabel lblNombrePiezaElegida = new JLabel(pieza.getTitulo());
 		lblNombrePiezaElegida.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNombrePiezaElegida.setBounds(143, 58, 415, 24);
 		panel_5.add(lblNombrePiezaElegida);
@@ -204,19 +224,27 @@ public class ConsignacionPiezasAdmin extends JFrame implements ActionListener, M
 		lblIngreseLaFecha.setBounds(27, 92, 415, 24);
 		panel_5.add(lblIngreseLaFecha);
 		
-		textField = new JTextField();
-		textField.setBounds(284, 95, 238, 24);
-		panel_5.add(textField);
-		textField.setColumns(10);
+		txtformatoAomesda = new JTextField();
+		txtformatoAomesda.setText("Formato -> añomesdía (Ej: 20280529)");
+		txtformatoAomesda.setToolTipText("Formato -> añomesdía (Ej: 20280529)");
+		txtformatoAomesda.setBounds(284, 95, 238, 24);
+		panel_5.add(txtformatoAomesda);
+		txtformatoAomesda.setColumns(10);
 		
-		JButton btnNewButton = new JButton("Revisar");
-		btnNewButton.setForeground(new Color(253, 255, 252));
-		btnNewButton.setBackground(new Color(30, 163, 177));
-		btnNewButton.setBounds(609, 96, 85, 21);
-		panel_5.add(btnNewButton);
+		JButton btnRevisar = new JButton("Revisar");
+		btnRevisar.setForeground(new Color(253, 255, 252));
+		btnRevisar.setBackground(new Color(30, 163, 177));
+		btnRevisar.setBounds(609, 96, 85, 21);
+		btnRevisar.setActionCommand("Revisar");
+		btnRevisar.addActionListener(this);
+	
+		piezaEscogida = pieza;
+		panel_5.add(btnRevisar);
 		
-		
-		
+	}
+	
+	public void reiniciar() {
+
 		
 		ArrayList<Pieza> consignadas = new ArrayList<Pieza>();
 		for (Pieza pieza: galeriaInicio.getPiezasActuales()) {
@@ -235,20 +263,20 @@ public class ConsignacionPiezasAdmin extends JFrame implements ActionListener, M
 			
 		} 
 		
-		else {
+		else{
 
-			JLabel lblConsignacion = new JLabel("Las piezas que se encuentran en consignación son:");
+			lblConsignacion = new JLabel("Las piezas que se encuentran en consignación son:");
 			lblConsignacion.setFont(new Font("Tahoma", Font.PLAIN, 14));
 			lblConsignacion.setBounds(26, 113, 366, 25);
 			panel_3.add(lblConsignacion);
 			
-			JLabel lblSelecciona = new JLabel("Selecciona la pieza que deseas revisar.");
+			lblSelecciona = new JLabel("Selecciona la pieza que deseas revisar.");
 			lblSelecciona.setFont(new Font("Tahoma", Font.PLAIN, 14));
 			lblSelecciona.setBounds(26, 88, 366, 25);
 			panel_3.add(lblSelecciona);
 			
-			JPanel panel_4 = new JPanel();
-			panel_4.setBounds(0, 161, 733, 358);
+			panel_4 = new JPanel();
+			panel_4.setBounds(10, 161, 723, 358);
 			panel_4.setLayout(new FlowLayout(FlowLayout.LEFT, 15, 15));	
 			for (Pieza pieza: consignadas) {
 				Panelpieza nueva = new Panelpieza(pieza);
@@ -300,6 +328,52 @@ public class ConsignacionPiezasAdmin extends JFrame implements ActionListener, M
 		ventanaBodega.setVisible(true);
 		this.dispose();
 	}
+	
+	public void  revisar() throws FechaInvalidaException {
+		if (Galeria.esFechaValida(txtformatoAomesda.getText())) {
+			
+			if (   ((Administrador)galeriaInicio.getAdministrador()).devolverPiezasConsignadas(piezaEscogida.getPropietario(), piezaEscogida,
+					txtformatoAomesda.getText(), galeriaInicio)   == true ) {
+				
+				
+				((Administrador)galeriaInicio.getAdministrador()).devoluciondePiezas(piezaEscogida, galeriaInicio, piezaEscogida.getPropietario());
+				galeriaInicio.salvarGaleria("Galeria.json");
+				DialogsAdvertencias fechaDialog = new DialogsAdvertencias();
+				fechaDialog.añadirYCambiarAdvertencia(piezaEscogida.getTitulo(), Galeria.formatearFecha(piezaEscogida.getFechaLimite()),
+						Galeria.formatearFecha(txtformatoAomesda.getText()), "La pieza ha sido devuelta debido a que su fecha límite expiró.");
+				fechaDialog.setBounds(100, 100, 600, 235);
+				fechaDialog.setVisible(true);
+				
+				panel_5.setVisible(false);
+				reiniciar();
+			}
+			
+			else {
+				DialogsAdvertencias fechaDialog = new DialogsAdvertencias();
+				fechaDialog.añadirYCambiarAdvertencia(piezaEscogida.getTitulo(), Galeria.formatearFecha(piezaEscogida.getFechaLimite()),
+						Galeria.formatearFecha(txtformatoAomesda.getText()), "La pieza no ha sido devuelta debido a que su fecha límite no ha expirado.");
+				fechaDialog.setBounds(100, 100, 600, 235);
+				fechaDialog.setVisible(true);
+				panel_5.setVisible(false);
+				reiniciar();
+			}
+			
+		}
+		
+		else {
+			DialogsAdvertencias fechaDialog = new DialogsAdvertencias();
+			fechaDialog.cambiarAdvertencia("Fecha inválida", "El formato de fecha igresado es inválido.");
+			fechaDialog.setVisible(true);
+		}
+		
+	}
+	
+	public void irExhibidas() {
+		VerPiezasExhibidas ventanaExhibidas = new VerPiezasExhibidas();
+		
+		ventanaExhibidas.setVisible(true);
+		this.dispose();
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -326,6 +400,19 @@ public class ConsignacionPiezasAdmin extends JFrame implements ActionListener, M
         else if("Ir-consignacion".equals(comando)) {
         	irConsignacion();
         }
+        
+        else if("Ir-exhibidas".equals(comando)) {
+        	irExhibidas();
+        }
+        
+        else if("Revisar".equals(comando)) {
+        	try {
+				revisar();
+			} catch (FechaInvalidaException e1) {
+				
+				e1.printStackTrace();
+			}
+        }
 		
 	}
 
@@ -334,7 +421,7 @@ public class ConsignacionPiezasAdmin extends JFrame implements ActionListener, M
         return new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-               System.out.println("si si Colombia");
+               escogido(pieza);
             }
         };
     }

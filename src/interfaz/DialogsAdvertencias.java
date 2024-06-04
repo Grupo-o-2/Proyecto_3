@@ -21,6 +21,11 @@ public class DialogsAdvertencias extends JDialog implements ActionListener {
 	private final JPanel contentPanel = new JPanel();
 	private JLabel lblInfo;
 	private JLabel lbPrincipal;
+	private JLabel lblNPieza;
+	private JLabel lblFlimite ;
+	private JLabel lblFactual;
+	private JLabel lblAccion;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -61,6 +66,35 @@ public class DialogsAdvertencias extends JDialog implements ActionListener {
 			contentPanel.add(lblInfo);
 		}
 		{
+			lblNPieza = new JLabel("Pieza:");
+			lblNPieza.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			lblNPieza.setBounds(10, 10, 426, 24);
+			contentPanel.add(lblNPieza);
+			lblNPieza.setVisible(false);
+		}
+		{
+			lblFlimite = new JLabel("Fecha límite:");
+			lblFlimite.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			lblFlimite.setBounds(10, 44, 426, 24);
+			contentPanel.add(lblFlimite);
+			lblFlimite.setVisible(false);
+		}
+		{
+			lblFactual = new JLabel("Fecha actual:");
+			lblFactual.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			lblFactual.setBounds(10, 78, 426, 24);
+			contentPanel.add(lblFactual);
+			lblFactual.setVisible(false);
+		}
+		{
+			lblAccion = new JLabel("");
+			lblAccion.setHorizontalAlignment(SwingConstants.CENTER);
+			lblAccion.setFont(new Font("Tahoma", Font.BOLD, 14));
+			lblAccion.setBounds(0, 120, 600, 28);
+			contentPanel.add(lblAccion);
+			lblAccion.setVisible(false);
+		}
+		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBackground(new Color(30, 163, 177));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -82,6 +116,19 @@ public class DialogsAdvertencias extends JDialog implements ActionListener {
 		lblInfo.setText(advertencia);
 	}
 	
+	public void añadirYCambiarAdvertencia(String Tpieza, String Flimite, String Factual, String accion ) {
+		lbPrincipal.setVisible(false);
+		lblInfo.setVisible(false);
+		lblNPieza.setText("Pieza: "+Tpieza);
+		lblFlimite.setText("Fecha límite: "+Flimite);
+		lblFactual.setText("Fecha actual: "+Factual);
+		lblAccion.setText(accion);
+		lblNPieza.setVisible(true);
+		lblFlimite.setVisible(true);
+		lblFactual.setVisible(true);
+		lblAccion.setVisible(true);
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String comando = e.getActionCommand();
@@ -90,5 +137,13 @@ public class DialogsAdvertencias extends JDialog implements ActionListener {
 			setVisible(false);
 		}
 		}
+
+	public JLabel getLblInfo() {
+		return lblInfo;
+	}
+
+	public JLabel getLblAccion() {
+		return lblAccion;
+	}
 
 }

@@ -21,6 +21,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.LineBorder;
 
 import modelo.Galeria;
+import piezas.Pintura;
+import piezas.Video;
 import usuarios.Artista;
 import usuarios.Comprador;
 import usuarios.Usuario;
@@ -202,6 +204,8 @@ public class DialogRegistrarVideo extends JDialog implements ActionListener{
 		
 		registros.galeriaInicio.crearVideo(titulo, valor, fechaCreacion, 
 				lugarCreacion, dueño, autores, dueños, ventas, "123", false, true, true, true, "0", alto, ancho, duracion, formato);
+		Video videoN = (Video) registros.galeriaInicio.obtenerPiezaGlobalesporTitulo(titulo);
+		registros.galeriaInicio.añadirPieza(videoN);
 		registros.galeriaInicio.salvarGaleria("GaleriaAnterior.json");
 		
 		

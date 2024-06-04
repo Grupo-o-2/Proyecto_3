@@ -1,6 +1,6 @@
 {
   "Galeria": {
-    "Piezas Actuales": "5,6,8,9,2,",
+    "Piezas Actuales": "5,6,8,9,2",
     "Compras": "Vacio",
     "Piezas Antiguas": "0,1,2,4,3,",
     "Compras por fecha": "2020-10-08,1;2021-02-14,1;2017-06-24,1;2023-12-12,1;2018-05-13,1;2014-05-15,1;2010-01-29,1;2024-01-05,1;2024-03-19,1;2022-07-07,1;2021-08-14,1;2015-05-15,1;2012-09-25,1;",
@@ -22,7 +22,7 @@
     {
       "Nombre": "Lucy",
       "Piezas Actuales": "3,",
-      "Historial Piezas": "1,19921008;0,20180201;7,20011230;5,20150315;",
+      "Historial Piezas": "5,20150315;0,20180201;7,20011230;1,19921008;",
       "Telefono": "567890123",
       "Login": "loginlucy",
       "Dinero": 200000,
@@ -34,7 +34,7 @@
     {
       "Nombre": "John",
       "Piezas Actuales": "4,",
-      "Historial Piezas": "1,19921008;3,20000319;7,20011230;",
+      "Historial Piezas": "3,20000319;7,20011230;1,19921008;",
       "Telefono": "234567890",
       "Login": "loginjohn",
       "Dinero": 80000,
@@ -45,14 +45,14 @@
     },
     {
       "Nombre": "fake",
-      "Piezas Actuales": "5,6,8,9,10,11,12,13,14,15,",
+      "Piezas Actuales": "5,6,8,9,",
       "Historial Piezas": "Vacío",
       "Telefono": "fake",
       "Login": "fake",
       "Dinero": 80000,
       "Tipo ": "Comprador",
       "Valor Maximo Compras": 1800000,
-      "Valor Coleccion": 14776,
+      "Valor Coleccion": 7655,
       "Password": "fake"
     },
     {
@@ -131,8 +131,8 @@
     {
       "Operador": "loginneo",
       "Nombre": "Subasta VIP",
-      "Registro Subasta": "6'loginalice,8701;loginlucy,10000;/9'loginjohn,7600;loginalice,7800;loginlucy,7500;/5'loginjohn,1800;loginalice,1700;loginlucy,2000;/",
-      "Piezas Subastadas": "6;8900,8700,'9;7500,7000,'5;1600,1500,'",
+      "Registro Subasta": "5'loginjohn,1800;loginlucy,2000;loginalice,1700;/9'loginjohn,7600;loginlucy,7500;loginalice,7800;/6'loginlucy,10000;loginalice,8701;/",
+      "Piezas Subastadas": "5;1600,1500,'9;7500,7000,'6;8900,8700,'",
       "Participantes": "loginalice,loginlucy,loginjohn,"
     }
   ],
@@ -183,8 +183,8 @@
       "Proprietario": "loginalice",
       "Autores": "loginvangogh,",
       "LugarCreacion": "Colombia",
-      "Dispventa": true,
-      "Fecha Limite": "0",
+      "Dispventa": false,
+      "Fecha Limite": "20281205",
       "Consignacion": true,
       "Titulo": "Esperanza",
       "Valor": "73",
@@ -195,7 +195,7 @@
       "fechaCreacion": "19980822",
       "Alto": "72.0",
       "Ancho": "25.0",
-      "Dispsubasta": true,
+      "Dispsubasta": false,
       "Identificador": "2",
       "Fecha Precio": "2024-01-05,73;"
     },
@@ -274,7 +274,7 @@
       "LugarCreacion": "España",
       "Dispventa": true,
       "Fecha Limite": "0",
-      "Consignacion": true,
+      "Consignacion": false,
       "Titulo": "Amanecer en París",
       "Valor": "1915",
       "Exhiba venda o subasta": "123",

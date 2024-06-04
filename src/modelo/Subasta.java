@@ -127,6 +127,7 @@ public ArrayList<Usuario> getParticipantes() {
 					pieza.setConsignacion(false);
 					pieza.setExhibida(false);
 					galeria.getPiezasActuales().remove(pieza);
+					galeria.getSubastas().remove(this);
 					int dineroActualizado = ((Comprador)mejorPostor).getDinero() - ofertaMayor;
 					((Comprador)mejorPostor).setValorColeccion(ofertaMayor);
 					((Comprador)mejorPostor).setDinero(dineroActualizado);
