@@ -552,7 +552,53 @@ public class Galeria {
         }
     }
 
+    
+    
 
+	public int[][] diagramaCompras(String año){
+		int[][] diagrama = new int[12][32];
+		for(int i=0 ; i<12 ; i++) {
+			for(int j=0 ; j<32 ; j++) {
+				if(i==1 && j>29) {
+					diagrama[i][j] = -1;
+				}else if ((i%2)==1 && i<7 && j==31) {
+					diagrama[i][j] = -1;
+				}else if ((i%2)==0 && i>7 && j==31) {
+					diagrama[i][j] = -1;
+				}else {
+					diagrama[i][j] = 0;
+				}
+			}
+		}
+		for(String fecha: this.fechasCompras.keySet()) {
+			String[] fechaDividida = fecha.split("-");
+			if(fechaDividida[0].equals(año)) {
+				int compras = this.fechasCompras.get(fecha);
+				if(compras<4) {
+					diagrama[Integer.parseInt(fechaDividida[1])-1][Integer.parseInt(fechaDividida[2])]= 1;
+				}else if(compras>3) {
+					diagrama[Integer.parseInt(fechaDividida[1])-1][Integer.parseInt(fechaDividida[2])]= 2;
+				}
+			}
+		}
+		return diagrama;
+	}
+	
+	public boolean fechaIngresadaAceptable(String fecha) {
+		boolean resultado;
+		if(fecha == null)
+		{
+			resultado =true;
+		}else {
+			try {  
+			    Integer.parseInt(fecha);  
+			    resultado = true;
+			  } catch(NumberFormatException e){  
+				  resultado = false;  
+			  }  
+		}
+		return resultado;
+	}    
 
 	
 

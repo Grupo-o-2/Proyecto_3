@@ -3,7 +3,7 @@
     "Piezas Actuales": "5,6,8,9,2,",
     "Compras": "Vacio",
     "Piezas Antiguas": "0,1,2,4,3,",
-    "Compras por fecha": "2020-10-08,1;2021-02-14,1;2017-06-24,1;2023-12-12,1;2018-05-13,1;2014-05-15,1;2010-01-29,1;2024-01-05,1;2024-03-19,1;2022-07-07,1;2021-08-14,1;2015-05-15,1;2012-09-25,1;",
+    "Compras por fecha": "2020-10-08,5;2021-02-14,1;2020-05-15,5;2020-06-24,1;2020-05-13,1;2017-06-24,1;2020-02-14,10;2023-12-12,1;2018-05-13,1;2014-05-15,1;2010-01-29,1;2024-01-05,1;2024-03-19,1;2022-07-07,1;2021-08-14,1;2015-05-15,1;2020-12-12,2;2020-01-29,4;2012-09-25,1;",
     "Ofertas": "8701,Alice,Amanecer en París,Subasta VIP,;10000,Lucy,Amanecer en París,Subasta VIP,;"
   },
   "Usuarios": [
@@ -22,7 +22,7 @@
     {
       "Nombre": "Lucy",
       "Piezas Actuales": "3,",
-      "Historial Piezas": "7,20011230;1,19921008;5,20150315;0,20180201;",
+      "Historial Piezas": "7,20011230;0,20180201;5,20150315;1,19921008;",
       "Telefono": "567890123",
       "Login": "loginlucy",
       "Dinero": 200000,
@@ -131,8 +131,8 @@
     {
       "Operador": "loginneo",
       "Nombre": "Subasta VIP",
-      "Registro Subasta": "6'loginlucy,10000;loginalice,8701;/5'loginjohn,1800;loginlucy,2000;loginalice,1700;/9'loginjohn,7600;loginlucy,7500;loginalice,7800;/",
-      "Piezas Subastadas": "6;8900,8700,'5;1600,1500,'9;7500,7000,'",
+      "Registro Subasta": "9'loginlucy,7500;loginjohn,7600;loginalice,7800;/5'loginlucy,2000;loginjohn,1800;loginalice,1700;/6'loginlucy,10000;loginalice,8701;/",
+      "Piezas Subastadas": "9;7500,7000,'5;1600,1500,'6;8900,8700,'",
       "Participantes": "loginalice,loginlucy,loginjohn,"
     }
   ],
