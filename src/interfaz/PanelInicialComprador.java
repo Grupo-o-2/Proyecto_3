@@ -192,7 +192,7 @@ public class PanelInicialComprador extends JFrame implements ActionListener {
 		panel.add(panel_2);
 		panel_2.setLayout(null);
 		
-		JLabel lblAdministradorPrincipal = new JLabel("Administrador - Inicio");
+		JLabel lblAdministradorPrincipal = new JLabel("Comprador - Inicio");
 		lblAdministradorPrincipal.setForeground(new Color(255, 200, 87));
 		lblAdministradorPrincipal.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblAdministradorPrincipal.setBounds(10, 11, 221, 23);
