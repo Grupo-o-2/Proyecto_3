@@ -21,22 +21,17 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.LineBorder;
 
 import modelo.Galeria;
-import piezas.Escultura;
-import piezas.Video;
 import usuarios.Artista;
 import usuarios.Comprador;
 import usuarios.Usuario;
 
-public class DialogRegistrarEscultura extends JDialog implements ActionListener{
+public class DialogFecha extends JDialog implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtAlto;
 	private JTextField txtAncho;
-	private JTextField txtProfundidad;
-	private JTextField txtMateriales;
 	private static RegistroPiezasAdmin registros;
-	private JTextField textPeso;
 	
 	/**
 	 * Launch the application.
@@ -44,7 +39,7 @@ public class DialogRegistrarEscultura extends JDialog implements ActionListener{
 	public static void main(String[] args) {
 		try {
 			
-			DialogRegistrarEscultura dialog = new DialogRegistrarEscultura(registros);
+			DialogRegistrarImpresion dialog = new DialogRegistrarImpresion(registros);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -55,7 +50,7 @@ public class DialogRegistrarEscultura extends JDialog implements ActionListener{
 	/**
 	 * Create the dialog.
 	 */
-	public DialogRegistrarEscultura(RegistroPiezasAdmin frameP) {
+	public DialogRegistrarImpresion(RegistroPiezasAdmin frameP) {
 		
 		registros = frameP;
 		
@@ -74,8 +69,8 @@ public class DialogRegistrarEscultura extends JDialog implements ActionListener{
 		}
 		{
 			txtAlto = new JTextField();
-			txtAlto.setToolTipText("Alto escultura (Ej: 55)");
-			txtAlto.setText("Ingrese el alto de la escultura");
+			txtAlto.setToolTipText("Alto de la impresión (Ej: 55)");
+			txtAlto.setText("Ingrese el alto de la impresión");
 			txtAlto.setBorder(new LineBorder(new Color(30, 163, 177), 2, true));
 			txtAlto.setBackground(new Color(253, 255, 252));
 			txtAlto.setBounds(41, 76, 268, 29);
@@ -84,44 +79,15 @@ public class DialogRegistrarEscultura extends JDialog implements ActionListener{
 		}
 		{
 			txtAncho = new JTextField();
-			txtAncho.setToolTipText("Ancho de la escultura (Ej: 63)");
-			txtAncho.setText("Ingrese el ancho de la escultura");
+			txtAncho.setToolTipText("Ancho de la impresión (Ej: 63)");
+			txtAncho.setText("Ingrese el ancho de la impresión");
 			txtAncho.setBorder(new LineBorder(new Color(30, 163, 177), 2));
 			txtAncho.setBackground(new Color(253, 255, 252));
 			txtAncho.setColumns(10);
 			txtAncho.setBounds(41, 115, 268, 29);
 			contentPanel.add(txtAncho);
 		}
-		{
-			txtProfundidad = new JTextField();
-			txtProfundidad.setToolTipText("Profundidad de la escultura (Ej: 56)");
-			txtProfundidad.setText("Ingrese la profundidad de la escultura");
-			txtProfundidad.setColumns(10);
-			txtProfundidad.setBorder(new LineBorder(new Color(30, 163, 177), 2));
-			txtProfundidad.setBackground(new Color(253, 255, 252));
-			txtProfundidad.setBounds(41, 154, 268, 29);
-			contentPanel.add(txtProfundidad);
-		}
-		{
-			txtMateriales = new JTextField();
-			txtMateriales.setToolTipText("Materiales de la escultura (Ej: \"bronce\")");
-			txtMateriales.setText("Ingrese los materiales de la escultura");
-			txtMateriales.setColumns(10);
-			txtMateriales.setBorder(new LineBorder(new Color(30, 163, 177), 2));
-			txtMateriales.setBackground(new Color(253, 255, 252));
-			txtMateriales.setBounds(41, 193, 268, 29);
-			contentPanel.add(txtMateriales);
-		}
-		{
-			textPeso = new JTextField();
-			textPeso.setToolTipText("Peso de la escultura (Ej: 89)");
-			textPeso.setText("Ingrese el peso de la escultura");
-			textPeso.setColumns(10);
-			textPeso.setBorder(new LineBorder(new Color(30, 163, 177), 2));
-			textPeso.setBackground(new Color(253, 255, 252));
-			textPeso.setBounds(41, 232, 268, 29);
-			contentPanel.add(textPeso);
-		}
+		
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBackground(new Color(30, 163, 177));
@@ -131,7 +97,7 @@ public class DialogRegistrarEscultura extends JDialog implements ActionListener{
 				JButton okButton = new JButton("OK");
 				okButton.setForeground(new Color(30, 163, 177));
 				okButton.setBackground(new Color(253, 255, 252));
-				okButton.setActionCommand("OK4");
+				okButton.setActionCommand("OK5");
 				okButton.addActionListener(this);
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
@@ -140,7 +106,7 @@ public class DialogRegistrarEscultura extends JDialog implements ActionListener{
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.setForeground(new Color(30, 163, 177));
 				cancelButton.setBackground(new Color(253, 255, 252));
-				cancelButton.setActionCommand("Cancel3");
+				cancelButton.setActionCommand("Cancel4");
 				cancelButton.addActionListener(this);
 				buttonPane.add(cancelButton);
 			}
@@ -158,8 +124,7 @@ public class DialogRegistrarEscultura extends JDialog implements ActionListener{
 	
 	public void registroAceptado(){
 		
-		if (  (txtAlto.getText()).isEmpty() || (txtAncho.getText()).isEmpty() || (txtProfundidad.getText()).isEmpty()   
-				|| (txtMateriales.getText()).isEmpty()   || (textPeso.getText()).isEmpty()){
+		if (  (txtAlto.getText()).isEmpty() || (txtAncho.getText()).isEmpty()  ){
 			
 			DialogsAdvertencias fechaDialog = new DialogsAdvertencias();
 			fechaDialog.cambiarAdvertencia("Campo vacío", "Uno o algunos de los campos se encuentran vacíos.");
@@ -167,8 +132,7 @@ public class DialogRegistrarEscultura extends JDialog implements ActionListener{
 			
 		}
 		
-		else if(    Galeria.esNumero((txtAlto.getText()) ) == false || Galeria.esNumero((txtAncho.getText()) ) == false 
-				||  Galeria.esNumero((txtProfundidad.getText()) ) == false || Galeria.esNumero((textPeso.getText()) ) == false){
+		else if(    Galeria.esNumero((txtAlto.getText()) ) == false || Galeria.esNumero((txtAncho.getText()) ) == false  ){
 			DialogsAdvertencias numerosDialog = new DialogsAdvertencias();
 			numerosDialog.cambiarAdvertencia("Campo incorrecto", "Uno o algunos de los campos que deberían ser números, no lo son.");
 			numerosDialog.setVisible(true);
@@ -210,15 +174,11 @@ public class DialogRegistrarEscultura extends JDialog implements ActionListener{
 		
 		Double alto = Double.parseDouble(txtAlto.getText());
 		Double ancho = Double.parseDouble(txtAncho.getText());
-		int profundidad = Integer.parseInt(txtProfundidad.getText());
-		String materiales = (txtMateriales.getText());
-		Double peso = Double.parseDouble(textPeso.getText());
 		
 		
-		registros.galeriaInicio.crearEscultura(titulo, valor, fechaCreacion, lugarCreacion, dueño, autores, dueños, ventas, "123", false, true, true, true, "0", alto, ancho, profundidad, materiales, peso, false, false);
-		Escultura esculturaN = (Escultura) registros.galeriaInicio.obtenerPiezaGlobalesporTitulo(titulo);
-		registros.galeriaInicio.añadirPieza(esculturaN);
-		registros.galeriaInicio.salvarGaleria("Galeria.json");
+		registros.galeriaInicio.crearPintura(titulo, valor, fechaCreacion, 
+				lugarCreacion, dueño, autores, dueños, ventas, "123", false, true, true, true, "0", alto, ancho);
+		registros.galeriaInicio.salvarGaleria("GaleriaAnterior.json");
 		
 		
 		
@@ -233,10 +193,10 @@ public class DialogRegistrarEscultura extends JDialog implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		String comando = e.getActionCommand();
 		
-		if("OK4".equals(comando)) {
+		if("OK5".equals(comando)) {
 			registroAceptado();
 			
-		}else if("Cancel3".equals(comando)) {
+		}else if("Cancel4".equals(comando)) {
 			registroCancelado();
 		}
 		}

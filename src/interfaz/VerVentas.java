@@ -35,7 +35,7 @@ import java.awt.Insets;
 import java.awt.Component;
 import java.awt.Dimension;
 
-public class PanelInicialAdministrador extends JFrame implements ActionListener {
+public class VerVentas extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -52,7 +52,7 @@ public class PanelInicialAdministrador extends JFrame implements ActionListener 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PanelInicialAdministrador frame = new PanelInicialAdministrador();
+					VerVentas frame = new VerVentas();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -64,7 +64,7 @@ public class PanelInicialAdministrador extends JFrame implements ActionListener 
 	/**
 	 * Create the frame.
 	 */
-	public PanelInicialAdministrador() {
+	public VerVentas() {
 		Fabrica fabricaInicio= new Fabrica();		
 		Galeria galeriaInicio = fabricaInicio.crearGaleria("Galeria de Prueba", new ArrayList<Subasta>(), new ArrayList<Pieza>(),
 				new ArrayList<Pieza>(), new ArrayList<Pieza>(), new ArrayList<Usuario>());
@@ -188,12 +188,11 @@ public class PanelInicialAdministrador extends JFrame implements ActionListener 
 		JPanel panel_3 = new JPanel();
 		panel_3.setBounds(251, 42, 733, 519);
 		panel.add(panel_3);
-		panel_3.setLayout(new FlowLayout(FlowLayout.LEFT, 15, 15));	
 		
-		for (Pieza pieza: galeriaInicio.getPiezasActuales()) {
-			Panelpieza nueva = new Panelpieza(pieza);
-			panel_3.add(nueva);
-		}
+	//añadir a panel_3
+	
+		
+	
 	}
 	
 	public void regresarInicio() {
