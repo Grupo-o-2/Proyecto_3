@@ -37,7 +37,7 @@ public class VerTodasPiezas extends JFrame implements ActionListener{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VerTodasPiezas frame = new VerTodasPiezas(galeriaInicio);
+					VerTodasPiezas frame = new VerTodasPiezas();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,14 +49,14 @@ public class VerTodasPiezas extends JFrame implements ActionListener{
 	/**
 	 * Create the frame.
 	 */
-	public VerTodasPiezas(Galeria mod) {
-		//Fabrica fabricaInicio= new Fabrica();		
-		//Galeria galeriaInicio = fabricaInicio.crearGaleria("Galeria de Prueba", new ArrayList<Subasta>(), new ArrayList<Pieza>(),
+	public VerTodasPiezas() {
+		Fabrica fabricaInicio= new Fabrica();		
+		Galeria galeriaInicio = fabricaInicio.crearGaleria("Galeria de Prueba", new ArrayList<Subasta>(), new ArrayList<Pieza>(),
 			
-		//new ArrayList<Pieza>(), new ArrayList<Pieza>(), new ArrayList<Usuario>());
-		//galeriaInicio.cargarGaleria("Galeria.json");
-		//galeriaInicio.salvarGaleria("GaleriaAnterior.json");
-		galeriaInicio = mod;
+		new ArrayList<Pieza>(), new ArrayList<Pieza>(), new ArrayList<Usuario>());
+		galeriaInicio.cargarGaleria("Galeria.json");
+		galeriaInicio.salvarGaleria("GaleriaAnterior.json");
+		
 		
 		setResizable(false);
 		setTitle("Administrador");

@@ -232,7 +232,7 @@ public class PanelPiezasAdministrador extends JFrame implements ActionListener{
 	}
 	
 	public void irTodas() {
-		VerTodasPiezas ventanaTodas = new VerTodasPiezas(galeriaInicio);
+		VerTodasPiezas ventanaTodas = new VerTodasPiezas();
 		
 		ventanaTodas.setVisible(true);
 		this.dispose();

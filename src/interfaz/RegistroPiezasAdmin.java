@@ -405,7 +405,7 @@ public class RegistroPiezasAdmin extends JFrame implements ActionListener, ItemL
 	}
 	
 	public void irTodas() {
-		VerTodasPiezas ventanaTodas = new VerTodasPiezas(galeriaInicio);
+		VerTodasPiezas ventanaTodas = new VerTodasPiezas();
 		
 		ventanaTodas.setVisible(true);
 		this.dispose();
