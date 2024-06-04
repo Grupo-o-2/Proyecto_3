@@ -168,8 +168,8 @@ public class PanelInicialAdministrador extends JFrame implements ActionListener 
 		btnVerVentas.setBackground(new Color(30, 163, 177));
 		btnVerVentas.setBounds(41, 238, 211, 32);
 		panel_1.add(btnVerVentas);
-		btnVerHistoriales.setActionCommand(BOTON_VENTAS);
-		btnVerHistoriales.addActionListener(this);
+		btnVerVentas.setActionCommand(BOTON_VENTAS);
+		btnVerVentas.addActionListener(this);
 		
 		
 		
@@ -230,6 +230,11 @@ public class PanelInicialAdministrador extends JFrame implements ActionListener 
         	PanelUsuariosAdministrador ventanaUsuarios = new PanelUsuariosAdministrador();
         	
         	ventanaUsuarios.setVisible(true);
+        	this.dispose();
+        }
+        else if (BOTON_VENTAS.equals(comando)) {
+        	DialogFechaVenta fechaVenta = new DialogFechaVenta(); 
+        	fechaVenta.setVisible(true);
         	this.dispose();
         }
 		
